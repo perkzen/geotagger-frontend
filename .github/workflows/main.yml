@@ -1,8 +1,7 @@
-name: Auctionbay Frontend CI/CD
+name: Geotagger Frontend CI/CD
 
 on: [ pull_request ]
 
-env:
 
 jobs:
   build:

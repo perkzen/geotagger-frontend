@@ -1,0 +1,21 @@
+@import "theme";
+@import "breakpoints";
+
+
+// colors
+:export {
+  primary: $primary-color;
+  primaryHover: $primary-hover-color;
+  white: $white-color;
+  dark: $dark-color;
+}
+
+
+// media queries
+:export {
+  xs: $breakpoint-xs;
+  sm: $breakpoint-sm;
+  md: $breakpoint-md;
+  lg: $breakpoint-lg;
+  xl: $breakpoint-lg;
+}

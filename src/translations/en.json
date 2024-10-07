@@ -1,5 +1,18 @@
 {
+  "shared": {
+    "geotagger": "Geotagger",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "or": "or",
+    "home": "Home"
+  },
   "home": {
-    "title": "Hello, World!"
+    "title": "Explore the world with Geotagger!",
+    "description": "Geotagger is website that allows you to post picture and tag it on the map. Other user than try to locate it via Google Maps.",
+    "cta": "Try yourself at Geotagger!",
+    "info": "Try to guess the location of image by selecting position on the map. When you guess it, it gives you the error distance."
+  },
+  "footer": {
+    "allRightsReserved": "All rights reserved | skillupmentor.com"
   }
 }

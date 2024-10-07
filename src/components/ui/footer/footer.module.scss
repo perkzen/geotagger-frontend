@@ -1,0 +1,14 @@
+@import "src/styles";
+
+
+.container {
+  @include flex-row-content-between;
+  align-items: center;
+  padding: 15px 70px;
+  background: $primary-color;
+  color: $white-color;
+
+  @include mq("sm") {
+    padding: 15px 42px;
+  }
+}
