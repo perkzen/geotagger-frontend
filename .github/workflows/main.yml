@@ -1,6 +1,6 @@
-name: Auctionbay Frontend CI/CD
+name: Geotagger Frontend CI/CD
 
-on: [ pull_request ]
+on: [ pull_request, push ]
 
 env:
 
