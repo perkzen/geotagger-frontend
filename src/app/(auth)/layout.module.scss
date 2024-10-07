@@ -1,0 +1,19 @@
+@import "src/styles";
+
+.container {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  min-height: 100vh;
+
+
+  .content {
+    padding: 32px 70px;
+  }
+
+
+  .desktopImage {
+    position: relative;
+    height: 100%;
+  }
+
+}

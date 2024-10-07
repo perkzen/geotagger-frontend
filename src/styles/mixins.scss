@@ -1,0 +1,50 @@
+@import "breakpoints";
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-row-content-between {
+  @include flex-row;
+  justify-content: space-between;
+}
+
+@mixin flex-row-items-center {
+  @include flex-row;
+  align-items: center;
+}
+
+@mixin flex-col-items-center {
+  @include flex-col;
+  align-items: center;
+}
+
+@mixin mq($breakpoint) {
+  @if $breakpoint == "xs" {
+    @media (max-width: #{$breakpoint-xs}px) {
+      @content;
+    }
+  } @else if $breakpoint == "sm" {
+    @media (max-width: #{$breakpoint-sm}px) {
+      @content;
+    }
+  } @else if $breakpoint == "md" {
+    @media (max-width: #{$breakpoint-md}px) {
+      @content;
+    }
+  } @else if $breakpoint == "lg" {
+    @media (max-width: #{$breakpoint-lg}px) {
+      @content;
+    }
+  } @else if $breakpoint == "xl" {
+    @media (max-width: #{$breakpoint-xl}px) {
+      @content;
+    }
+  }
+}

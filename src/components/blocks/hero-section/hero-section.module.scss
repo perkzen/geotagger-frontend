@@ -1,0 +1,40 @@
+@import "src/styles";
+
+.container {
+  position: relative;
+
+  .image {
+    position: absolute;
+    z-index: -1;
+    right: 0;
+    top: 0;
+
+    @include mq("sm") {
+      display: block;
+      max-width: 100%;
+      max-height: 215px;
+      margin: 64px 0;
+      position: relative;
+    }
+  }
+
+  .headline {
+    @include flex-col;
+    gap: 32px;
+    max-width: 420px;
+    padding-top: 96px;
+
+    @include mq("sm") {
+      text-align: center;
+      padding-top: 32px;
+    }
+
+    button {
+      width: 172px;
+
+      @include mq("sm") {
+        margin: auto;
+      }
+    }
+  }
+}
