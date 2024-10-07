@@ -3,9 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import { Routes } from '@/contants/routes';
+import MobileMenuDrawer from '@/components/blocks/mobile-menu-drawer/mobile-menu-drawer';
 import Logo from 'public/images/logo.svg';
 import styles from './navbar.module.scss';
-import { Menu } from '@mui/icons-material';
 
 const Navbar = () => {
   const t = useTranslations('shared');
@@ -18,14 +19,16 @@ const Navbar = () => {
       <Image src={Logo} alt={'logo'} quality={100} className={styles.logo} />
 
       {isMobile ? (
-        <Menu color="primary" />
+        <MobileMenuDrawer />
       ) : (
         <div className={styles.actions}>
-          <Link className={styles.bold} href={'/sign-in'}>
+          <Link className={styles.bold} href={Routes.signIn}>
             {t('signIn')}
           </Link>
           <Typography variant="body1">{t('or')}</Typography>
-          <Button variant="contained">{t('signUp')}</Button>
+          <Button variant="contained" href={Routes.signUp}>
+            {t('signUp')}
+          </Button>
         </div>
       )}
     </nav>

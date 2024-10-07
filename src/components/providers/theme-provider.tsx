@@ -79,8 +79,16 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
           root: {
             padding: '8px 30px',
             borderRadius: '8px',
+          },
+          contained: {
             '&:hover': {
               backgroundColor: vars.primaryHover,
+            },
+          },
+          outlined: {
+            '&:hover': {
+              backgroundColor: vars.primary,
+              color: vars.white,
             },
           },
         },

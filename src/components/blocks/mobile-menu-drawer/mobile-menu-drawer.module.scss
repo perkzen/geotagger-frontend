@@ -1,0 +1,35 @@
+@import "src/styles";
+
+.container {
+  padding: 28px 35px 24px 35px;
+
+  .header {
+    @include flex-row-items-center;
+    justify-content: space-between;
+
+    .logo {
+      @include mq("sm") {
+        max-width: 141px;
+        max-height: 33px;
+      }
+    }
+  }
+
+  .link {
+    @include flex-row-items-center;
+    justify-content: space-between;
+    color: $dark-color;
+    margin-top: 24px;
+    margin-bottom: 64px;
+
+    h5 {
+      color: $dark-color;
+    }
+  }
+
+  .actions {
+    @include flex-col;
+    gap: 16px;
+  }
+
+}
