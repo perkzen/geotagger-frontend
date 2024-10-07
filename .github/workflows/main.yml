@@ -1,8 +1,7 @@
 name: Geotagger Frontend CI/CD
 
-on: [ pull_request, push ]
+on: [ pull_request ]
 
-env:
 
 jobs:
   build:
