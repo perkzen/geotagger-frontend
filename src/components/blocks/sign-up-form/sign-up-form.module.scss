@@ -1,0 +1,19 @@
+@import "src/styles";
+
+.container {
+  @include flex-col;
+  gap: 16px;
+
+  .row {
+    @include flex-row;
+    gap: 16px;
+  }
+
+  .alreadyHaveAccount {
+    @include flex-row-content-between;
+
+    a {
+      color: $primary-color;
+    }
+  }
+}

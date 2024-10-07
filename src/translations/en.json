@@ -4,7 +4,13 @@
     "signIn": "Sign in",
     "signUp": "Sign up",
     "or": "or",
-    "home": "Home"
+    "home": "Home",
+    "alreadyHaveAccount": "Already have an account?",
+    "email": "Email",
+    "firstname": "First name",
+    "lastname": "Last name",
+    "password": "Password",
+    "repeatPassword": "Repeat password"
   },
   "home": {
     "title": "Explore the world with Geotagger!",
@@ -14,5 +20,9 @@
   },
   "footer": {
     "allRightsReserved": "All rights reserved | skillupmentor.com"
+  },
+  "signUp": {
+    "title": "Sign up",
+    "description": "Your name will appear on posts and your public profile."
   }
 }

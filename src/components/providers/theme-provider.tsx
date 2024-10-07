@@ -8,6 +8,9 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
       primary: {
         main: vars.primary,
       },
+      text: {
+        primary: vars.textPrimary,
+      },
     },
     typography: {
       caption: {
@@ -35,6 +38,11 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
           lineHeight: '40px',
           letterSpacing: '0.25px',
         },
+      },
+      h3: {
+        fontWeight: 500,
+        fontSize: '48px',
+        lineHeight: '56.25px',
       },
       h4: {
         fontWeight: 400,
@@ -90,6 +98,16 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
               backgroundColor: vars.primary,
               color: vars.white,
             },
+          },
+        },
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            borderRadius: '8px',
+          },
+          input: {
+            padding: '8px 16px',
           },
         },
       },
