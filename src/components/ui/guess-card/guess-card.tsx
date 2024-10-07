@@ -9,7 +9,7 @@ type GuessCardProps = {
   isLocked?: boolean;
 };
 
-const GuessCard: FC<GuessCardProps> = ({ image, isLocked }) => {
+const GuessCard: FC<GuessCardProps> = ({ isLocked }) => {
   return (
     <div className={styles.container}>
       <div className={styles.image}>
