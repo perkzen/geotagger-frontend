@@ -2,6 +2,12 @@ name: Geotagger Frontend CI/CD
 
 on: [ pull_request ]
 
+env:
+  NEXT_PUBLIC_API_URL: http://localhost:8000
+  NEXT_PUBLIC_ENVIRONMENT: development
+  NEXT_PUBLIC_BASE_URL: http://localhost:3000
+  JWT_SECRET: secret
+
 
 jobs:
   build:
