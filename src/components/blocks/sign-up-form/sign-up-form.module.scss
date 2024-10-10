@@ -4,6 +4,11 @@
   @include flex-col;
   gap: 16px;
 
+  .error {
+    text-align: center;
+    margin-top: 16px;
+  }
+
   .row {
     @include flex-row;
     gap: 16px;

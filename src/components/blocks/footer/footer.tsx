@@ -1,6 +1,6 @@
 'use client';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import { Typography, useMediaQuery, useTheme } from '@mui/material';
 import Logo from 'public/images/footer-logo.svg';
 import MobileLogo from 'public/images/mobile-footer-logo.svg';

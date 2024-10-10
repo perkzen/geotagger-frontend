@@ -14,7 +14,7 @@
   }
 
   main {
-    padding: 96px 70px;
+    padding: 96px 70px 0 70px;
 
     @include mq("sm") {
       padding: 64px 35px;
@@ -24,6 +24,10 @@
   .image {
     position: relative;
     height: 100%;
+
+    img {
+      object-fit: cover;
+    }
 
     @include mq("sm") {
       display: none;

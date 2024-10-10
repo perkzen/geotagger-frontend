@@ -1,12 +1,12 @@
 'use client';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { ChevronRight, Close, Menu } from '@mui/icons-material';
 import { Button, Drawer, Typography } from '@mui/material';
-import { Menu, Close, ChevronRight } from '@mui/icons-material';
-import { Routes } from '@/contants/routes';
 import Logo from 'public/images/logo.svg';
+import { Routes } from '@/lib/constants/routes';
 import styles from './mobile-menu-drawer.module.scss';
 
 const MobileMenuDrawer = () => {

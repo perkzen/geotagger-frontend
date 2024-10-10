@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import Image from 'next/image';
-import Navbar from '@/components/ui/navbar/navbar';
 import Background from 'public/images/background.svg';
+import Navbar from '@/components/blocks/navbar/navbar';
 import styles from './layout.module.scss';
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -12,13 +12,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <main>{children}</main>
       </div>
       <div className={styles.image}>
-        <Image
-          src={Background}
-          alt="background"
-          quality={100}
-          objectFit={'cover'}
-          fill
-        />
+        <Image src={Background} alt="background" quality={100} fill />
       </div>
     </div>
   );

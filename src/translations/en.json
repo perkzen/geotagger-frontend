@@ -5,12 +5,17 @@
     "signUp": "Sign up",
     "or": "or",
     "home": "Home",
+    "profileSettings": "Profile settings",
+    "logout": "Logout",
     "alreadyHaveAccount": "Already have an account?",
+    "createAccount": "Do you want to create an account?",
     "email": "Email",
     "firstname": "First name",
     "lastname": "Last name",
     "password": "Password",
-    "repeatPassword": "Repeat password"
+    "repeatPassword": "Repeat password",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithFacebook": "Sign in with Facebook"
   },
   "home": {
     "title": "Explore the world with Geotagger!",
@@ -24,5 +29,14 @@
   "signUp": {
     "title": "Sign up",
     "description": "Your name will appear on posts and your public profile."
+  },
+  "signIn": {
+    "title": "Sign in",
+    "description": "Welcome back to Geotagger. We are glad that you are back."
+  },
+  "errors": {
+    "invalidCredentials": "Invalid email or password",
+    "emailAlreadyInUse": "Email is already in use",
+    "default": "Something went wrong. Please try again later."
   }
 }

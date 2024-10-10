@@ -4,18 +4,20 @@ import SignUpForm from '@/components/blocks/sign-up-form/sign-up-form';
 import styles from './sign-up-page.module.scss';
 
 export default function SignUpPage() {
-  const t = useTranslations();
+  const t = useTranslations('signUp');
 
   return (
     <div className={styles.container}>
-      <div className={styles.headline}>
-        <Typography variant="h3">{t('signUp.title')}</Typography>
-        <Typography variant="body1" color="textPrimary">
-          {t('signUp.description')}
-        </Typography>
+      <div className={styles.content}>
+        <div className={styles.headline}>
+          <Typography variant="h3">{t('title')}</Typography>
+          <Typography variant="body1" color="textPrimary">
+            {t('description')}
+          </Typography>
+        </div>
+        <Avatar className={styles.avatar} />
+        <SignUpForm />
       </div>
-      <Avatar className={styles.avatar} />
-      <SignUpForm />
     </div>
   );
 }

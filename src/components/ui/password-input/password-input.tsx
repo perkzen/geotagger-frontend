@@ -1,20 +1,21 @@
 import React, { forwardRef, useState } from 'react';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
+  FormHelperText,
   IconButton,
-  OutlinedInputProps,
   InputAdornment,
   OutlinedInput,
+  OutlinedInputProps,
 } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from './password-input.module.scss';
 
 type PasswordInputProps = Omit<
-  OutlinedInputProps & { label?: string },
+  OutlinedInputProps & { label?: string; helperText?: string },
   'type' | 'endAdornment'
 >;
 
 const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
-  ({ label, ...props }, ref) => {
+  ({ label, helperText, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
     const togglePassword = () => setShowPassword((prev) => !prev);
 
@@ -37,6 +38,7 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
             </InputAdornment>
           }
         />
+        {helperText && <FormHelperText error>{helperText}</FormHelperText>}
       </div>
     );
   }

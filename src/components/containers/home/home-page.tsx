@@ -1,7 +1,8 @@
 import { useTranslations } from 'next-intl';
 import { Button, Typography } from '@mui/material';
-import GuessCard from '@/components/ui/guess-card/guess-card';
 import HeroSection from '@/components/blocks/hero-section/hero-section';
+import GuessCard from '@/components/ui/guess-card/guess-card';
+import { Routes } from '@/lib/constants/routes';
 import styles from './home-page.module.scss';
 
 export default function HomePage() {
@@ -22,7 +23,9 @@ export default function HomePage() {
           <GuessCard isLocked />
           <GuessCard isLocked />
         </div>
-        <Button variant="contained">{t('shared.signUp')}</Button>
+        <Button variant="contained" href={Routes.signUp}>
+          {t('shared.signUp')}
+        </Button>
       </div>
     </div>
   );

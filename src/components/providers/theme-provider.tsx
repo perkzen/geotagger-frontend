@@ -11,6 +11,9 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
       text: {
         primary: vars.textPrimary,
       },
+      error: {
+        main: vars.error,
+      },
     },
     typography: {
       caption: {

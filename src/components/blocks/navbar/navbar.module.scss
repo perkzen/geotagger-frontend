@@ -16,17 +16,4 @@
     padding: 31.5px 35px;
     box-shadow: $primary-shadow;
   }
-
-  .actions {
-    @include flex-row-items-center;
-    gap: 16px;
-
-    @include mq("sm") {
-      display: none;
-    }
-  }
-
-  .bold {
-    font-weight: 500;
-  }
 }

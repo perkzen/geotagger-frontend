@@ -2,21 +2,27 @@
 
 .container {
   @include flex-col-items-center;
-  gap: 16px;
 
-  .headline {
+  .content {
     @include flex-col-items-center;
-    gap: 8px;
-    text-align: center;
-  }
+    max-width: 420px;
+    gap: 16px;
 
-  .avatar {
-    width: 64px;
-    height: 64px;
 
-    svg {
-      height: 24px;
-      width: 24px;
+    .headline {
+      @include flex-col-items-center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 64px;
+      height: 64px;
+
+      svg {
+        height: 24px;
+        width: 24px;
+      }
     }
   }
 }
