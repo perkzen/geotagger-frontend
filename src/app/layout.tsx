@@ -1,14 +1,14 @@
-import type { Metadata } from 'next';
-import Head from 'next/head';
 import { ReactNode } from 'react';
-import Providers from '@/components/providers/providers';
+import type { Metadata } from 'next';
 import { getLocale } from 'next-intl/server';
-import TranslationsProvider from '@/components/providers/translations-provider';
+import Head from 'next/head';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import '@/styles/globals.scss';
+import Providers from '@/components/providers/providers';
+import TranslationsProvider from '@/components/providers/translations-provider';
 
 export const metadata: Metadata = {
   title: 'Geotagger',

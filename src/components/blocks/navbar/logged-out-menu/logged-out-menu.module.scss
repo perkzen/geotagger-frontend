@@ -1,0 +1,15 @@
+@import "src/styles";
+
+.container {
+  @include flex-row-items-center;
+  gap: 16px;
+
+  @include mq("sm") {
+    display: none;
+  }
+
+  .bold {
+    font-weight: 500;
+  }
+}
+

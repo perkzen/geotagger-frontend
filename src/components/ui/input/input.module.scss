@@ -1,0 +1,10 @@
+@import "src/styles";
+
+.container {
+  @include flex-col;
+  gap: 6px;
+
+  p {
+    margin: 0;
+  }
+}

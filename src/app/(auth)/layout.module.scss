@@ -5,15 +5,32 @@
   grid-template-columns: 40% 60%;
   min-height: 100vh;
 
+  @include mq("sm") {
+    @include flex-col;
+  }
 
-  .content {
+  .navbar {
     padding: 32px 70px;
   }
 
+  main {
+    padding: 96px 70px 0 70px;
 
-  .desktopImage {
-    position: relative;
-    height: 100%;
+    @include mq("sm") {
+      padding: 64px 35px;
+    }
   }
 
+  .image {
+    position: relative;
+    height: 100%;
+
+    img {
+      object-fit: cover;
+    }
+
+    @include mq("sm") {
+      display: none;
+    }
+  }
 }

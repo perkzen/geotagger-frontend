@@ -1,0 +1,16 @@
+@import "src/styles";
+
+.container {
+  @include flex-col-items-center;
+  gap: 16px;
+
+  .content {
+    max-width: 420px;
+
+    .headline {
+      @include flex-col-items-center;
+      gap: 8px;
+      text-align: center;
+    }
+  }
+}

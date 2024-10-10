@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
-import Navbar from '@/components/ui/navbar/navbar';
-import Footer from '@/components/ui/footer/footer';
+import Footer from '@/components/blocks/footer/footer';
+import Navbar from '@/components/blocks/navbar/navbar';
 import styles from './layout.module.scss';
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default async function Layout({ children }: { children: ReactNode }) {
   return (
     <div className={styles.container}>
       <Navbar />
