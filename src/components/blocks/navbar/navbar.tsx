@@ -12,7 +12,7 @@ type NavbarProps = {
   actions?: boolean;
 };
 
-const Navbar: FC<NavbarProps> = async ({ className, actions }) => {
+const Navbar: FC<NavbarProps> = ({ className, actions }) => {
   return (
     <nav className={classNames(styles.container, className)}>
       <Link href={Routes.home}>
