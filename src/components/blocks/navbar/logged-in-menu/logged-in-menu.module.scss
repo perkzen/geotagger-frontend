@@ -1,2 +1,31 @@
+@import "src/styles";
+
 .container {
+  @include flex-row-items-center;
+
+
+  .add {
+    background: $primary-color;
+    color: $white-color;
+  }
+
+  .user {
+    @include flex-row-items-center;
+    gap: 17px;
+    border-radius: 64px;
+    margin-left: 24px;
+    margin-right: 16px;
+    padding-right: 16px;
+    border: 2px solid $primary-color;
+
+    .avatar {
+      max-height: 36px;
+      max-width: 36px;
+    }
+
+
+    .points {
+      padding: 0 9px;
+    }
+  }
 }

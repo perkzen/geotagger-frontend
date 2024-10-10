@@ -102,6 +102,13 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
               color: vars.white,
             },
           },
+          text: {
+            fontWeight: 400,
+            color: vars.dark,
+            fontSize: '16px',
+            lineHeight: '18.75px',
+            padding: '8px 24px',
+          },
         },
       },
       MuiOutlinedInput: {
