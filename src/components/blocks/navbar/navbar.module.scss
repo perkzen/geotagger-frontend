@@ -12,7 +12,7 @@
     }
   }
 
-  @include mq("sm") {
+  @include mq("md") {
     padding: 31.5px 35px;
     box-shadow: $primary-shadow;
   }

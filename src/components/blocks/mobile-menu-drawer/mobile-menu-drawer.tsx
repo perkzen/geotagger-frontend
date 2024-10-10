@@ -1,17 +1,19 @@
 'use client';
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import Link from 'next/link';
-import { ChevronRight, Close, Menu } from '@mui/icons-material';
-import { Button, Drawer, Typography } from '@mui/material';
+import { Close, Menu } from '@mui/icons-material';
+import { Drawer } from '@mui/material';
 import Logo from 'public/images/logo.svg';
-import { Routes } from '@/lib/constants/routes';
+import MobileLoggedInMenu from '@/components/blocks/mobile-menu-drawer/mobile-logged-in-menu/mobile-logged-in-menu';
+import MobileLoggedOutMenu from '@/components/blocks/mobile-menu-drawer/mobile-logged-out-menu/mobile-logged-out-menu';
+import { useSession } from '@/lib/hooks/auth';
 import styles from './mobile-menu-drawer.module.scss';
 
 const MobileMenuDrawer = () => {
-  const t = useTranslations('shared');
   const [open, setOpen] = useState(false);
+
+  const session = useSession();
+  const isAuth = !!session?.session;
 
   return (
     <>
@@ -21,7 +23,6 @@ const MobileMenuDrawer = () => {
         anchor="top"
         open={open}
         onClose={() => setOpen(false)}
-        hideBackdrop
       >
         <div className={styles.container}>
           <div className={styles.header}>
@@ -33,20 +34,11 @@ const MobileMenuDrawer = () => {
             />
             <Close color="primary" onClick={() => setOpen(false)} />
           </div>
-          <nav>
-            <Link href={Routes.home} className={styles.link}>
-              <Typography variant="h5">{t('home')}</Typography>
-              <ChevronRight />
-            </Link>
-          </nav>
-          <div className={styles.actions}>
-            <Button variant="contained" href={Routes.signUp}>
-              {t('signUp')}
-            </Button>
-            <Button variant="outlined" href={Routes.signIn}>
-              {t('signIn')}
-            </Button>
-          </div>
+          {isAuth ? (
+            <MobileLoggedInMenu />
+          ) : (
+            <MobileLoggedOutMenu closeDrawer={() => setOpen(false)} />
+          )}
         </div>
       </Drawer>
     </>

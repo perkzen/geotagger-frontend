@@ -1,6 +1,5 @@
-import axios from 'axios';
 import { env } from '@/env';
-import { api } from '@/lib/api/index';
+import { api, nextAuthApi } from '@/lib/api/index';
 import { ApiRoutes, NextAuthRoutes } from '@/lib/constants/api-routes';
 import { Session } from '@/lib/models/auth';
 import { SignInFormData } from '@/lib/validators/sign-in';
@@ -27,18 +26,18 @@ export const signUp = async (data: SignUpFormData) => {
 };
 
 export const signIn = async (data: SignInFormData) => {
-  await axios.post(NextAuthRoutes.login, data);
+  await nextAuthApi.post(NextAuthRoutes.login, data);
 };
 
 export const signOut = async () => {
-  await axios.post(NextAuthRoutes.logout);
+  await nextAuthApi.post(NextAuthRoutes.logout);
 };
 
 export const refreshAccessToken = async () => {
-  await axios.post(NextAuthRoutes.refreshToken);
+  await nextAuthApi.post(NextAuthRoutes.refreshToken);
 };
 
 export const getSession = async () => {
-  const res = await axios.get<Session>(NextAuthRoutes.session);
+  const res = await nextAuthApi.get<Session>(NextAuthRoutes.session);
   return res.data;
 };

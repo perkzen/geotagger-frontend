@@ -2,6 +2,8 @@
 
 .container {
   padding: 28px 35px 24px 35px;
+  @include flex-col;
+  gap: 24px;
 
   .header {
     @include flex-row-items-center;
@@ -14,22 +16,4 @@
       }
     }
   }
-
-  .link {
-    @include flex-row-items-center;
-    justify-content: space-between;
-    color: $dark-color;
-    margin-top: 24px;
-    margin-bottom: 64px;
-
-    h5 {
-      color: $dark-color;
-    }
-  }
-
-  .actions {
-    @include flex-col;
-    gap: 16px;
-  }
-
 }

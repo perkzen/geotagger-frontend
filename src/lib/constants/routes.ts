@@ -3,3 +3,5 @@ export const Routes = {
   signIn: '/sign-in',
   signUp: '/sign-up',
 } as const;
+
+export type Route = (typeof Routes)[keyof typeof Routes];

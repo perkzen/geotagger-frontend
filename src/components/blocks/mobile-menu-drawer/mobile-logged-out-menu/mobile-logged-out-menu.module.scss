@@ -1,0 +1,18 @@
+@import "src/styles";
+
+
+.link {
+  @include flex-row-items-center;
+  justify-content: space-between;
+  color: $dark-color;
+  margin-bottom: 64px;
+
+  h5 {
+    color: $dark-color;
+  }
+}
+
+.actions {
+  @include flex-col;
+  gap: 16px;
+}

@@ -1,0 +1,27 @@
+@import "src/styles";
+
+
+.nav {
+  @include flex-col;
+  gap: 24px;
+}
+
+.link {
+  @include flex-row-items-center;
+  justify-content: space-between;
+  color: $dark-color;
+
+  h5 {
+    color: $dark-color;
+  }
+}
+
+
+.logout {
+  color: $primary-color;
+  padding: 0;
+
+  h5 {
+    color: $primary-color;
+  }
+}

@@ -2,12 +2,20 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { env } from '@/env';
 import { refreshAccessToken, signOut } from '@/lib/api/auth';
 
-export const defaultConfig = {
-  baseURL: env.NEXT_PUBLIC_API_URL,
+export const nextAuthApi = axios.create({
+  baseURL: env.NEXT_PUBLIC_BASE_URL,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
+});
+
+export const defaultConfig = {
+  baseURL: env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 };
 
 export const api = axios.create(defaultConfig);
