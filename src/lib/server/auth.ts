@@ -7,6 +7,10 @@ import {
   REFRESH_TOKEN_COOKIE_NAME,
 } from '@/lib/constants/cookies';
 import { AccessTokens, Session, SessionUser } from '@/lib/models/auth';
+import {
+  NextAuthError,
+  NextAuthErrorCodes,
+} from '@/lib/server/errors/next-auth-error';
 
 export const setAuthCookies = ({
   accessToken,
@@ -21,7 +25,11 @@ export const getAccessTokens = (): AccessTokens => {
   const refreshToken = cookies().get(REFRESH_TOKEN_COOKIE_NAME)?.value;
 
   if (!accessToken || !refreshToken) {
-    throw new Error('Access tokens not found');
+    throw new NextAuthError(
+      'Access token or refresh token not found',
+      NextAuthErrorCodes.ACCESS_TOKEN_NOT_FOUND,
+      401
+    );
   }
 
   return { accessToken, refreshToken };

@@ -5,7 +5,7 @@ import { Session } from '@/lib/models/auth';
 import { SignInFormData } from '@/lib/validators/sign-in';
 import { SignUpFormData } from '@/lib/validators/sign-up';
 
-const redirectUrl = `${env.NEXT_PUBLIC_BASE_URL}${NextAuthRoutes.authCallback}`;
+const redirectUrl = `${env.NEXT_PUBLIC_AUTH_URL}${NextAuthRoutes.authCallback}`;
 
 export const signInWithGoogle = () => {
   window.open(

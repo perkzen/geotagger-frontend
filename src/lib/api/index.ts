@@ -6,7 +6,7 @@ import axios, {
 } from 'axios';
 import { env } from '@/env';
 import { refreshAccessToken, signOut } from '@/lib/api/auth';
-import { ApiRoutes } from '@/lib/constants/api-routes';
+import { NextAuthRoutes } from '@/lib/constants/api-routes';
 
 const authInterceptor = async (instance: AxiosInstance, error: AxiosError) => {
   const originalConfig = error.config as InternalAxiosRequestConfig & {
@@ -15,8 +15,8 @@ const authInterceptor = async (instance: AxiosInstance, error: AxiosError) => {
 
   if (
     error.response?.status === 401 &&
-    !originalConfig?.url?.includes(ApiRoutes.auth.login) &&
-    !originalConfig?.url?.includes(ApiRoutes.auth.refreshToken)
+    !originalConfig?.url?.includes(NextAuthRoutes.login) &&
+    !originalConfig?.url?.includes(NextAuthRoutes.refreshToken)
   ) {
     if (!originalConfig.isRefreshing) {
       originalConfig.isRefreshing = true;
@@ -40,7 +40,6 @@ const defaultApiConfig = {
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
-    'Cache-Control': 'no-store',
   },
 };
 
@@ -52,11 +51,10 @@ api.interceptors.response.use(
 );
 
 const defaultNextAuthApiConfig: AxiosRequestConfig = {
-  baseURL: env.NEXT_PUBLIC_BASE_URL,
+  baseURL: env.NEXT_PUBLIC_AUTH_URL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
-    'Cache-Control': 'no-store',
   },
 };
 
