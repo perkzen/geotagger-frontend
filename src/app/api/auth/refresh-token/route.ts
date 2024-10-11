@@ -2,11 +2,15 @@ import { AxiosError } from 'axios';
 import { api } from '@/lib/api';
 import { ApiRoutes } from '@/lib/constants/api-routes';
 import { AccessTokens } from '@/lib/models/auth';
-import { setAuthCookies } from '@/lib/server/auth';
+import { getAccessTokens, setAuthCookies } from '@/lib/server/auth';
 
 export async function POST() {
   try {
-    const { data } = await api.post<AccessTokens>(ApiRoutes.auth.refreshToken);
+    const tokens = getAccessTokens();
+
+    const { data } = await api.post<AccessTokens>(ApiRoutes.auth.refreshToken, {
+      refreshToken: tokens.refreshToken,
+    });
 
     const { accessToken, refreshToken } = data;
 

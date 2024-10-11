@@ -13,7 +13,7 @@ export const ApiRoutes = {
 export const NextAuthRoutes = {
   login: '/api/auth/login',
   logout: '/api/auth/logout',
-  refreshToken: '/api/auth/refreshToken',
+  refreshToken: '/api/auth/refresh-token',
   authCallback: '/api/auth/callback',
   session: '/api/auth/session',
 } as const;
