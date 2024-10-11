@@ -10,7 +10,7 @@ import { AccessTokens, Session, SessionUser } from '@/lib/models/auth';
 import {
   NextAuthError,
   NextAuthErrorCodes,
-} from '@/lib/server/errors/next-auth-error';
+} from '@/lib/models/next-auth-error';
 
 export const setAuthCookies = ({
   accessToken,
