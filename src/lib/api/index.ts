@@ -23,7 +23,7 @@ const authInterceptor = async (instance: AxiosInstance, error: AxiosError) => {
 
       try {
         await refreshAccessToken();
-        return instance(originalConfig ?? {});
+        return instance(originalConfig);
       } catch (_e) {
         await signOut();
       }
