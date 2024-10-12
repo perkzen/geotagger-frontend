@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Typography } from '@mui/material';
-import SignInForm from '@/components/blocks/sign-in-form/sign-in-form';
+import SignInForm from '@/components/blocks/forms/sign-in-form/sign-in-form';
 import styles from './sign-in-page.module.scss';
 
 export default function SignInPage() {

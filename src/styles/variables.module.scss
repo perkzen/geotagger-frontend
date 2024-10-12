@@ -2,22 +2,22 @@
 @import "breakpoints";
 
 
-// colors
 :export {
   primary: $primary-color;
   primaryHover: $primary-hover-color;
+  primaryDisabled: $primary-disabled-color;
   white: $white-color;
   dark: $dark-color;
   error: $error-color;
   textPrimary: $text-primary-color;
-}
 
-
-// media queries
-:export {
   xs: $breakpoint-xs;
   sm: $breakpoint-sm;
   md: $breakpoint-md;
   lg: $breakpoint-lg;
   xl: $breakpoint-lg;
+
+
+  $shadow: $primary-shadow
 }
+

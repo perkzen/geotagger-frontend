@@ -7,10 +7,7 @@ import {
   REFRESH_TOKEN_COOKIE_NAME,
 } from '@/lib/constants/cookies';
 import { AccessTokens, Session, SessionUser } from '@/lib/models/auth';
-import {
-  NextAuthError,
-  NextAuthErrorCodes,
-} from '@/lib/models/next-auth-error';
+import { NextAuthError, NextAuthErrorCodes } from '@/lib/types/next-auth-error';
 
 export const setAuthCookies = ({
   accessToken,

@@ -1,0 +1,30 @@
+@import "src/styles";
+
+.container {
+  @include flex-col;
+  gap: 32px;
+  width: 100%;
+
+  .items {
+    @include flex-col-items-center;
+    gap: 16px;
+
+    .avatar {
+      max-width: 64px;
+      max-height: 64px;
+      width: 100%;
+      height: 64px;
+    }
+  }
+
+  .actions {
+    @include flex-row;
+    margin-left: auto;
+    gap: 16px;
+
+    button:first-child {
+      color: $primary-color;
+    }
+  }
+
+}

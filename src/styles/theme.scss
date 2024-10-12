@@ -1,6 +1,7 @@
 // colors
 $primary-color: #619B8A;
 $primary-hover-color: #468579;
+$primary-disabled-color: #D0F5DF;
 $error-color: #F04438;
 $white-color: #fff;
 $dark-color: #233D4D;
@@ -14,3 +15,9 @@ $mobile-border-rounded: 4px;
 // box-shadow
 $shadow-color: #00000026;
 $primary-shadow: 0px 0px 8px 0px $shadow-color;
+
+
+// modal
+$modal-width: 593px;
+$modal-sm-width: 489px;
+$valid-modal-sizes: ("sm", "md");

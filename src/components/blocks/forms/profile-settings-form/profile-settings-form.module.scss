@@ -1,0 +1,33 @@
+@import "src/styles";
+
+.container {
+  @include flex-col;
+  gap: 16px;
+  width: 100%;
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .actions {
+    @include flex-row;
+    margin-left: auto;
+    gap: 16px;
+    button:first-child {
+      color: $primary-color;
+    }
+  }
+
+  .links {
+    @include flex-col;
+    gap: 16px;
+
+    button {
+      width: fit-content;
+      padding: 0;
+      color: $primary-color;
+    }
+  }
+}

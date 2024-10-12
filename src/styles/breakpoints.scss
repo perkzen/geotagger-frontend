@@ -3,3 +3,11 @@ $breakpoint-sm: 640;
 $breakpoint-md: 768;
 $breakpoint-lg: 1024;
 $breakpoint-xl: 1280;
+
+$breakpoints: (
+        "xs": $breakpoint-xs,
+        "sm": $breakpoint-sm,
+        "md": $breakpoint-md,
+        "lg": $breakpoint-lg,
+        "xl": $breakpoint-xl
+);

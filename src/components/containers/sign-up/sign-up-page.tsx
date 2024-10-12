@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Avatar, Typography } from '@mui/material';
-import SignUpForm from '@/components/blocks/sign-up-form/sign-up-form';
+import SignUpForm from '@/components/blocks/forms/sign-up-form/sign-up-form';
 import styles from './sign-up-page.module.scss';
 
 export default function SignUpPage() {
