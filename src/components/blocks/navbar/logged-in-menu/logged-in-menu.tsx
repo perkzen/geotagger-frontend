@@ -26,7 +26,6 @@ const LoggedInMenu = () => {
     openModal({
       id: 'profile-settings',
       type: 'PROFILE_SETTINGS',
-      data: null,
     });
   };
 
