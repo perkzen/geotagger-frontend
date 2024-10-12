@@ -1,5 +1,5 @@
 import { Avatar, Typography } from '@mui/material';
-import { useProfile } from '@/lib/hooks/profile';
+import { useProfile } from '@/lib/hooks/user';
 import styles from './user-info.module.scss';
 
 const UserInfo = () => {

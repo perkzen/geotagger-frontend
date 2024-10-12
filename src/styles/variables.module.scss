@@ -5,7 +5,7 @@
 :export {
   primary: $primary-color;
   primaryHover: $primary-hover-color;
-  primaryDisabled: $primary-disabled-color;
+  primaryDisabled:  $primary-disabled-color;
   white: $white-color;
   dark: $dark-color;
   error: $error-color;
@@ -18,6 +18,6 @@
   xl: $breakpoint-lg;
 
 
-  $shadow: $primary-shadow
+  shadow: $primary-shadow
 }
 

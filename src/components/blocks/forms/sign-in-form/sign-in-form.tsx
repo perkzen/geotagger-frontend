@@ -11,13 +11,14 @@ import Input from '@/components/ui/input/input';
 import PasswordInput from '@/components/ui/password-input/password-input';
 import { signInWithFacebook, signInWithGoogle } from '@/lib/api/auth';
 import { Routes } from '@/lib/constants/routes';
-import { useAuthError, useSignIn } from '@/lib/hooks/auth';
+import { useSignIn } from '@/lib/hooks/auth';
+import { useError } from '@/lib/hooks/use-error';
 import { SignInFormData, SignInValidator } from '@/lib/validators/sign-in';
 import styles from './sign-in-form.module.scss';
 
 const SignInForm: FC = () => {
   const t = useTranslations('shared');
-  const { getAuthError } = useAuthError();
+  const { getAuthError } = useError();
 
   const { mutateAsync: signIn, error: signInError, isPending } = useSignIn();
 
@@ -50,7 +51,7 @@ const SignInForm: FC = () => {
         label={t('password')}
         error={!!errors.password}
         helperText={errors.password?.message}
-        autoComplete={'current-password'}
+        autoComplete={'password'}
       />
 
       <Button variant="contained" type="submit" disabled={isPending}>

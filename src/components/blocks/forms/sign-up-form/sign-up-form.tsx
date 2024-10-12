@@ -8,13 +8,14 @@ import { Button, Typography } from '@mui/material';
 import Input from '@/components/ui/input/input';
 import PasswordInput from '@/components/ui/password-input/password-input';
 import { Routes } from '@/lib/constants/routes';
-import { useAuthError, useSignUp } from '@/lib/hooks/auth';
+import { useSignUp } from '@/lib/hooks/auth';
+import { useError } from '@/lib/hooks/use-error';
 import { SignUpFormData, SignUpValidator } from '@/lib/validators/sign-up';
 import styles from './sign-up-form.module.scss';
 
 const SignUpForm: FC = () => {
   const t = useTranslations('shared');
-  const { getAuthError } = useAuthError();
+  const { getAuthError } = useError();
 
   const { mutateAsync: signUp, error: signUpError, isPending } = useSignUp();
 

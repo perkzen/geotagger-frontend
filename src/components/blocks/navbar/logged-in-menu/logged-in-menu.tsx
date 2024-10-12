@@ -5,7 +5,7 @@ import { Add } from '@mui/icons-material';
 import { Avatar, Button, IconButton, Typography } from '@mui/material';
 import { Routes } from '@/lib/constants/routes';
 import { useSignOut } from '@/lib/hooks/auth';
-import { useProfile } from '@/lib/hooks/profile';
+import { useProfile } from '@/lib/hooks/user';
 import { useModalStore } from '@/lib/stores/modal-store';
 import styles from './logged-in-menu.module.scss';
 

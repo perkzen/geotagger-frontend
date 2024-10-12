@@ -10,6 +10,7 @@ export const ApiRoutes = {
     register: '/auth/register',
     logout: '/auth/logout',
     refreshToken: '/auth/refresh-token',
+    changePassword: '/auth/change-password',
   },
   profile: {
     base: '/profile',

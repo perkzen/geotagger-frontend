@@ -1,13 +1,15 @@
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Card, Modal, Typography } from '@mui/material';
 import { AxiosError } from 'axios';
 import ChangePasswordForm from '@/components/blocks/forms/change-password-form/change-password-form';
 import ChangeProfilePicForm from '@/components/blocks/forms/change-profile-pic-form/change-profile-pic-form';
 import ProfileSettingsForm from '@/components/blocks/forms/profile-settings-form/profile-settings-form';
-import { useModalStore } from '@/lib/stores/modal-store';
+import { useConfirmationModal } from '@/lib/hooks/use-confirmation-modal';
+import { useErrorModal } from '@/lib/hooks/use-error-modal';
+import { useUsersAuthProvider } from '@/lib/hooks/user';
 import { ApiError } from '@/lib/types/api-error';
-import { ModalStateProps, ModalTypes } from '@/lib/types/modal';
+import { ModalStateProps } from '@/lib/types/modal';
 import styles from './profile-settings-modal.module.scss';
 
 enum ProfileSettingsForms {
@@ -20,40 +22,47 @@ const ProfileSettingsModal: FC<ModalStateProps> = ({ props }) => {
   const t = useTranslations();
   const [form, setForm] = useState(ProfileSettingsForms.PROFILE);
 
-  const openModal = useModalStore((state) => state.openModal);
+  const openErrorModal = useErrorModal();
+  const openConfirmationModal = useConfirmationModal();
+
+  const authProvider = useUsersAuthProvider();
+  const isLocalProvider = authProvider === 'local';
 
   const handleClose = () => {
     props.onClose();
   };
 
-  const openConfirmationModal = () => {
-    openModal({
-      type: ModalTypes.CONFIRMATION,
-      data: {
+  const handleSuccess = () => {
+    openConfirmationModal(
+      {
         title: t('profileSettings.informationChanged'),
         message: t('profileSettings.settingsSaved'),
       },
-    });
-
-    handleClose();
+      handleClose
+    );
   };
 
-  const openErrorModal = (error: AxiosError<ApiError>) => {
-    const response = error.response?.data;
-    const message = Array.isArray(response?.error)
-      ? response?.error[0]
-      : response?.error;
+  const handleError = (error: AxiosError<ApiError>) => {
+    openErrorModal(error, handleClose);
+  };
 
-    openModal({
-      type: ModalTypes.ERROR,
-      data: {
-        errorCode: response?.statusCode || 500,
-        message: message || t('errors.default'),
-      },
+  const links = useMemo(() => {
+    const links = [];
+
+    if (isLocalProvider) {
+      links.push({
+        onClick: () => setForm(ProfileSettingsForms.PASSWORD),
+        text: t('profileSettings.changePassword'),
+      });
+    }
+
+    links.push({
+      onClick: () => setForm(ProfileSettingsForms.PROFILE_PIC),
+      text: t('profileSettings.changeProfilePic'),
     });
 
-    handleClose();
-  };
+    return links;
+  }, [isLocalProvider, t]);
 
   const getForm = () => {
     switch (form) {
@@ -61,32 +70,24 @@ const ProfileSettingsModal: FC<ModalStateProps> = ({ props }) => {
         return (
           <ChangePasswordForm
             onCancel={handleClose}
-            onSubmit={openConfirmationModal}
+            onSuccess={handleSuccess}
+            onError={handleError}
           />
         );
       case ProfileSettingsForms.PROFILE_PIC:
         return (
           <ChangeProfilePicForm
             onCancel={handleClose}
-            onSubmit={openConfirmationModal}
+            onSubmit={handleSuccess}
           />
         );
       default:
         return (
           <ProfileSettingsForm
             onCancel={handleClose}
-            onSuccess={openConfirmationModal}
-            onError={openErrorModal}
-            links={[
-              {
-                onClick: () => setForm(ProfileSettingsForms.PASSWORD),
-                text: t('profileSettings.changePassword'),
-              },
-              {
-                onClick: () => setForm(ProfileSettingsForms.PROFILE_PIC),
-                text: t('profileSettings.changeProfilePic'),
-              },
-            ]}
+            onSuccess={handleSuccess}
+            onError={handleError}
+            links={links}
           />
         );
     }

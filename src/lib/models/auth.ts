@@ -18,6 +18,7 @@ export type Session = {
 export const AuthErrorCodes = {
   INVALID_CREDENTIALS: 'INVALID_CREDENTIALS',
   USER_ALREADY_EXISTS: 'USER_ALREADY_EXISTS',
+  INCORRECT_PASSWORD: 'INCORRECT_PASSWORD',
 } as const;
 
 export type AuthErrorCodes =

@@ -37,3 +37,8 @@ export const useUpdateProfile = (options?: UseUpdateProfileOptions) => {
     mutationFn: updateProfile,
   });
 };
+
+export const useUsersAuthProvider = () => {
+  const { data } = useProfile();
+  return data?.provider;
+};

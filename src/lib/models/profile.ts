@@ -5,4 +5,5 @@ export type Profile = {
   lastname: string;
   imageUrl: string | null;
   points: number;
+  provider: 'local' | 'google' | 'facebook';
 };
