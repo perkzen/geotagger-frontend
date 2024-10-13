@@ -3,7 +3,7 @@ import { api } from '@/lib/api';
 import { ApiRoutes } from '@/lib/constants/api-routes';
 import { AccessTokens } from '@/lib/models/auth';
 import { getAccessTokens, setAuthCookies } from '@/lib/server/auth';
-import { NextAuthError } from '@/lib/models/next-auth-error';
+import { NextAuthError } from '@/lib/types/next-auth-error';
 
 export async function POST() {
   try {

@@ -1,12 +1,22 @@
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import {
+  useMutation,
+  UseMutationOptions,
+  useQuery,
+} from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { getSession, signIn, signOut, signUp } from '@/lib/api/auth';
+import {
+  changePassword,
+  getSession,
+  signIn,
+  signOut,
+  signUp,
+} from '@/lib/api/auth';
 import { Routes } from '@/lib/constants/routes';
-import { ApiError } from '@/lib/models/api-error';
-import { AuthErrorCodes } from '@/lib/models/auth';
+import { GET_PROFILE_KEY } from '@/lib/hooks/user';
+import { ApiError } from '@/lib/types/api-error';
 import { getQueryClient } from '@/lib/utils/get-query-client';
+import { ChangePasswordFormData } from '@/lib/validators/change-password';
 import { SignInFormData } from '@/lib/validators/sign-in';
 import { SignUpFormData } from '@/lib/validators/sign-up';
 
@@ -52,7 +62,7 @@ export const useSignUp = () => {
   });
 };
 
-const SIGN_OUT_KEY = 'logout';
+export const SIGN_OUT_KEY = 'logout';
 
 export const useSignOut = () => {
   const { push } = useRouter();
@@ -62,29 +72,34 @@ export const useSignOut = () => {
     mutationKey: [SIGN_OUT_KEY],
     mutationFn: signOut,
     onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [SESSION_KEY],
-      });
+      void Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: [SESSION_KEY],
+        }),
+        queryClient.invalidateQueries({ queryKey: [GET_PROFILE_KEY] }),
+      ]);
+
       push(Routes.signIn);
     },
   });
 };
 
-export const useAuthError = () => {
-  const t = useTranslations('errors');
+export const CHANGE_PASSWORD_KEY = 'change-password';
 
-  const getAuthError = (error: AxiosError<ApiError>) => {
-    const code = error.response?.data.code;
+export type UseChangePasswordOptions = Omit<
+  UseMutationOptions<
+    void,
+    AxiosError<ApiError>,
+    ChangePasswordFormData,
+    unknown
+  >,
+  'mutationFn' | 'mutationKey'
+>;
 
-    switch (code) {
-      case AuthErrorCodes.INVALID_CREDENTIALS:
-        return t('invalidCredentials');
-      case AuthErrorCodes.USER_ALREADY_EXISTS:
-        return t('emailAlreadyInUse');
-      default:
-        return t('default');
-    }
-  };
-
-  return { getAuthError };
+export const useChangePassword = (options?: UseChangePasswordOptions) => {
+  return useMutation({
+    ...options,
+    mutationKey: [CHANGE_PASSWORD_KEY],
+    mutationFn: changePassword,
+  });
 };

@@ -1,0 +1,13 @@
+@import "src/styles";
+
+.container {
+  @include modal;
+
+  .message {
+  }
+
+
+  button {
+    margin-left: auto;
+  }
+}

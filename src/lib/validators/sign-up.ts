@@ -4,8 +4,8 @@ import { strongPassword } from '@/lib/validators/common';
 export const SignUpValidator = z
   .object({
     email: z.string().email(),
-    firstname: z.string().min(3),
-    lastname: z.string().min(3),
+    firstname: z.string().min(3).max(64),
+    lastname: z.string().min(3).max(64),
     password: strongPassword(),
     repeatPassword: z.string(),
   })

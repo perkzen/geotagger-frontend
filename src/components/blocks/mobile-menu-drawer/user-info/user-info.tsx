@@ -1,9 +1,9 @@
 import { Avatar, Typography } from '@mui/material';
-import { useUserProfile } from '@/lib/hooks/profile';
+import { useProfile } from '@/lib/hooks/user';
 import styles from './user-info.module.scss';
 
 const UserInfo = () => {
-  const { data: profile } = useUserProfile();
+  const { data: profile } = useProfile();
   const imageUrl = profile?.imageUrl || undefined;
 
   return (

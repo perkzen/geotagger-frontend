@@ -92,6 +92,10 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
             borderRadius: '8px',
           },
           contained: {
+            '&:disabled': {
+              backgroundColor: vars.primaryDisabled,
+              color: vars.white,
+            },
             '&:hover': {
               backgroundColor: vars.primaryHover,
             },
@@ -118,6 +122,25 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
           },
           input: {
             padding: '8px 16px',
+          },
+        },
+      },
+      MuiModal: {
+        styleOverrides: {
+          root: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+        },
+      },
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            borderRadius: '8px',
+            boxShadow: vars.shadow,
+            padding: '32px',
+            color: vars.dark,
           },
         },
       },

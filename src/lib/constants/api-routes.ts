@@ -1,13 +1,21 @@
+import { env } from '@/env';
+
 export const ApiRoutes = {
   auth: {
-    google: '/auth/google?redirect=:redirect',
-    facebook: '/auth/facebook?redirect=:redirect',
+    google: (redirect: string) =>
+      `${env.NEXT_PUBLIC_API_URL}/auth/google?redirect=${encodeURIComponent(redirect)}`,
+    facebook: (redirect: string) =>
+      `${env.NEXT_PUBLIC_API_URL}/auth/facebook?redirect=${encodeURIComponent(redirect)}`,
     login: '/auth/login',
     register: '/auth/register',
     logout: '/auth/logout',
     refreshToken: '/auth/refresh-token',
+    changePassword: '/auth/change-password',
   },
-  profile: '/profile',
+  profile: {
+    base: '/profile',
+    image: '/profile/image',
+  },
 } as const;
 
 export const NextAuthRoutes = {

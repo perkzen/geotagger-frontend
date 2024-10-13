@@ -3,7 +3,6 @@
 .container {
   @include flex-row-items-center;
 
-
   .add {
     background: $primary-color;
     color: $white-color;
@@ -22,7 +21,6 @@
       max-height: 36px;
       max-width: 36px;
     }
-
 
     .points {
       padding: 0 9px;

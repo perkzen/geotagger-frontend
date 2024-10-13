@@ -1,4 +1,5 @@
 @import "breakpoints";
+@import "theme";
 
 @mixin flex-row {
   display: flex;
@@ -26,25 +27,30 @@
 }
 
 @mixin mq($breakpoint) {
-  @if $breakpoint == "xs" {
-    @media (max-width: #{$breakpoint-xs}px) {
+  $value: map-get($breakpoints, $breakpoint);
+
+  @if $value {
+    @media (max-width: #{$value}px) {
       @content;
     }
-  } @else if $breakpoint == "sm" {
-    @media (max-width: #{$breakpoint-sm}px) {
-      @content;
+  } @else {
+    @error "Invalid breakpoint '#{$breakpoint}' provided. Allowed breakpoints: #{map-keys($breakpoints)}";
+  }
+}
+
+
+@mixin modal($size: "md") {
+  @include flex-col;
+  width: 100%;
+  gap: 16px;
+
+  @if index($valid-modal-sizes, $size) {
+    @if $size == "sm" {
+      max-width: $modal-sm-width;
+    } @else {
+      max-width: $modal-width;
     }
-  } @else if $breakpoint == "md" {
-    @media (max-width: #{$breakpoint-md}px) {
-      @content;
-    }
-  } @else if $breakpoint == "lg" {
-    @media (max-width: #{$breakpoint-lg}px) {
-      @content;
-    }
-  } @else if $breakpoint == "xl" {
-    @media (max-width: #{$breakpoint-xl}px) {
-      @content;
-    }
+  } @else {
+    @error "Invalid size '#{$size}' provided. Allowed sizes: #{join($valid-modal-sizes, ', ')}";
   }
 }

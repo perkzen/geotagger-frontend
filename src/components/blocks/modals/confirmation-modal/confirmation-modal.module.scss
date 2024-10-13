@@ -1,0 +1,9 @@
+@import "src/styles";
+
+.container {
+  @include modal;
+
+  button {
+    margin-left: auto;
+  }
+}
