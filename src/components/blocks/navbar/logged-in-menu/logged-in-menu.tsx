@@ -44,7 +44,7 @@ const LoggedInMenu = () => {
       </div>
       <IconButton
         className={styles.add}
-        onClick={() => push(Routes.location.add)}
+        onClick={() => push(Routes.addLocation)}
       >
         <Add />
       </IconButton>

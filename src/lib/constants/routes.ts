@@ -2,9 +2,7 @@ export const Routes = {
   home: '/',
   signIn: '/sign-in',
   signUp: '/sign-up',
-  location: {
-    add: '/location/add',
-  },
+  addLocation: '/location/add',
   profile: '/profile',
 } as const;
 
