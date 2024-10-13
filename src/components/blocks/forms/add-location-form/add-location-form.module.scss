@@ -1,0 +1,34 @@
+@import "src/styles";
+
+.container {
+  @include flex-col;
+  gap: 16px;
+  width: 100%;
+  max-width: 860px;
+
+  @include mq("sm") {
+    width: 344px;
+  }
+
+  .button {
+    width: fit-content;
+    margin-left: auto;
+  }
+
+  .imageContainer {
+    @include flex-col;
+    gap: 6px;
+
+    .image {
+      position: relative;
+      height: 280px;
+      width: 100%;
+      border-radius: $border-rounded;
+      overflow: hidden;
+
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+}

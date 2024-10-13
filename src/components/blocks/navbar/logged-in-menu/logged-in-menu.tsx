@@ -42,7 +42,10 @@ const LoggedInMenu = () => {
           {profile?.points}
         </Typography>
       </div>
-      <IconButton className={styles.add}>
+      <IconButton
+        className={styles.add}
+        onClick={() => push(Routes.location.add)}
+      >
         <Add />
       </IconButton>
     </div>

@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { strongPassword } from '@/lib/validators/common';
+import { StrongPasswordValidator } from '@/lib/validators/common';
 
 export const SignUpValidator = z
   .object({
-    email: z.string().email(),
-    firstname: z.string().min(3).max(64),
-    lastname: z.string().min(3).max(64),
-    password: strongPassword(),
+    email: z.string().email().trim(),
+    firstname: z.string().trim().min(3).max(64),
+    lastname: z.string().trim().min(3).max(64),
+    password: StrongPasswordValidator(),
     repeatPassword: z.string(),
   })
   .refine((data) => data.password === data.repeatPassword, {

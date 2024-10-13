@@ -16,6 +16,11 @@ export const ApiRoutes = {
     base: '/profile',
     image: '/profile/image',
   },
+  locations: {
+    geocode: ({ lat, lng }: { lat: number; lng: number }) =>
+      `/locations/geocode?lat=${lat}&lng=${lng}`,
+    add: '/locations',
+  },
 } as const;
 
 export const NextAuthRoutes = {

@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { strongPassword } from '@/lib/validators/common';
+import { StrongPasswordValidator } from '@/lib/validators/common';
 
 export const ChangePasswordValidator = z
   .object({
     currentPassword: z.string(),
-    newPassword: strongPassword(),
+    newPassword: StrongPasswordValidator(),
     repeatPassword: z.string(),
   })
   .refine((data) => data.newPassword === data.repeatPassword, {

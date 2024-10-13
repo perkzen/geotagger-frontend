@@ -1,0 +1,15 @@
+@import "src/styles";
+
+.container {
+  height: 197px;
+  max-width: 860px;
+  width: 100%;
+
+  @include mq("sm") {
+    max-width: 344px;
+  }
+
+
+  border-radius: $border-rounded;
+  overflow: hidden; /* Ensures the map does not overflow rounded corners */
+}
