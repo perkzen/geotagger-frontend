@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import React, { FC, forwardRef, ReactNode } from 'react';
 import { Button, ButtonProps } from '@mui/material';
 import styles from './file-upload-input.module.scss';
 
@@ -9,24 +9,36 @@ type FileUploadInputProps = {
   variant?: ButtonProps['variant'];
 };
 
-const FileUploadInput: FC<FileUploadInputProps> = ({
-  children,
-  accept,
-  multiple = false,
-  variant = 'contained',
-}) => {
-  return (
-    <Button component="label" role={undefined} tabIndex={-1} variant={variant}>
-      {children}
-      <input
-        className={styles.input}
-        type="file"
-        onChange={(event) => console.log(event.target.files)}
-        multiple={multiple}
-        accept={accept}
-      />
-    </Button>
-  );
-};
+const FileUploadInput: FC<FileUploadInputProps> = forwardRef<
+  HTMLInputElement,
+  FileUploadInputProps
+>(
+  (
+    { children, accept, multiple = false, variant = 'contained', ...props },
+    ref
+  ) => {
+    return (
+      <Button
+        component="label"
+        role={undefined}
+        tabIndex={-1}
+        variant={variant}
+      >
+        {children}
+        <input
+          {...props}
+          className={styles.input}
+          type="file"
+          ref={ref}
+          multiple={multiple}
+          accept={accept}
+          hidden
+        />
+      </Button>
+    );
+  }
+);
+
+FileUploadInput.displayName = 'FileUploadInput';
 
 export default FileUploadInput;

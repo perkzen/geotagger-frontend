@@ -1,30 +1,72 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Avatar, Button, Typography } from '@mui/material';
+import { AxiosError } from 'axios';
 import FileUploadInput from '@/components/ui/file-upload-input/file-upload-input';
+import {
+  GET_PROFILE_KEY,
+  useProfile,
+  useUpdateProfilePicture,
+} from '@/lib/hooks/user';
+import { ApiError } from '@/lib/types/api-error';
+import { getQueryClient } from '@/lib/utils/get-query-client';
+import {
+  ProfilePictureFormData,
+  ProfilePictureValidator,
+} from '@/lib/validators/profile-pciture';
 import styles from './change-profile-pic-form.module.scss';
 
 type ProfileSettingsFormProps = {
   onCancel: () => void;
-  onSubmit: () => void;
+  onSuccess: () => void;
+  onError: (error: AxiosError<ApiError>) => void;
+};
+
+const defaultValues = {
+  fileList: undefined,
 };
 
 const ChangeProfilePicForm: FC<ProfileSettingsFormProps> = ({
   onCancel,
-  onSubmit,
+  onSuccess,
+  onError,
 }) => {
   const t = useTranslations();
+  const queryClient = getQueryClient();
 
-  const { handleSubmit } = useForm();
+  const { data: profile } = useProfile();
 
-  const onFormSubmit = () => {
-    onSubmit();
+  const { mutateAsync: updatePicture, isPending: isUploading } =
+    useUpdateProfilePicture({
+      onSuccess: () => {
+        void queryClient.invalidateQueries({ queryKey: [GET_PROFILE_KEY] });
+        onSuccess();
+      },
+      onError,
+    });
+
+  const { handleSubmit, register, watch, formState } =
+    useForm<ProfilePictureFormData>({
+      defaultValues,
+      resolver: zodResolver(ProfilePictureValidator),
+    });
+
+  const { dirtyFields, errors } = formState;
+
+  const onFormSubmit = (data: ProfilePictureFormData) => {
+    void updatePicture(data.fileList[0]);
   };
+
+  const selectedFile = watch('fileList')?.item(0);
+  const imgSrc = selectedFile
+    ? URL.createObjectURL(selectedFile)
+    : (profile?.imageUrl ?? undefined);
 
   return (
     <form
-      id="change-password-form"
+      id="change-picture-form"
       className={styles.container}
       onSubmit={handleSubmit(onFormSubmit)}
     >
@@ -32,16 +74,30 @@ const ChangeProfilePicForm: FC<ProfileSettingsFormProps> = ({
         {t('profileSettings.changeYourProfilePic')}
       </Typography>
       <div className={styles.items}>
-        <Avatar className={styles.avatar} />
-        <FileUploadInput variant="outlined" accept={'image/*'}>
+        <Avatar className={styles.avatar} src={imgSrc} />
+        <FileUploadInput
+          {...register('fileList')}
+          variant="outlined"
+          accept={'image/*'}
+        >
           {t('profileSettings.uploadNewPic')}
         </FileUploadInput>
+        {!!errors.fileList && (
+          <Typography variant="body1" color="error">
+            {errors.fileList?.message}
+          </Typography>
+        )}
       </div>
       <div className={styles.actions}>
         <Button onClick={onCancel} variant="text" color="primary">
           {t('shared.cancel')}
         </Button>
-        <Button variant="contained" form="profile-settings-form" type="submit">
+        <Button
+          variant="contained"
+          form="change-picture-form"
+          type="submit"
+          disabled={!dirtyFields.fileList || isUploading}
+        >
           {t('shared.submit')}
         </Button>
       </div>

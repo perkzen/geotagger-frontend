@@ -78,7 +78,8 @@ const ProfileSettingsModal: FC<ModalStateProps> = ({ props }) => {
         return (
           <ChangeProfilePicForm
             onCancel={handleClose}
-            onSubmit={handleSuccess}
+            onSuccess={handleSuccess}
+            onError={handleError}
           />
         );
       default:
