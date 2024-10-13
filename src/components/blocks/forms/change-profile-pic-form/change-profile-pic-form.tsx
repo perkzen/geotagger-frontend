@@ -24,10 +24,6 @@ type ProfileSettingsFormProps = {
   onError: (error: AxiosError<ApiError>) => void;
 };
 
-const defaultValues = {
-  fileList: undefined,
-};
-
 const ChangeProfilePicForm: FC<ProfileSettingsFormProps> = ({
   onCancel,
   onSuccess,
@@ -49,7 +45,6 @@ const ChangeProfilePicForm: FC<ProfileSettingsFormProps> = ({
 
   const { handleSubmit, register, watch, formState } =
     useForm<ProfilePictureFormData>({
-      defaultValues,
       resolver: zodResolver(ProfilePictureValidator),
     });
 
@@ -78,7 +73,7 @@ const ChangeProfilePicForm: FC<ProfileSettingsFormProps> = ({
         <FileUploadInput
           {...register('fileList')}
           variant="outlined"
-          accept={'image/*'}
+          accept={'image/png,image/jpg'}
         >
           {t('profileSettings.uploadNewPic')}
         </FileUploadInput>

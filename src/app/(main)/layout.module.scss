@@ -6,11 +6,6 @@
 
   main {
     flex-grow: 1;
-    padding-top: 30px;
-    padding-bottom: 167px;
-
-    @include mq("sm") {
-      padding-bottom: 72px;
-    }
+    padding-top: 20px;
   }
 }

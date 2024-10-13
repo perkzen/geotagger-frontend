@@ -1,5 +1,6 @@
 import React, { FC, forwardRef, ReactNode } from 'react';
 import { Button, ButtonProps } from '@mui/material';
+import classNames from 'classnames';
 import styles from './file-upload-input.module.scss';
 
 type FileUploadInputProps = {
@@ -7,6 +8,7 @@ type FileUploadInputProps = {
   multiple?: boolean;
   accept?: string;
   variant?: ButtonProps['variant'];
+  className?: string;
 };
 
 const FileUploadInput: FC<FileUploadInputProps> = forwardRef<
@@ -14,7 +16,14 @@ const FileUploadInput: FC<FileUploadInputProps> = forwardRef<
   FileUploadInputProps
 >(
   (
-    { children, accept, multiple = false, variant = 'contained', ...props },
+    {
+      children,
+      accept,
+      multiple = false,
+      variant = 'contained',
+      className,
+      ...props
+    },
     ref
   ) => {
     return (
@@ -23,6 +32,7 @@ const FileUploadInput: FC<FileUploadInputProps> = forwardRef<
         role={undefined}
         tabIndex={-1}
         variant={variant}
+        className={classNames(styles.container, className)}
       >
         {children}
         <input

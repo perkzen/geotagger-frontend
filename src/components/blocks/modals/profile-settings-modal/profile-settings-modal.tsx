@@ -98,8 +98,9 @@ const ProfileSettingsModal: FC<ModalStateProps> = ({ props }) => {
     <Modal {...props}>
       <Card className={styles.container}>
         <Typography className={styles.title} variant="h5">
-          {t('profileSettings.profile')}{' '}
-          <span>{t('profileSettings.settings')}.</span>
+          {t.rich('profileSettings.title', {
+            span: (chunk) => <span>{chunk}</span>,
+          })}
         </Typography>
         {getForm()}
       </Card>

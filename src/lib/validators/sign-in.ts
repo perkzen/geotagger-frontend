@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
 export const SignInValidator = z.object({
-  email: z.string().email({
+  email: z.string().trim().email({
     message: 'Invalid email format',
   }),
-  password: z.string().min(1, {
+  password: z.string().trim().min(1, {
     message: 'Password is required',
   }),
 });

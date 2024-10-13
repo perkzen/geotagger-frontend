@@ -39,8 +39,7 @@
     "description": "Welcome back to Geotagger. We are glad that you are back."
   },
   "profileSettings": {
-    "profile": "Profile",
-    "settings": "Settings",
+    "title": "Profile <span>settings</span>",
     "changePassword": "Change password",
     "changeProfilePic": "Change profile picture",
     "changeYourInfo": "Change your information",
@@ -52,6 +51,14 @@
     "uploadNewPic": "Upload new  picture",
     "informationChanged": "Information changed",
     "settingsSaved": "Your settings are saved"
+  },
+  "location": {
+    "add": {
+      "title": "Add a new <span>location</span>",
+      "uploadImage": "Upload image",
+      "addNew": "Add new",
+      "location": "Location"
+    }
   },
   "errors": {
     "errorCode": "Ooppss! Error code #{code}",

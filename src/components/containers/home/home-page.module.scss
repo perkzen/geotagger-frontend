@@ -19,10 +19,11 @@
     @include flex-col-items-center;
     gap: 32px;
     margin-top: 233px;
-    margin-bottom: 32px;
+    margin-bottom: 167px;
 
     @include mq("sm") {
       margin-top: 0;
+      margin-bottom: 73px;
     }
 
     .tryYourself {

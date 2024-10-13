@@ -40,5 +40,5 @@ export const useError = (options?: UseErrorOptions) => {
     return Array.isArray(response) ? response[0] : response;
   };
 
-  return { getAuthError, getError };
+  return { getError };
 };

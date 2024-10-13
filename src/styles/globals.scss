@@ -29,3 +29,22 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+
+// hide google maps logo (illegal stuff)
+// https://stackoverflow.com/a/23613338/16700572
+a[href^="http://maps.google.com/maps"] {
+  display: none !important
+}
+
+a[href^="https://maps.google.com/maps"] {
+  display: none !important
+}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+  display: none;
+}
+
+.gmnoprint div {
+  background: none !important;
+}
