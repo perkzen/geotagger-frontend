@@ -18,7 +18,7 @@ import styles from './sign-in-form.module.scss';
 
 const SignInForm: FC = () => {
   const t = useTranslations('shared');
-  const { getAuthError } = useError();
+  const { getError } = useError();
 
   const { mutateAsync: signIn, error: signInError, isPending } = useSignIn();
 
@@ -36,7 +36,7 @@ const SignInForm: FC = () => {
     <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
       {signInError && (
         <Typography className={styles.error} color="error">
-          {getAuthError(signInError)}
+          {getError(signInError)}
         </Typography>
       )}
       <Input
