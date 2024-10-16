@@ -1,20 +1,27 @@
 import { cookies } from 'next/headers';
 import { verify } from 'jsonwebtoken';
 import { env } from '@/env';
+import { AccessTokens, Session, SessionUser } from '@/lib/api/auth/models';
 import {
   ACCESS_TOKEN_COOKIE_NAME,
   cookieOptions,
+  ONE_MONTH,
   REFRESH_TOKEN_COOKIE_NAME,
 } from '@/lib/constants/cookies';
-import { AccessTokens, Session, SessionUser } from '@/lib/api/auth/auth';
 import { NextAuthError, NextAuthErrorCodes } from '@/lib/types/next-auth-error';
 
 export const setAuthCookies = ({
   accessToken,
   refreshToken,
 }: AccessTokens): void => {
-  cookies().set(ACCESS_TOKEN_COOKIE_NAME, accessToken, cookieOptions);
-  cookies().set(REFRESH_TOKEN_COOKIE_NAME, refreshToken, cookieOptions);
+  cookies().set(ACCESS_TOKEN_COOKIE_NAME, accessToken, {
+    ...cookieOptions,
+    httpOnly: false,
+  });
+  cookies().set(REFRESH_TOKEN_COOKIE_NAME, refreshToken, {
+    ...cookieOptions,
+    maxAge: ONE_MONTH,
+  });
 };
 
 export const getAccessTokens = (): AccessTokens => {

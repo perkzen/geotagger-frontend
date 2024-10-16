@@ -1,7 +1,7 @@
 import { env } from '@/env';
 import { api, nextAuthApi } from '@/lib/api';
+import { Session } from '@/lib/api/auth/models';
 import { ApiRoutes, NextAuthRoutes } from '@/lib/constants/api-routes';
-import { Session } from '@/lib/api/auth/auth';
 import { ChangePasswordFormData } from '@/lib/validators/change-password';
 import { SignInFormData } from '@/lib/validators/sign-in';
 import { SignUpFormData } from '@/lib/validators/sign-up';

@@ -4,7 +4,7 @@ export type GeocodeResponse = {
   formattedAddress: string;
 };
 
-export type Models = {
+export type Location = {
   id: string;
   userId: string;
   imageUrl: string;
@@ -13,4 +13,4 @@ export type Models = {
   lng: number;
 };
 
-export type LocationsList = Pagination<Models>;
+export type LocationsList = Pagination<Location>;

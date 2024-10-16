@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import { api } from '@/lib/api';
+import { AccessTokens } from '@/lib/api/auth/models';
 import { ApiRoutes } from '@/lib/constants/api-routes';
-import { AccessTokens } from '@/lib/api/auth/auth';
 import { setAuthCookies } from '@/lib/server/auth';
 import { SignInValidator } from '@/lib/validators/sign-in';
 

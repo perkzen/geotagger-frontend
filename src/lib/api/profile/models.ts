@@ -1,4 +1,4 @@
-export type Models = {
+export type Profile = {
   id: string;
   email: string;
   firstname: string;

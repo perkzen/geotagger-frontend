@@ -17,6 +17,9 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
       contrast: {
         main: vars.white,
       },
+      danger: {
+        main: vars.danger,
+      },
     },
     typography: {
       caption: {

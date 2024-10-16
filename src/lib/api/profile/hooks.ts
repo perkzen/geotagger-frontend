@@ -10,7 +10,7 @@ import {
   updateProfile,
   updateProfilePicture,
 } from '@/lib/api/profile';
-import { Models } from '@/lib/api/profile/models';
+import { Profile } from '@/lib/api/profile/models';
 import { ApiError } from '@/lib/types/api-error';
 import { ProfileSettingsFormData } from '@/lib/validators/profile-settings';
 
@@ -29,7 +29,7 @@ export const UPDATE_PROFILE_KEY = 'UPDATE_PROFILE_KEY';
 
 export type UseUpdateProfileOptions = Omit<
   UseMutationOptions<
-    Models,
+    Profile,
     AxiosError<ApiError>,
     ProfileSettingsFormData,
     unknown

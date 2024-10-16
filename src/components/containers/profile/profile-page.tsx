@@ -1,29 +1,21 @@
+import { Suspense } from 'react';
 import GuessesList from '@/components/blocks/guess-list/guesses-list';
+import LocationsListSkeleton from '@/components/blocks/locations-list/locations-list-skeleton';
 import ProfileInfo from '@/components/blocks/profile-info/profile-info';
+import ProfileInfoSkeleton from '@/components/blocks/profile-info/profile-info-skeleton';
 import UploadsList from '@/components/blocks/uploads-list/uploads-list';
-import { myLocationsQueryOptions } from '@/lib/api/locations/hooks';
-import { profileQueryOptions } from '@/lib/api/profile/hooks';
-import { getQueryClient } from '@/lib/utils/get-query-client';
 import styles from './profile-page.module.scss';
 
-const ProfilePage = async () => {
-  const queryClient = getQueryClient();
-
-  void Promise.all([
-    queryClient.prefetchQuery(profileQueryOptions),
-    queryClient.prefetchQuery(
-      myLocationsQueryOptions({
-        take: 5,
-        skip: 0,
-      })
-    ),
-  ]);
-
+const ProfilePage = () => {
   return (
     <div className={styles.container}>
-      <ProfileInfo />
+      <Suspense fallback={<ProfileInfoSkeleton />}>
+        <ProfileInfo />
+      </Suspense>
       <GuessesList />
-      <UploadsList />
+      <Suspense fallback={<LocationsListSkeleton />}>
+        <UploadsList />
+      </Suspense>
     </div>
   );
 };

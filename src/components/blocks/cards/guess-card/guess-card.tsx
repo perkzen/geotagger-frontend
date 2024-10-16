@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Image from 'next/image';
 import { LockOutlined } from '@mui/icons-material';
-import PlaceholderLocation from '../../../../public/images/location-1.jpeg';
+import PlaceholderLocation from '../../../../../public/images/location-1.jpeg';
 import styles from './guess-card.module.scss';
 
 type GuessCardProps = {
