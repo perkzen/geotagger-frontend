@@ -24,7 +24,7 @@
   "home": {
     "title": "Explore the world with Geotagger!",
     "description": "Geotagger is website that allows you to post picture and tag it on the map. Other user than try to locate it via Google Maps.",
-    "cta": "Try yourself at Geotagger!",
+    "subtitle": "Try yourself at Geotagger!",
     "info": "Try to guess the location of image by selecting position on the map. When you guess it, it gives you the error distance."
   },
   "footer": {
@@ -59,6 +59,16 @@
       "addNew": "Add new",
       "location": "Location"
     }
+  },
+  "profile": {
+    "myBestGuesses": "My best guesses",
+    "noBestGuesses": "No best guesses yet",
+    "guessInfo": "Start new game and guess the location of the picture to get the results here!",
+    "goToLocations": "Go to locations",
+    "myUploads": "My uploads",
+    "noUploads": "No uploads yet",
+    "uploadInfo": "Upload new location with the click on button bellow or in navigation bar press the “+” button.",
+    "addLocation": "Add location"
   },
   "errors": {
     "errorCode": "Ooppss! Error code #{code}",

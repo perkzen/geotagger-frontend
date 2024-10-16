@@ -13,7 +13,9 @@ export default function HomePage() {
       <HeroSection />
       <div className={styles.tryYourselfContainer}>
         <div className={styles.tryYourself}>
-          <Typography variant={'h4'}>{t('home.cta')}</Typography>
+          <Typography variant="h4" color="primary">
+            {t('home.subtitle')}
+          </Typography>
           <div className={styles.infoContainer}>
             <Typography variant="body1">{t('home.info')}</Typography>
           </div>
@@ -23,7 +25,7 @@ export default function HomePage() {
           <GuessCard isLocked />
           <GuessCard isLocked />
         </div>
-        <Button variant="contained" href={Routes.signUp}>
+        <Button variant="contained" href={Routes.SIGN_UP}>
           {t('shared.signUp')}
         </Button>
       </div>

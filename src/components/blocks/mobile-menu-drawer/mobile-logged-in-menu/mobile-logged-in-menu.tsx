@@ -20,11 +20,11 @@ const MobileLoggedInMenu = () => {
     <>
       <UserInfo />
       <nav className={styles.nav}>
-        <Link href={Routes.home} className={styles.link}>
+        <Link href={Routes.HOME} className={styles.link}>
           <Typography variant="h5">{t('home')}</Typography>
           <ChevronRight />
         </Link>
-        <Link href={Routes.home} className={styles.link}>
+        <Link href={Routes.HOME} className={styles.link}>
           <Typography variant="h5">{t('profileSettings')}</Typography>
           <ChevronRight />
         </Link>

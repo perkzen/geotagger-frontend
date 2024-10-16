@@ -42,7 +42,7 @@ export const useSignIn = () => {
     mutationKey: [SIGN_IN_KEY],
     mutationFn: signIn,
     onSuccess: () => {
-      push(Routes.home);
+      push(Routes.HOME);
       void queryClient.invalidateQueries({
         queryKey: [SESSION_KEY],
       });
@@ -58,7 +58,7 @@ export const useSignUp = () => {
   return useMutation<void, AxiosError<ApiError>, SignUpFormData>({
     mutationKey: [SIGN_UP_KEY],
     mutationFn: signUp,
-    onSuccess: () => push(Routes.signIn),
+    onSuccess: () => push(Routes.SIGN_IN),
   });
 };
 
@@ -79,7 +79,7 @@ export const useSignOut = () => {
         queryClient.invalidateQueries({ queryKey: [GET_PROFILE_KEY] }),
       ]);
 
-      push(Routes.signIn);
+      push(Routes.SIGN_IN);
     },
   });
 };

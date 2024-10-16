@@ -38,7 +38,7 @@ const AddLocationForm: FC = () => {
   const { errors } = formState;
 
   const { mutateAsync: addLocation, isPending: isUploading } = useAddLocation({
-    onSuccess: () => push(Routes.profile),
+    onSuccess: () => push(Routes.PROFILE),
   });
 
   const selectedFile = watch('fileList')?.item(0);

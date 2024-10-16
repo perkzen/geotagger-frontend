@@ -1,5 +1,6 @@
 'use client';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Add } from '@mui/icons-material';
 import { Avatar, Button, IconButton, Typography } from '@mui/material';
@@ -31,20 +32,20 @@ const LoggedInMenu = () => {
 
   return (
     <div className={styles.container}>
-      <Button onClick={() => push(Routes.home)}>{t('home')}</Button>
+      <Button onClick={() => push(Routes.HOME)}>{t('home')}</Button>
       <Button onClick={handleOpenProfileSettings}>
         {t('profileSettings')}
       </Button>
       <Button onClick={handleSignOut}>{t('logout')}</Button>
-      <div className={styles.user}>
+      <Link href={Routes.PROFILE} className={styles.user}>
         <Avatar src={imageUrl} className={styles.avatar} />
         <Typography variant="body1" className={styles.points}>
           {profile?.points}
         </Typography>
-      </div>
+      </Link>
       <IconButton
         className={styles.add}
-        onClick={() => push(Routes.addLocation)}
+        onClick={() => push(Routes.ADD_LOCATION)}
       >
         <Add />
       </IconButton>

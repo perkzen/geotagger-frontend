@@ -76,7 +76,7 @@ const SignUpForm: FC = () => {
       </Button>
       <div className={styles.alreadyHaveAccount}>
         <Typography variant="body1">{t('alreadyHaveAccount')}</Typography>
-        <Link href={Routes.signIn}>{t('signIn')}</Link>
+        <Link href={Routes.SIGN_IN}>{t('signIn')}</Link>
       </div>
     </form>
   );

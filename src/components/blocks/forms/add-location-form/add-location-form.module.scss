@@ -3,11 +3,12 @@
 .container {
   @include flex-col;
   gap: 16px;
-  width: 100%;
   max-width: 860px;
+  width: 100%;
 
   @include mq("sm") {
-    width: 344px;
+    max-width: 344px;
+    width: 100%;
   }
 
   .button {
