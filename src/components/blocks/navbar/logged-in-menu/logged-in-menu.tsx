@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Add } from '@mui/icons-material';
 import { Avatar, Button, IconButton, Typography } from '@mui/material';
+import { useSignOut } from '@/lib/api/auth/hooks';
+import { useProfile } from '@/lib/api/profile/hooks';
 import { Routes } from '@/lib/constants/routes';
-import { useSignOut } from '@/lib/hooks/auth';
-import { useProfile } from '@/lib/hooks/user';
 import { useModalStore } from '@/lib/stores/modal-store';
 import styles from './logged-in-menu.module.scss';
 

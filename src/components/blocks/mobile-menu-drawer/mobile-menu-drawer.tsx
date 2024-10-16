@@ -6,7 +6,7 @@ import { Drawer } from '@mui/material';
 import Logo from 'public/images/logo.svg';
 import MobileLoggedInMenu from '@/components/blocks/mobile-menu-drawer/mobile-logged-in-menu/mobile-logged-in-menu';
 import MobileLoggedOutMenu from '@/components/blocks/mobile-menu-drawer/mobile-logged-out-menu/mobile-logged-out-menu';
-import { useSession } from '@/lib/hooks/auth';
+import { useSession } from '@/lib/api/auth/hooks';
 import styles from './mobile-menu-drawer.module.scss';
 
 const MobileMenuDrawer = () => {

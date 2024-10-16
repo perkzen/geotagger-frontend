@@ -1,4 +1,5 @@
 import { env } from '@/env';
+import { PaginationQuery } from '@/lib/types/pagination';
 
 export const ApiRoutes = {
   auth: {
@@ -20,6 +21,8 @@ export const ApiRoutes = {
     geocode: ({ lat, lng }: { lat: number; lng: number }) =>
       `/locations/geocode?lat=${lat}&lng=${lng}`,
     add: '/locations',
+    myLocations: ({ take, skip }: PaginationQuery) =>
+      `/locations/me?take=${take}&skip=${skip}`,
   },
 } as const;
 

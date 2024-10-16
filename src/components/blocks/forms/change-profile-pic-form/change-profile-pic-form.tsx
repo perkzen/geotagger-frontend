@@ -9,7 +9,7 @@ import {
   GET_PROFILE_KEY,
   useProfile,
   useUpdateProfilePicture,
-} from '@/lib/hooks/user';
+} from '@/lib/api/profile/hooks';
 import { ApiError } from '@/lib/types/api-error';
 import { getQueryClient } from '@/lib/utils/get-query-client';
 import {

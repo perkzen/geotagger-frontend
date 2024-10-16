@@ -1,25 +1,29 @@
-'use client';
-import { Avatar, Typography } from '@mui/material';
-import NoGuessesInfo from '@/components/blocks/no-guesses-info/no-guesses-info';
-import NoUploadsInfo from '@/components/blocks/no-uploads-info/no-uploads-info';
-import { useProfile } from '@/lib/hooks/user';
+import GuessesList from '@/components/blocks/guess-list/guesses-list';
+import ProfileInfo from '@/components/blocks/profile-info/profile-info';
+import UploadsList from '@/components/blocks/uploads-list/uploads-list';
+import { myLocationsQueryOptions } from '@/lib/api/locations/hooks';
+import { profileQueryOptions } from '@/lib/api/profile/hooks';
+import { getQueryClient } from '@/lib/utils/get-query-client';
 import styles from './profile-page.module.scss';
 
-const ProfilePage = () => {
-  const { data: profile } = useProfile();
+const ProfilePage = async () => {
+  const queryClient = getQueryClient();
+
+  void Promise.all([
+    queryClient.prefetchQuery(profileQueryOptions),
+    queryClient.prefetchQuery(
+      myLocationsQueryOptions({
+        take: 5,
+        skip: 0,
+      })
+    ),
+  ]);
 
   return (
     <div className={styles.container}>
-      <div className={styles.user}>
-        <Avatar
-          src={profile?.imageUrl ?? undefined}
-          alt={'user'}
-          className={styles.avatar}
-        />
-        <Typography variant="h4">{`${profile?.firstname} ${profile?.lastname}`}</Typography>
-      </div>
-      <NoGuessesInfo />
-      <NoUploadsInfo />
+      <ProfileInfo />
+      <GuessesList />
+      <UploadsList />
     </div>
   );
 };

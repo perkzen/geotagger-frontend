@@ -11,8 +11,8 @@ import PlaceholderImage from 'public/images/placeholder-image.svg';
 import FileUploadInput from '@/components/ui/file-upload-input/file-upload-input';
 import Input from '@/components/ui/input/input';
 import Map from '@/components/ui/map/map';
+import { useAddLocation, useGeocode } from '@/lib/api/locations/hooks';
 import { Routes } from '@/lib/constants/routes';
-import { useAddLocation, useGeocode } from '@/lib/hooks/locations';
 import { Coordinates } from '@/lib/types/coordinates';
 import {
   AddLocationFormData,

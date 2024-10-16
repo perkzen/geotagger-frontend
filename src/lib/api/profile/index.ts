@@ -1,16 +1,16 @@
-import { api } from '@/lib/api/index';
+import { api } from '@/lib/api';
 import { ApiRoutes } from '@/lib/constants/api-routes';
-import { Profile } from '@/lib/models/profile';
+import { Models } from '@/lib/api/profile/models';
 import { ProfileSettingsFormData } from '@/lib/validators/profile-settings';
 
 export const getProfile = async () => {
-  const res = await api.get<Profile>(ApiRoutes.profile.base);
+  const res = await api.get<Models>(ApiRoutes.profile.base);
 
   return res.data;
 };
 
 export const updateProfile = async (data: ProfileSettingsFormData) => {
-  const res = await api.patch<Profile>(ApiRoutes.profile.base, data);
+  const res = await api.patch<Models>(ApiRoutes.profile.base, data);
   return res.data;
 };
 

@@ -1,7 +1,8 @@
-import { api } from '@/lib/api/index';
+import { api } from '@/lib/api';
+import { GeocodeResponse, LocationsList } from '@/lib/api/locations/models';
 import { ApiRoutes } from '@/lib/constants/api-routes';
-import { GeocodeResponse } from '@/lib/models/location';
 import { Coordinates } from '@/lib/types/coordinates';
+import { PaginationQuery } from '@/lib/types/pagination';
 import { AddLocationFormData } from '@/lib/validators/add-location';
 
 export const geocode = async (query: Coordinates) => {
@@ -24,4 +25,11 @@ export const addLocation = async (data: AddLocationFormData) => {
       'Content-Type': 'multipart/form-data',
     },
   });
+};
+
+export const getMyLocations = async (query: PaginationQuery) => {
+  const res = await api.get<LocationsList>(
+    ApiRoutes.locations.myLocations(query)
+  );
+  return res.data;
 };

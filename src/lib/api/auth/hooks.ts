@@ -12,8 +12,8 @@ import {
   signOut,
   signUp,
 } from '@/lib/api/auth';
+import { GET_PROFILE_KEY } from '@/lib/api/profile/hooks';
 import { Routes } from '@/lib/constants/routes';
-import { GET_PROFILE_KEY } from '@/lib/hooks/user';
 import { ApiError } from '@/lib/types/api-error';
 import { getQueryClient } from '@/lib/utils/get-query-client';
 import { ChangePasswordFormData } from '@/lib/validators/change-password';

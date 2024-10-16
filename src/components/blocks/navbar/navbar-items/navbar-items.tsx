@@ -4,7 +4,7 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import MobileMenuDrawer from '@/components/blocks/mobile-menu-drawer/mobile-menu-drawer';
 import LoggedInMenu from '@/components/blocks/navbar/logged-in-menu/logged-in-menu';
 import LoggedOutMenu from '@/components/blocks/navbar/logged-out-menu/logged-out-menu';
-import { useSession } from '@/lib/hooks/auth';
+import { useSession } from '@/lib/api/auth/hooks';
 
 type NavbarItemsProps = {
   actions?: boolean;

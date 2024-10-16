@@ -3,12 +3,14 @@ import {
   UseMutationOptions,
   useQuery,
   UseQueryOptions,
+  queryOptions,
 } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { addLocation, geocode } from '@/lib/api/locations';
-import { GeocodeResponse } from '@/lib/models/location';
+import { addLocation, geocode, getMyLocations } from '@/lib/api/locations';
+import { GeocodeResponse } from '@/lib/api/locations/models';
 import { ApiError } from '@/lib/types/api-error';
 import { Coordinates } from '@/lib/types/coordinates';
+import { PaginationQuery } from '@/lib/types/pagination';
 import { AddLocationFormData } from '@/lib/validators/add-location';
 
 export const GET_GEOCODE_KEY = 'get-geocode';
@@ -48,4 +50,16 @@ export const useAddLocation = (options?: UseAddLocationOptions) => {
     mutationKey: [ADD_LOCATION_KEY],
     mutationFn: addLocation,
   });
+};
+
+export const MY_LOCATIONS_KEY = 'my-locations';
+
+export const myLocationsQueryOptions = (query: PaginationQuery) =>
+  queryOptions({
+    queryKey: [MY_LOCATIONS_KEY],
+    queryFn: () => getMyLocations(query),
+  });
+
+export const useMyLocations = (query: PaginationQuery) => {
+  return useQuery(myLocationsQueryOptions(query));
 };
