@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import Image from 'next/image';
+import { Close, Edit } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 import { Location } from '@/lib/api/locations/models';
 import styles from './location-card.module.scss';
-import { IconButton } from '@mui/material';
-import { Close, Edit } from '@mui/icons-material';
 
 type LocationCardProps = {
   location: Location;

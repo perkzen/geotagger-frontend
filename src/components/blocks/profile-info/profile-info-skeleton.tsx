@@ -1,5 +1,5 @@
-import styles from './profile-info.module.scss';
 import { Skeleton } from '@mui/material';
+import styles from './profile-info.module.scss';
 
 const ProfileInfoSkeleton = () => {
   return (

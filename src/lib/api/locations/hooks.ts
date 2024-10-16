@@ -1,9 +1,9 @@
 import {
+  queryOptions,
   useMutation,
   UseMutationOptions,
   useQuery,
   UseQueryOptions,
-  queryOptions,
 } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { addLocation, geocode, getMyLocations } from '@/lib/api/locations';

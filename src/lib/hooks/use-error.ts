@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { AxiosError } from 'axios';
-import { ApiError } from '@/lib/types/api-error';
 import { AuthErrorCodes } from '@/lib/api/auth/models';
+import { ApiError } from '@/lib/types/api-error';
 
 type UseErrorOptions = {
   defaultErrorMessage?: string;
