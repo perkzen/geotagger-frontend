@@ -4,6 +4,7 @@ export const Routes = {
   SIGN_UP: '/sign-up',
   ADD_LOCATION: '/location/add',
   PROFILE: '/profile',
+  EDIT_LOCATION: '/location/edit',
 } as const;
 
 export type Route = (typeof Routes)[keyof typeof Routes];

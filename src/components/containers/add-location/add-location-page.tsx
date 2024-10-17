@@ -1,9 +1,9 @@
 import { useTranslations } from 'next-intl';
 import { Typography } from '@mui/material';
 import AddLocationForm from '@/components/blocks/forms/add-location-form/add-location-form';
-import styles from './add-location.module.scss';
+import styles from './add-location-page.module.scss';
 
-export default function AddLocation() {
+export default function AddLocationPage() {
   const t = useTranslations();
 
   return (

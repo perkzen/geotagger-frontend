@@ -4,14 +4,11 @@ import { Location } from '@/lib/api/locations/models';
 import styles from './locations-list.module.scss';
 
 type LocationsListProps = {
-  data?: Location[];
+  data: Location[];
   emptyComponent?: ReactNode;
 };
 
-const LocationsList: FC<LocationsListProps> = ({
-  data = [],
-  emptyComponent,
-}) => {
+const LocationsList: FC<LocationsListProps> = ({ data, emptyComponent }) => {
   if (data.length === 0) {
     return emptyComponent || 'no data';
   }

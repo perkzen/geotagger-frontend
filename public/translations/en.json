@@ -17,6 +17,8 @@
     "cancel": "Cancel",
     "close": "Close",
     "dismiss": "Dismiss",
+    "save": "Save",
+    "uploadImage": "Upload image",
     "areYouSure": "Are you sure?",
     "repeatPassword": "Repeat password",
     "signInWithGoogle": "Sign in with Google",
@@ -56,9 +58,11 @@
   "location": {
     "add": {
       "title": "Add a new <span>location</span>",
-      "uploadImage": "Upload image",
       "addNew": "Add new",
       "location": "Location"
+    },
+    "edit": {
+      "title": "Edit <span>location</span>"
     },
     "delete": {
       "message": "This location will be deleted. There is no undo of this action.",

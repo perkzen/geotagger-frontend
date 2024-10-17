@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import AddLocation from '@/components/containers/add-location/add-location';
+import AddLocationPage from '@/components/containers/add-location/add-location-page';
 
 export const metadata: Metadata = {
   title: 'Geotagger | Add Location',
 };
 
 export default function Page() {
-  return <AddLocation />;
+  return <AddLocationPage />;
 }

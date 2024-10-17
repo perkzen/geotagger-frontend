@@ -26,9 +26,7 @@ const AddLocationForm: FC = () => {
 
   const [coordinates, setCoordinates] = useState<Coordinates>();
 
-  const { data: address, refetch: fetchAddress } = useGeocode({
-    query: coordinates,
-  });
+  const { mutateAsync: fetchAddress, data: address } = useGeocode();
 
   const { register, handleSubmit, setValue, formState, watch } =
     useForm<AddLocationFormData>({
@@ -54,7 +52,7 @@ const AddLocationForm: FC = () => {
 
   useEffect(() => {
     if (coordinates) {
-      void fetchAddress();
+      void fetchAddress(coordinates);
     }
   }, [coordinates, fetchAddress]);
 
@@ -91,7 +89,7 @@ const AddLocationForm: FC = () => {
         variant="outlined"
         accept="image/png,image/jpg"
       >
-        {t('location.add.uploadImage')}
+        {t('shared.uploadImage')}
       </FileUploadInput>
       <Map
         onClick={handleMapClick}

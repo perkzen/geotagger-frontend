@@ -1,4 +1,5 @@
 import { Pagination } from '@/lib/types/pagination';
+import { AddLocationFormData } from '@/lib/validators/add-location';
 
 export type GeocodeResponse = {
   formattedAddress: string;
@@ -14,3 +15,5 @@ export type Location = {
 };
 
 export type LocationsList = Pagination<Location>;
+
+export type UpdateLocationPayload = AddLocationFormData & { id: string };

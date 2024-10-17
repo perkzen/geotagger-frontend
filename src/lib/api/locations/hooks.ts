@@ -2,43 +2,38 @@ import {
   queryOptions,
   useMutation,
   UseMutationOptions,
-  useQuery,
-  UseQueryOptions,
 } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import {
   addLocation,
   deleteLocation,
   geocode,
+  getLocation,
   getMyLocations,
+  updateLocation,
 } from '@/lib/api/locations';
-import { GeocodeResponse } from '@/lib/api/locations/models';
+import {
+  GeocodeResponse,
+  Location,
+  UpdateLocationPayload,
+} from '@/lib/api/locations/models';
 import { ApiError } from '@/lib/types/api-error';
 import { Coordinates } from '@/lib/types/coordinates';
 import { PaginationQuery } from '@/lib/types/pagination';
 import { AddLocationFormData } from '@/lib/validators/add-location';
 
-export const GET_GEOCODE_KEY = 'GET_GEOCODE';
+export const GEOCODE_KEY = 'GEOCODE';
 
 type UseGeocodeOptions = Omit<
-  UseQueryOptions<
-    GeocodeResponse,
-    AxiosError<ApiError>,
-    GeocodeResponse,
-    [typeof GET_GEOCODE_KEY]
-  >,
-  'queryFn' | 'queryKey'
-> & {
-  query?: Coordinates;
-};
+  UseMutationOptions<GeocodeResponse, AxiosError<ApiError>, Coordinates>,
+  'mutationFn' | 'mutationKey'
+>;
 
-export const useGeocode = ({ query, ...options }: UseGeocodeOptions) => {
-  return useQuery({
+export const useGeocode = (options?: UseGeocodeOptions) => {
+  return useMutation({
     ...options,
-    queryKey: [GET_GEOCODE_KEY],
-    queryFn: () =>
-      !!query ? geocode(query) : Promise.resolve({} as GeocodeResponse),
-    enabled: false,
+    mutationKey: [GEOCODE_KEY],
+    mutationFn: (query: Coordinates) => geocode(query),
   });
 };
 
@@ -65,10 +60,6 @@ export const myLocationsQueryOptions = (query: PaginationQuery) =>
     queryFn: () => getMyLocations(query),
   });
 
-export const useMyLocations = (query: PaginationQuery) => {
-  return useQuery(myLocationsQueryOptions(query));
-};
-
 export const DELETE_LOCATION_KEY = 'DELETE_LOCATION';
 
 type UseDeleteLocationOptions = Omit<
@@ -81,5 +72,28 @@ export const useDeleteLocation = (options?: UseDeleteLocationOptions) => {
     ...options,
     mutationKey: [DELETE_LOCATION_KEY],
     mutationFn: (id: string) => deleteLocation(id),
+  });
+};
+
+export const GET_LOCATION_KEY = 'GET_LOCATION';
+
+export const locationQueryOptions = (id: string) =>
+  queryOptions({
+    queryKey: [GET_LOCATION_KEY],
+    queryFn: () => getLocation(id),
+  });
+
+export const UPDATE_LOCATION_KEY = 'UPDATE_LOCATION';
+
+type UseUpdateLocationOptions = Omit<
+  UseMutationOptions<Location, AxiosError, UpdateLocationPayload, unknown>,
+  'mutationFn' | 'mutationKey'
+>;
+
+export const useUpdateLocation = (options?: UseUpdateLocationOptions) => {
+  return useMutation({
+    ...options,
+    mutationKey: [UPDATE_LOCATION_KEY],
+    mutationFn: ({ id, ...data }) => updateLocation(id, data),
   });
 };

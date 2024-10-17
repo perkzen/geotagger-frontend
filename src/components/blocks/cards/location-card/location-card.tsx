@@ -1,9 +1,11 @@
 'use client';
 import { FC } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { Close, Edit } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { Location } from '@/lib/api/locations/models';
+import { Routes } from '@/lib/constants/routes';
 import { useDeleteLocationModal } from '@/lib/hooks/use-delete-location-modal';
 import styles from './location-card.module.scss';
 
@@ -12,6 +14,7 @@ type LocationCardProps = {
 };
 
 const LocationCard: FC<LocationCardProps> = ({ location }) => {
+  const { push } = useRouter();
   const openDeleteLocationModal = useDeleteLocationModal({ id: location.id });
 
   return (
@@ -22,7 +25,10 @@ const LocationCard: FC<LocationCardProps> = ({ location }) => {
         quality={100}
         fill
       />
-      <IconButton className={styles.edit}>
+      <IconButton
+        className={styles.edit}
+        onClick={() => push(`${Routes.EDIT_LOCATION}/${location.id}`)}
+      >
         <Edit />
       </IconButton>
       <IconButton className={styles.delete} onClick={openDeleteLocationModal}>
