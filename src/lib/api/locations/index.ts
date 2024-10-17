@@ -33,3 +33,7 @@ export const getMyLocations = async (query: PaginationQuery) => {
   );
   return res.data;
 };
+
+export const deleteLocation = async (id: string) => {
+  await api.delete(ApiRoutes.locations.byId(id));
+};

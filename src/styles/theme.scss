@@ -20,4 +20,5 @@ $primary-shadow: 0px 0px 8px 0px $shadow-color;
 // modal
 $modal-width: 593px;
 $modal-sm-width: 489px;
-$valid-modal-sizes: ("sm", "md");
+$modal-fit-width: fit-content;
+$valid-modal-sizes: ("sm", "md", "fit");

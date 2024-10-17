@@ -6,14 +6,19 @@ import {
   UseQueryOptions,
 } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { addLocation, geocode, getMyLocations } from '@/lib/api/locations';
+import {
+  addLocation,
+  deleteLocation,
+  geocode,
+  getMyLocations,
+} from '@/lib/api/locations';
 import { GeocodeResponse } from '@/lib/api/locations/models';
 import { ApiError } from '@/lib/types/api-error';
 import { Coordinates } from '@/lib/types/coordinates';
 import { PaginationQuery } from '@/lib/types/pagination';
 import { AddLocationFormData } from '@/lib/validators/add-location';
 
-export const GET_GEOCODE_KEY = 'get-geocode';
+export const GET_GEOCODE_KEY = 'GET_GEOCODE';
 
 type UseGeocodeOptions = Omit<
   UseQueryOptions<
@@ -37,7 +42,7 @@ export const useGeocode = ({ query, ...options }: UseGeocodeOptions) => {
   });
 };
 
-export const ADD_LOCATION_KEY = 'add-location';
+export const ADD_LOCATION_KEY = 'ADD_LOCATION';
 
 type UseAddLocationOptions = Omit<
   UseMutationOptions<void, Error, AddLocationFormData, unknown>,
@@ -52,7 +57,7 @@ export const useAddLocation = (options?: UseAddLocationOptions) => {
   });
 };
 
-export const MY_LOCATIONS_KEY = 'my-locations';
+export const MY_LOCATIONS_KEY = 'MY_LOCATIONS';
 
 export const myLocationsQueryOptions = (query: PaginationQuery) =>
   queryOptions({
@@ -62,4 +67,19 @@ export const myLocationsQueryOptions = (query: PaginationQuery) =>
 
 export const useMyLocations = (query: PaginationQuery) => {
   return useQuery(myLocationsQueryOptions(query));
+};
+
+export const DELETE_LOCATION_KEY = 'DELETE_LOCATION';
+
+type UseDeleteLocationOptions = Omit<
+  UseMutationOptions<void, AxiosError, string, unknown>,
+  'mutationFn' | 'mutationKey'
+>;
+
+export const useDeleteLocation = (options?: UseDeleteLocationOptions) => {
+  return useMutation({
+    ...options,
+    mutationKey: [DELETE_LOCATION_KEY],
+    mutationFn: (id: string) => deleteLocation(id),
+  });
 };

@@ -23,6 +23,7 @@ export const ApiRoutes = {
     add: '/locations',
     myLocations: ({ take, skip }: PaginationQuery) =>
       `/locations/me?take=${take}&skip=${skip}`,
+    byId: (id: string) => `/locations/${id}`,
   },
 } as const;
 
