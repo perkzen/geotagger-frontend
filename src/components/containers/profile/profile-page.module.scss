@@ -2,7 +2,13 @@
 
 .container {
   @include flex-col;
+  padding-bottom: 48px;
   gap: 32px;
+
+
+  @include mq("sm") {
+    padding-bottom: 72px;
+  }
 
 
   .user {

@@ -16,6 +16,7 @@ const MobileLoggedInMenu = () => {
   const handleSignOut = async () => {
     void signOut();
   };
+
   return (
     <>
       <UserInfo />
