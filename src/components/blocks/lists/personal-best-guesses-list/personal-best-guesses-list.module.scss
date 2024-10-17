@@ -1,0 +1,10 @@
+@import "src/styles";
+
+.container {
+
+
+  .title {
+    @include flex-col;
+    gap: 16px;
+  }
+}

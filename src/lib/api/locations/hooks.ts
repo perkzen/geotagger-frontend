@@ -9,6 +9,7 @@ import {
   deleteLocation,
   geocode,
   getLocation,
+  getLocations,
   getMyLocations,
   updateLocation,
 } from '@/lib/api/locations';
@@ -97,3 +98,11 @@ export const useUpdateLocation = (options?: UseUpdateLocationOptions) => {
     mutationFn: ({ id, ...data }) => updateLocation(id, data),
   });
 };
+
+export const LOCATIONS_LIST_KEY = 'LOCATIONS_LIST';
+
+export const locationsListQueryOptions = (query: PaginationQuery) =>
+  queryOptions({
+    queryKey: [LOCATIONS_LIST_KEY],
+    queryFn: () => getLocations(query),
+  });

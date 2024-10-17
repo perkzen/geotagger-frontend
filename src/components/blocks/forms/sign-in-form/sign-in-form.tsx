@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Typography } from '@mui/material';
 import FacebookIcon from '@/components/ui/icons/facebook-icon';
@@ -10,17 +11,31 @@ import GoogleIcon from '@/components/ui/icons/google-icon';
 import Input from '@/components/ui/input/input';
 import PasswordInput from '@/components/ui/password-input/password-input';
 import { signInWithFacebook, signInWithGoogle } from '@/lib/api/auth';
-import { useSignIn } from '@/lib/api/auth/hooks';
+import { SESSION_KEY, useSignIn } from '@/lib/api/auth/hooks';
 import { Routes } from '@/lib/constants/routes';
 import { useError } from '@/lib/hooks/use-error';
+import { getQueryClient } from '@/lib/utils/get-query-client';
 import { SignInFormData, SignInValidator } from '@/lib/validators/sign-in';
 import styles from './sign-in-form.module.scss';
 
 const SignInForm: FC = () => {
   const t = useTranslations('shared');
+  const { push } = useRouter();
+  const queryClient = getQueryClient();
   const { getError } = useError();
 
-  const { mutateAsync: signIn, error: signInError, isPending } = useSignIn();
+  const {
+    mutateAsync: signIn,
+    error: signInError,
+    isPending,
+  } = useSignIn({
+    onSuccess: () => {
+      push(Routes.HOME);
+      void queryClient.invalidateQueries({
+        queryKey: [SESSION_KEY],
+      });
+    },
+  });
 
   const { register, handleSubmit, formState } = useForm<SignInFormData>({
     resolver: zodResolver(SignInValidator),

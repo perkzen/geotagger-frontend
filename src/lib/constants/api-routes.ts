@@ -18,6 +18,8 @@ export const ApiRoutes = {
     image: '/profile/image',
   },
   locations: {
+    list: ({ take, skip }: PaginationQuery) =>
+      `/locations?take=${take}&skip=${skip}`,
     geocode: ({ lat, lng }: { lat: number; lng: number }) =>
       `/locations/geocode?lat=${lat}&lng=${lng}`,
     add: '/locations',

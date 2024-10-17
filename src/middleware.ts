@@ -1,19 +1,40 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { ACCESS_TOKEN_COOKIE_NAME } from '@/lib/constants/cookies';
 import { Routes } from '@/lib/constants/routes';
+import { getServerSession } from '@/lib/server/auth';
 
-export function middleware(req: NextRequest) {
-  const accessToken = req.cookies.get(ACCESS_TOKEN_COOKIE_NAME)?.value;
+const protectedRoutes = [
+  Routes.ADD_LOCATION,
+  Routes.EDIT_LOCATION,
+  Routes.PROFILE,
+];
 
-  if (!accessToken) {
-    const redirectUrl = new URL(Routes.SIGN_IN, req.url);
-    return NextResponse.redirect(redirectUrl);
+export async function middleware(req: NextRequest) {
+  const isProtectedRoute = protectedRoutes.some((route) =>
+    req.nextUrl.pathname.startsWith(route)
+  );
+
+  if (isProtectedRoute) {
+    const { session } = await getServerSession();
+
+    if (!session) {
+      const redirectUrl = new URL(Routes.SIGN_IN, req.url);
+      return NextResponse.redirect(redirectUrl);
+    }
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/profile', '/location/:path*'],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
 };

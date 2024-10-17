@@ -1,7 +1,7 @@
 import { getServerSession } from '@/lib/server/auth';
 
-export function GET() {
-  const session = getServerSession();
+export async function GET() {
+  const session = await getServerSession();
 
   if (!session.session) {
     return Response.json(session, { status: 401 });

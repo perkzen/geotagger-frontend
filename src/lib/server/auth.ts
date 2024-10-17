@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { verify } from 'jsonwebtoken';
+import { jwtVerify } from 'jose';
 import { env } from '@/env';
 import { AccessTokens, Session, SessionUser } from '@/lib/api/auth/models';
 import {
@@ -44,15 +44,17 @@ export const removeAuthCookies = (): void => {
   cookies().delete(REFRESH_TOKEN_COOKIE_NAME);
 };
 
-export const getServerSession = (): Session => {
+export const getServerSession = async (): Promise<Session> => {
   try {
     const { accessToken } = getAccessTokens();
 
-    const decoded = verify(accessToken, env.JWT_SECRET);
+    const secret = new TextEncoder().encode(env.JWT_SECRET);
+
+    const { payload } = await jwtVerify(accessToken, secret);
 
     return {
       session: true,
-      user: decoded.sub as unknown as SessionUser,
+      user: payload.sub as unknown as SessionUser,
       error: null,
     };
   } catch (e) {

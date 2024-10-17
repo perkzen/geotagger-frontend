@@ -10,7 +10,7 @@ type LocationsListProps = {
 
 const LocationsList: FC<LocationsListProps> = ({ data, emptyComponent }) => {
   if (data.length === 0) {
-    return emptyComponent || 'no data';
+    return emptyComponent;
   }
 
   return (
