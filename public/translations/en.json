@@ -17,6 +17,9 @@
     "cancel": "Cancel",
     "close": "Close",
     "dismiss": "Dismiss",
+    "save": "Save",
+    "uploadImage": "Upload image",
+    "areYouSure": "Are you sure?",
     "repeatPassword": "Repeat password",
     "signInWithGoogle": "Sign in with Google",
     "signInWithFacebook": "Sign in with Facebook"
@@ -24,7 +27,7 @@
   "home": {
     "title": "Explore the world with Geotagger!",
     "description": "Geotagger is website that allows you to post picture and tag it on the map. Other user than try to locate it via Google Maps.",
-    "cta": "Try yourself at Geotagger!",
+    "subtitle": "Try yourself at Geotagger!",
     "info": "Try to guess the location of image by selecting position on the map. When you guess it, it gives you the error distance."
   },
   "footer": {
@@ -55,10 +58,26 @@
   "location": {
     "add": {
       "title": "Add a new <span>location</span>",
-      "uploadImage": "Upload image",
       "addNew": "Add new",
       "location": "Location"
+    },
+    "edit": {
+      "title": "Edit <span>location</span>"
+    },
+    "delete": {
+      "message": "This location will be deleted. There is no undo of this action.",
+      "success": "Your location was deleted."
     }
+  },
+  "profile": {
+    "myBestGuesses": "My best guesses",
+    "noBestGuesses": "No best guesses yet",
+    "guessInfo": "Start new game and guess the location of the picture to get the results here!",
+    "goToLocations": "Go to locations",
+    "myUploads": "My uploads",
+    "noUploads": "No uploads yet",
+    "uploadInfo": "Upload new location with the click on button bellow or in navigation bar press the “+” button.",
+    "addLocation": "Add location"
   },
   "errors": {
     "errorCode": "Ooppss! Error code #{code}",

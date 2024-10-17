@@ -9,11 +9,11 @@ const LoggedOutMenu = () => {
 
   return (
     <div className={styles.container}>
-      <Link className={styles.bold} href={Routes.signIn}>
+      <Link className={styles.bold} href={Routes.SIGN_IN}>
         {t('signIn')}
       </Link>
       <Typography variant="body1">{t('or')}</Typography>
-      <Button variant="contained" href={Routes.signUp}>
+      <Button variant="contained" href={Routes.SIGN_UP}>
         {t('signUp')}
       </Button>
     </div>

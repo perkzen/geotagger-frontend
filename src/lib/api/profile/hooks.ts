@@ -1,4 +1,5 @@
 import {
+  queryOptions,
   useMutation,
   UseMutationOptions,
   useQuery,
@@ -9,17 +10,19 @@ import {
   updateProfile,
   updateProfilePicture,
 } from '@/lib/api/profile';
-import { Profile } from '@/lib/models/profile';
+import { Profile } from '@/lib/api/profile/models';
 import { ApiError } from '@/lib/types/api-error';
 import { ProfileSettingsFormData } from '@/lib/validators/profile-settings';
 
 export const GET_PROFILE_KEY = 'GET_PROFILE_KEY';
 
+export const profileQueryOptions = queryOptions({
+  queryKey: [GET_PROFILE_KEY],
+  queryFn: getProfile,
+});
+
 export const useProfile = () => {
-  return useQuery({
-    queryKey: [GET_PROFILE_KEY],
-    queryFn: getProfile,
-  });
+  return useQuery(profileQueryOptions);
 };
 
 export const UPDATE_PROFILE_KEY = 'UPDATE_PROFILE_KEY';

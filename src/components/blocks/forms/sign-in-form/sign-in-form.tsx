@@ -10,8 +10,8 @@ import GoogleIcon from '@/components/ui/icons/google-icon';
 import Input from '@/components/ui/input/input';
 import PasswordInput from '@/components/ui/password-input/password-input';
 import { signInWithFacebook, signInWithGoogle } from '@/lib/api/auth';
+import { useSignIn } from '@/lib/api/auth/hooks';
 import { Routes } from '@/lib/constants/routes';
-import { useSignIn } from '@/lib/hooks/auth';
 import { useError } from '@/lib/hooks/use-error';
 import { SignInFormData, SignInValidator } from '@/lib/validators/sign-in';
 import styles from './sign-in-form.module.scss';
@@ -78,7 +78,7 @@ const SignInForm: FC = () => {
 
       <div className={styles.alreadyHaveAccount}>
         <Typography variant="body1">{t('createAccount')}</Typography>
-        <Link href={Routes.signUp}>{t('signUp')}</Link>
+        <Link href={Routes.SIGN_UP}>{t('signUp')}</Link>
       </div>
     </form>
   );

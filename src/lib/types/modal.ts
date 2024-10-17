@@ -4,6 +4,8 @@ export const ModalTypes = {
   PROFILE_SETTINGS: 'PROFILE_SETTINGS',
   CONFIRMATION: 'CONFIRMATION',
   ERROR: 'ERROR',
+  DELETE: 'DELETE',
+  DELETE_CONFIRMATION: 'DELETE_CONFIRMATION',
 } as const;
 
 export type ModalType = keyof typeof ModalTypes;
@@ -16,6 +18,14 @@ export type ModalData = {
   [ModalTypes.ERROR]: {
     errorCode: number;
     message: string;
+  };
+  [ModalTypes.DELETE]: {
+    title: string;
+    message: string;
+    onSubmit: () => void;
+  };
+  [ModalTypes.DELETE_CONFIRMATION]: {
+    title: string;
   };
 };
 
@@ -32,7 +42,7 @@ export type ModalStateProps<T extends ModalType = ModalType> = {
 
 export type OpenModalOptions<T extends ModalType = ModalType> = {
   id?: string | number;
-  type: ModalType;
+  type: T;
   data?: T extends keyof ModalData ? ModalData[T] : never;
   props?: Partial<Omit<MuiModalProps, 'open' | 'children'>>;
 };

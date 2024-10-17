@@ -12,15 +12,15 @@ import {
   signOut,
   signUp,
 } from '@/lib/api/auth';
+import { GET_PROFILE_KEY } from '@/lib/api/profile/hooks';
 import { Routes } from '@/lib/constants/routes';
-import { GET_PROFILE_KEY } from '@/lib/hooks/user';
 import { ApiError } from '@/lib/types/api-error';
 import { getQueryClient } from '@/lib/utils/get-query-client';
 import { ChangePasswordFormData } from '@/lib/validators/change-password';
 import { SignInFormData } from '@/lib/validators/sign-in';
 import { SignUpFormData } from '@/lib/validators/sign-up';
 
-export const SESSION_KEY = 'session';
+export const SESSION_KEY = 'SESSION';
 
 export const useSession = () => {
   const { data } = useQuery({
@@ -32,7 +32,7 @@ export const useSession = () => {
   return data;
 };
 
-export const SIGN_IN_KEY = 'login';
+export const SIGN_IN_KEY = 'LOGIN';
 
 export const useSignIn = () => {
   const { push } = useRouter();
@@ -42,7 +42,7 @@ export const useSignIn = () => {
     mutationKey: [SIGN_IN_KEY],
     mutationFn: signIn,
     onSuccess: () => {
-      push(Routes.home);
+      push(Routes.HOME);
       void queryClient.invalidateQueries({
         queryKey: [SESSION_KEY],
       });
@@ -50,7 +50,7 @@ export const useSignIn = () => {
   });
 };
 
-export const SIGN_UP_KEY = 'register';
+export const SIGN_UP_KEY = 'REGISTER';
 
 export const useSignUp = () => {
   const { push } = useRouter();
@@ -58,11 +58,11 @@ export const useSignUp = () => {
   return useMutation<void, AxiosError<ApiError>, SignUpFormData>({
     mutationKey: [SIGN_UP_KEY],
     mutationFn: signUp,
-    onSuccess: () => push(Routes.signIn),
+    onSuccess: () => push(Routes.SIGN_IN),
   });
 };
 
-export const SIGN_OUT_KEY = 'logout';
+export const SIGN_OUT_KEY = 'LOGOUT';
 
 export const useSignOut = () => {
   const { push } = useRouter();
@@ -79,12 +79,12 @@ export const useSignOut = () => {
         queryClient.invalidateQueries({ queryKey: [GET_PROFILE_KEY] }),
       ]);
 
-      push(Routes.signIn);
+      push(Routes.SIGN_IN);
     },
   });
 };
 
-export const CHANGE_PASSWORD_KEY = 'change-password';
+export const CHANGE_PASSWORD_KEY = 'CHANGE_PASSWORD';
 
 export type UseChangePasswordOptions = Omit<
   UseMutationOptions<

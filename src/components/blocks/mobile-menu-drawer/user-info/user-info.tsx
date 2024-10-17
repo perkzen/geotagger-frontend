@@ -1,5 +1,7 @@
+import Link from 'next/link';
 import { Avatar, Typography } from '@mui/material';
-import { useProfile } from '@/lib/hooks/user';
+import { useProfile } from '@/lib/api/profile/hooks';
+import { Routes } from '@/lib/constants/routes';
 import styles from './user-info.module.scss';
 
 const UserInfo = () => {
@@ -7,12 +9,12 @@ const UserInfo = () => {
   const imageUrl = profile?.imageUrl || undefined;
 
   return (
-    <div className={styles.container}>
+    <Link href={Routes.PROFILE} className={styles.container}>
       <Avatar src={imageUrl} />
       <Typography variant="h5">
         {`${profile?.firstname} ${profile?.lastname}`}
       </Typography>
-    </div>
+    </Link>
   );
 };
 

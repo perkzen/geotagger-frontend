@@ -2,12 +2,13 @@ import { create } from 'zustand';
 import {
   ModalProps,
   ModalStateProps,
+  ModalType,
   OpenModalOptions,
 } from '@/lib/types/modal';
 
 type ModalState = {
   modals: ModalStateProps[];
-  openModal: (modal: OpenModalOptions) => void;
+  openModal: <T extends ModalType>(modal: OpenModalOptions<T>) => void;
   closeModal: (id: string | number) => void;
   closeAllModals: () => void;
 };

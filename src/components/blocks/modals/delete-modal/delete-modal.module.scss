@@ -1,0 +1,16 @@
+@import "src/styles";
+
+.container {
+  @include modal("fit");
+
+
+  .buttons {
+    @include flex-row;
+    gap: 16px;
+    margin-left: auto;
+
+    .cancel {
+      color: $primary-color;
+    }
+  }
+}

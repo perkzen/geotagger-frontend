@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Typography } from '@mui/material';
 import { AxiosError } from 'axios';
 import PasswordInput from '@/components/ui/password-input/password-input';
-import { useChangePassword } from '@/lib/hooks/auth';
+import { useChangePassword } from '@/lib/api/auth/hooks';
 import { ApiError } from '@/lib/types/api-error';
 import {
   ChangePasswordFormData,

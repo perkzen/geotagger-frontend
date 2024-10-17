@@ -1,0 +1,40 @@
+@import "src/styles";
+
+.container {
+  @include flex-col;
+  gap: 16px;
+  max-width: 860px;
+  width: 100%;
+
+  @include mq("sm") {
+    max-width: 344px;
+    width: 100%;
+  }
+
+  .imageContainer {
+    @include flex-col;
+    gap: 6px;
+
+    .image {
+      position: relative;
+      height: 280px;
+      width: 100%;
+      border-radius: $border-rounded;
+      overflow: hidden;
+
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+
+  .row {
+    @include flex-row;
+    justify-content: space-between;
+
+    .group {
+      @include flex-row-items-center;
+      gap: 16px;
+    }
+  }
+}

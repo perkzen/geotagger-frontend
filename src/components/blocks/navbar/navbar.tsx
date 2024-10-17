@@ -15,7 +15,7 @@ type NavbarProps = {
 const Navbar: FC<NavbarProps> = ({ className, actions }) => {
   return (
     <nav className={classNames(styles.container, className)}>
-      <Link href={Routes.home}>
+      <Link href={Routes.HOME}>
         <Image src={Logo} alt={'logo'} quality={100} className={styles.logo} />
       </Link>
       <NavbarItems actions={actions} />

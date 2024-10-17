@@ -11,8 +11,8 @@ import PlaceholderImage from 'public/images/placeholder-image.svg';
 import FileUploadInput from '@/components/ui/file-upload-input/file-upload-input';
 import Input from '@/components/ui/input/input';
 import Map from '@/components/ui/map/map';
+import { useAddLocation, useGeocode } from '@/lib/api/locations/hooks';
 import { Routes } from '@/lib/constants/routes';
-import { useAddLocation, useGeocode } from '@/lib/hooks/locations';
 import { Coordinates } from '@/lib/types/coordinates';
 import {
   AddLocationFormData,
@@ -26,9 +26,7 @@ const AddLocationForm: FC = () => {
 
   const [coordinates, setCoordinates] = useState<Coordinates>();
 
-  const { data: address, refetch: fetchAddress } = useGeocode({
-    query: coordinates,
-  });
+  const { mutateAsync: fetchAddress, data: address } = useGeocode();
 
   const { register, handleSubmit, setValue, formState, watch } =
     useForm<AddLocationFormData>({
@@ -38,7 +36,7 @@ const AddLocationForm: FC = () => {
   const { errors } = formState;
 
   const { mutateAsync: addLocation, isPending: isUploading } = useAddLocation({
-    onSuccess: () => push(Routes.profile),
+    onSuccess: () => push(Routes.PROFILE),
   });
 
   const selectedFile = watch('fileList')?.item(0);
@@ -54,7 +52,7 @@ const AddLocationForm: FC = () => {
 
   useEffect(() => {
     if (coordinates) {
-      void fetchAddress();
+      void fetchAddress(coordinates);
     }
   }, [coordinates, fetchAddress]);
 
@@ -91,7 +89,7 @@ const AddLocationForm: FC = () => {
         variant="outlined"
         accept="image/png,image/jpg"
       >
-        {t('location.add.uploadImage')}
+        {t('shared.uploadImage')}
       </FileUploadInput>
       <Map
         onClick={handleMapClick}

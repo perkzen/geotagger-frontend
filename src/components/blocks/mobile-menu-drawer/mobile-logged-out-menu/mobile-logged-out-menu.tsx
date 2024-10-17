@@ -23,7 +23,7 @@ const MobileLoggedOutMenu: FC<MobileLoggedOutMenuProps> = ({ closeDrawer }) => {
   return (
     <>
       <nav>
-        <Link href={Routes.home} className={styles.link}>
+        <Link href={Routes.HOME} className={styles.link}>
           <Typography variant="h5">{t('home')}</Typography>
           <ChevronRight />
         </Link>
@@ -31,13 +31,13 @@ const MobileLoggedOutMenu: FC<MobileLoggedOutMenuProps> = ({ closeDrawer }) => {
       <div className={styles.actions}>
         <Button
           variant="contained"
-          onClick={() => handleRouteChange(Routes.signUp)}
+          onClick={() => handleRouteChange(Routes.SIGN_UP)}
         >
           {t('signUp')}
         </Button>
         <Button
           variant="outlined"
-          onClick={() => handleRouteChange(Routes.signIn)}
+          onClick={() => handleRouteChange(Routes.SIGN_IN)}
         >
           {t('signIn')}
         </Button>

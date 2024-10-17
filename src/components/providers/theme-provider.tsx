@@ -14,13 +14,19 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
       error: {
         main: vars.error,
       },
+      contrast: {
+        main: vars.white,
+      },
+      danger: {
+        main: vars.danger,
+      },
     },
     typography: {
       caption: {
         fontWeight: 400,
         fontSize: '12px',
         lineHeight: '14px',
-        color: vars.white,
+        color: vars.dark,
       },
       body1: {
         fontWeight: 400,
@@ -33,7 +39,7 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
         fontSize: '61px',
         lineHeight: '70px',
         letterSpacing: '-0.5px',
-        color: vars.primary,
+        color: vars.dark,
 
         [`@media (max-width:${vars.sm}px)`]: {
           fontWeight: 400,
@@ -46,13 +52,14 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
         fontWeight: 500,
         fontSize: '48px',
         lineHeight: '56.25px',
+        color: vars.dark,
       },
       h4: {
         fontWeight: 400,
         fontSize: '34px',
         lineHeight: '40px',
         letterSpacing: '0.25px',
-        color: vars.primary,
+        color: vars.dark,
 
         [`@media (max-width:${vars.sm}px)`]: {
           fontWeight: 400,
@@ -66,7 +73,7 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
         fontSize: '24px',
         lineHeight: '28px',
         letterSpacing: '0.25px',
-        color: vars.primary,
+        color: vars.dark,
       },
       button: {
         textTransform: 'none',

@@ -1,0 +1,19 @@
+@import "src/styles";
+
+
+.container {
+  @include flex-col;
+  gap: 16px;
+  max-width: 352px;
+
+
+  button {
+    width: fit-content;
+  }
+
+
+  .text {
+    @include flex-col;
+    gap: 4px;
+  }
+}

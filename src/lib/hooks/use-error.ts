@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { AxiosError } from 'axios';
-import { AuthErrorCodes } from '@/lib/models/auth';
+import { AuthErrorCodes } from '@/lib/api/auth/models';
 import { ApiError } from '@/lib/types/api-error';
 
 type UseErrorOptions = {

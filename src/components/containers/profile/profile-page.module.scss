@@ -1,0 +1,24 @@
+@import "src/styles";
+
+.container {
+  @include flex-col;
+  padding-bottom: 48px;
+  gap: 32px;
+
+
+  @include mq("sm") {
+    padding-bottom: 72px;
+  }
+
+
+  .user {
+    @include flex-row-items-center;
+    gap: 24px;
+    margin-bottom: 32px;
+
+    .avatar {
+      height: 64px;
+      width: 64px;
+    }
+  }
+}

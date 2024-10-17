@@ -15,6 +15,14 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NEXT_PUBLIC_ENVIRONMENT === 'production',
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '"geotagger-bucket.s3.eu-central-1.amazonaws.com',
+      },
+    ],
+  },
   async headers() {
     return [
       {

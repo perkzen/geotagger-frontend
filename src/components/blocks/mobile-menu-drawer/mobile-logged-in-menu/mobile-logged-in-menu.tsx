@@ -4,8 +4,8 @@ import { ChevronRight } from '@mui/icons-material';
 import { Button, Typography } from '@mui/material';
 import classNames from 'classnames';
 import UserInfo from '@/components/blocks/mobile-menu-drawer/user-info/user-info';
+import { useSignOut } from '@/lib/api/auth/hooks';
 import { Routes } from '@/lib/constants/routes';
-import { useSignOut } from '@/lib/hooks/auth';
 import styles from './mobile-logged-in-menu.module.scss';
 
 const MobileLoggedInMenu = () => {
@@ -16,15 +16,16 @@ const MobileLoggedInMenu = () => {
   const handleSignOut = async () => {
     void signOut();
   };
+
   return (
     <>
       <UserInfo />
       <nav className={styles.nav}>
-        <Link href={Routes.home} className={styles.link}>
+        <Link href={Routes.HOME} className={styles.link}>
           <Typography variant="h5">{t('home')}</Typography>
           <ChevronRight />
         </Link>
-        <Link href={Routes.home} className={styles.link}>
+        <Link href={Routes.HOME} className={styles.link}>
           <Typography variant="h5">{t('profileSettings')}</Typography>
           <ChevronRight />
         </Link>

@@ -13,7 +13,9 @@ const Footer = () => {
   return (
     <footer className={styles.container}>
       <Image src={isMobile ? MobileLogo : Logo} alt={'logo'} />
-      <Typography variant="caption">{t('allRightsReserved')}</Typography>
+      <Typography variant="caption" color="contrast">
+        {t('allRightsReserved')}
+      </Typography>
     </footer>
   );
 };

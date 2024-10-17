@@ -11,9 +11,11 @@ const HeroSection = () => {
   return (
     <div className={styles.container}>
       <div className={styles.headline}>
-        <Typography variant={'h1'}>{t('home.title')}</Typography>
+        <Typography variant="h1" color="primary">
+          {t('home.title')}
+        </Typography>
         <Typography variant="body1">{t('home.description')}</Typography>
-        <Button variant="contained" href={Routes.signUp}>
+        <Button variant="contained" href={Routes.SIGN_UP}>
           {t('shared.signUp')}
         </Button>
       </div>

@@ -15,7 +15,6 @@ export const AddLocationValidator = z
     lng: z.number().refine((val) => val >= -180 && val <= 180, {
       message: 'Longitude must be between -180 and 180',
     }),
-
     fileList: ImageValidator(MAX_FILE_SIZE_BYTES, ['image/jpeg', 'image/png']),
   })
   .refine(

@@ -47,6 +47,8 @@
   @if index($valid-modal-sizes, $size) {
     @if $size == "sm" {
       max-width: $modal-sm-width;
+    } @else if $size == "fit" {
+      width: $modal-fit-width;
     } @else {
       max-width: $modal-width;
     }

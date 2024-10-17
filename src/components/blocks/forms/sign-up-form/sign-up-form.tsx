@@ -7,8 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Typography } from '@mui/material';
 import Input from '@/components/ui/input/input';
 import PasswordInput from '@/components/ui/password-input/password-input';
+import { useSignUp } from '@/lib/api/auth/hooks';
 import { Routes } from '@/lib/constants/routes';
-import { useSignUp } from '@/lib/hooks/auth';
 import { useError } from '@/lib/hooks/use-error';
 import { SignUpFormData, SignUpValidator } from '@/lib/validators/sign-up';
 import styles from './sign-up-form.module.scss';
@@ -76,7 +76,7 @@ const SignUpForm: FC = () => {
       </Button>
       <div className={styles.alreadyHaveAccount}>
         <Typography variant="body1">{t('alreadyHaveAccount')}</Typography>
-        <Link href={Routes.signIn}>{t('signIn')}</Link>
+        <Link href={Routes.SIGN_IN}>{t('signIn')}</Link>
       </div>
     </form>
   );

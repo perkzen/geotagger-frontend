@@ -1,0 +1,28 @@
+@import "src/styles";
+
+.container {
+  position: relative;
+  max-width: 309px;
+  height: 175px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: $border-rounded;
+
+  .delete {
+    position: absolute;
+    top: 9px;
+    right: 11px;
+    background: $danger-color;
+    color: $white-color;
+    border-radius: 4px;
+  }
+
+  .edit {
+    position: absolute;
+    top: 9px;
+    left: 7px;
+    background: $primary-color;
+    color: $white-color;
+    border-radius: 4px;
+  }
+}

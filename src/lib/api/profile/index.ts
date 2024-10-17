@@ -1,6 +1,6 @@
-import { api } from '@/lib/api/index';
+import { api } from '@/lib/api';
+import { Profile } from '@/lib/api/profile/models';
 import { ApiRoutes } from '@/lib/constants/api-routes';
-import { Profile } from '@/lib/models/profile';
 import { ProfileSettingsFormData } from '@/lib/validators/profile-settings';
 
 export const getProfile = async () => {
