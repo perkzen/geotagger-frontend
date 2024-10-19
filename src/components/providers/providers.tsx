@@ -6,8 +6,8 @@ import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experime
 import ModalProvider from '@/components/providers/modal-provider';
 import SessionProvider from '@/components/providers/session-provider';
 import ThemeProvider from '@/components/providers/theme-provider';
-import { getQueryClient } from '@/lib/utils/get-query-client';
 import {Session} from "@/lib/types/session";
+import { getQueryClient } from '@/lib/utils/get-query-client';
 
 type ProvidersProps = {
   session: Session | null;
