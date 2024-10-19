@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import Footer from '@/components/blocks/footer/footer';
 import Navbar from '@/components/blocks/navbar/navbar';
 import NavbarItems from '@/components/blocks/navbar/navbar-items/navbar-items';
-import { getSession } from '@/lib/server/auth/actions';
+import { getSession } from '@/lib/server/session';
 import styles from './layout.module.scss';
 
 export default async function Layout({ children }: { children: ReactNode }) {

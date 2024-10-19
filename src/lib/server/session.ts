@@ -1,9 +1,12 @@
-'use server';
 import { cookies } from 'next/headers';
 import { jwtVerify, SignJWT } from 'jose';
 import { env } from '@/env';
 import { AccessTokens } from '@/lib/api/auth/models';
-import { cookieOptions, SESSION_COOKIE_NAME } from '@/lib/constants/cookies';
+import {
+  cookieOptions,
+  expiresAt,
+  SESSION_COOKIE_NAME,
+} from '@/lib/constants/cookies';
 import { NextAuthErrorCodes } from '@/lib/constants/next-auth-error-codes';
 import { NextAuthError } from '@/lib/types/next-auth-error';
 import { Session } from '@/lib/types/session';
@@ -18,13 +21,15 @@ export async function createSession(payload: Session) {
   const session = await new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
-    .setExpirationTime('7d')
+    .setExpirationTime(expiresAt)
     .sign(secret);
 
   cookies().set(SESSION_COOKIE_NAME, session, cookieOptions);
 }
 
 export async function getSession() {
+  'use server';
+
   const cookie = cookies().get(SESSION_COOKIE_NAME)?.value;
   if (!cookie) return null;
 
@@ -46,7 +51,7 @@ export async function updateTokens({
   refreshToken,
 }: AccessTokens) {
   const cookie = cookies().get(SESSION_COOKIE_NAME)?.value;
-  if (!cookie) return null;
+  if (!cookie) return null; // TODO  maybe throw error?
 
   const { payload } = await jwtVerify<Session>(cookie, secret);
 
@@ -66,4 +71,15 @@ export async function updateTokens({
   };
 
   await createSession(newPayload);
+}
+
+export async function validateSession(token: string | undefined) {
+  if (!token) return null;
+
+  try {
+    const { payload } = await jwtVerify(token, secret);
+    return payload as Session;
+  } catch (_e) {
+    return null;
+  }
 }

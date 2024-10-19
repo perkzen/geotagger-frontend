@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import { api } from '@/lib/api';
 import { AccessTokens, User } from '@/lib/api/auth/models';
 import { ApiRoutes } from '@/lib/constants/api-routes';
-import { createSession } from '@/lib/server/auth/actions';
+import { createSession } from '@/lib/server/session';
 import { Session } from '@/lib/types/session';
 import { SignInValidator } from '@/lib/validators/sign-in';
 

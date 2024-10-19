@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import HomePage from '@/components/containers/home/home-page';
-import { getSession } from '@/lib/server/auth/actions';
+import { getSession } from '@/lib/server/session';
 
 export const metadata: Metadata = {
   title: 'Geotagger | Home',

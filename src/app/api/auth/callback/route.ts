@@ -3,7 +3,7 @@ import { api } from '@/lib/api';
 import { User } from '@/lib/api/auth/models';
 import { ApiRoutes } from '@/lib/constants/api-routes';
 import { Routes } from '@/lib/constants/routes';
-import { createSession } from '@/lib/server/auth/actions';
+import { createSession } from '@/lib/server/session';
 import { Session } from '@/lib/types/session';
 
 export async function GET(req: NextRequest) {

@@ -1,3 +1,4 @@
+import { isServer } from '@tanstack/react-query';
 import axios, {
   AxiosError,
   AxiosInstance,
@@ -6,10 +7,10 @@ import axios, {
 } from 'axios';
 import { env } from '@/env';
 import { refreshAccessToken, signOut } from '@/lib/api/auth';
-import { getSession } from '@/lib/server/auth/actions';
+import { NextAuthRoutes } from '@/lib/constants/api-routes';
+import { SESSION_COOKIE_NAME } from '@/lib/constants/cookies';
 import { useSessionStore } from '@/lib/stores/session-store';
-
-const isServer = typeof window === 'undefined';
+import { Session } from '@/lib/types/session';
 
 const refreshTokenInterceptor = async (
   instance: AxiosInstance,
@@ -45,8 +46,20 @@ const accessTokenInterceptor = async (config: InternalAxiosRequestConfig) => {
   let accessToken: string | undefined;
 
   if (isServer) {
-    const session = await getSession();
-    accessToken = session?.accessToken;
+    const { cookies } = await import('next/headers');
+
+    const sessionCookie = cookies().get(SESSION_COOKIE_NAME)?.value;
+
+    try {
+      const { data } = await nextAuthApi.get<Session>(NextAuthRoutes.session, {
+        headers: {
+          Authorization: `Bearer ${sessionCookie}`,
+        },
+      });
+      accessToken = data.accessToken;
+    } catch (_e) {
+      accessToken = undefined;
+    }
   } else {
     accessToken = useSessionStore.getState().session?.accessToken;
   }
@@ -69,24 +82,16 @@ export const api = axios.create(defaultApiConfig);
 
 api.interceptors.request.use(accessTokenInterceptor);
 
-api.interceptors.response.use(
-  (response) => response,
-  (error) => refreshTokenInterceptor(api, error)
-);
+// api.interceptors.response.use(
+//   (response) => response,
+//   (error) => refreshTokenInterceptor(api, error)
+// );
 
 const defaultNextAuthApiConfig: CreateAxiosDefaults = {
   baseURL: env.NEXT_PUBLIC_AUTH_URL,
-  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
 };
 
 export const nextAuthApi = axios.create(defaultNextAuthApiConfig);
-
-nextAuthApi.interceptors.request.use(accessTokenInterceptor);
-//
-// nextAuthApi.interceptors.response.use(
-//   (response) => response,
-//   (error) => refreshTokenInterceptor(nextAuthApi, error)
-// );

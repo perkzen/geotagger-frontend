@@ -57,7 +57,7 @@ export const MY_LOCATIONS_KEY = 'MY_LOCATIONS';
 
 export const myLocationsQueryOptions = (query: PaginationQuery) =>
   queryOptions({
-    queryKey: [MY_LOCATIONS_KEY],
+    queryKey: [MY_LOCATIONS_KEY, query],
     queryFn: () => getMyLocations(query),
   });
 
@@ -103,6 +103,6 @@ export const LOCATIONS_LIST_KEY = 'LOCATIONS_LIST';
 
 export const locationsListQueryOptions = (query: PaginationQuery) =>
   queryOptions({
-    queryKey: [LOCATIONS_LIST_KEY],
+    queryKey: [LOCATIONS_LIST_KEY, query],
     queryFn: () => getLocations(query),
   });

@@ -26,7 +26,7 @@ const NavbarItems: FC<NavbarItemsProps> = ({ isAuth }) => {
     onSuccess: async () => {
       refresh();
       clearSession();
-      void queryClient.removeQueries();
+      await queryClient.invalidateQueries();
     },
   });
 

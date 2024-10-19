@@ -10,4 +10,12 @@ export class NextAuthError extends Error {
     this.code = code;
     this.status = status;
   }
+
+  toJSON() {
+    return {
+      message: this.message,
+      code: this.code,
+      status: this.status,
+    };
+  }
 }

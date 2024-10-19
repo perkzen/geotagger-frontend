@@ -8,7 +8,7 @@ import '@fontsource/roboto/700.css';
 import '@/styles/globals.scss';
 import Providers from '@/components/providers/providers';
 import TranslationsProvider from '@/components/providers/translations-provider';
-import { getSession } from '@/lib/server/auth/actions';
+import { getSession } from '@/lib/server/session';
 
 export const metadata: Metadata = {
   title: 'Geotagger',

@@ -1,4 +1,4 @@
-import { deleteSession } from '@/lib/server/auth/actions';
+import {deleteSession} from "@/lib/server/session";
 
 export async function GET() {
   await deleteSession();

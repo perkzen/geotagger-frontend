@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Add } from '@mui/icons-material';
 import { Avatar, Button, IconButton, Typography } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { profileQueryOptions } from '@/lib/api/profile/hooks';
 import { Routes } from '@/lib/constants/routes';
 import { useModalStore } from '@/lib/stores/modal-store';
@@ -20,7 +20,7 @@ const LoggedInMenu: FC<LoggedInMenuProps> = ({ handleSignOut }) => {
   const t = useTranslations('shared');
   const { push } = useRouter();
 
-  const { data: profile } = useQuery(profileQueryOptions);
+  const { data: profile } = useSuspenseQuery(profileQueryOptions);
   const imageUrl = profile?.imageUrl ?? undefined;
 
   const { openModal } = useModalStore();

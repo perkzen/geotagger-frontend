@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { Routes } from '@/lib/constants/routes';
-import {getSession} from "@/lib/server/auth/actions";
+import { getSession } from '@/lib/server/session';
 
 const protectedRoutes = [
   Routes.ADD_LOCATION,
