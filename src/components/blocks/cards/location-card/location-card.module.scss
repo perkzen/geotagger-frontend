@@ -2,11 +2,19 @@
 
 .container {
   position: relative;
-  max-width: 309px;
-  height: 175px;
   width: 100%;
   overflow: hidden;
   border-radius: $border-rounded;
+
+  &.md {
+    max-width: 309px;
+    height: 175px;
+  }
+
+  &.lg {
+    max-width: 420px;
+    height: 236px;
+  }
 
   .delete {
     position: absolute;

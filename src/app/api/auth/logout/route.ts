@@ -1,7 +1,9 @@
-import { removeAuthCookies } from '@/lib/server/auth';
+import { deleteSession } from '@/lib/server/session';
 
-export async function POST() {
-  removeAuthCookies();
+export async function GET() {
+  await deleteSession();
 
-  return new Response(undefined, { status: 200 });
+  return new Response(undefined, {
+    status: 200,
+  });
 }

@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className={styles.container}>
       <div>
-        <Navbar actions={false} />
+        <Navbar />
         <main>{children}</main>
       </div>
       <div className={styles.image}>

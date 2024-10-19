@@ -1,33 +1,32 @@
 'use client';
+import { FC } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Add } from '@mui/icons-material';
 import { Avatar, Button, IconButton, Typography } from '@mui/material';
-import { useSignOut } from '@/lib/api/auth/hooks';
-import { useProfile } from '@/lib/api/profile/hooks';
+import { useQuery } from '@tanstack/react-query';
+import { profileQueryOptions } from '@/lib/api/profile/hooks';
 import { Routes } from '@/lib/constants/routes';
 import { useModalStore } from '@/lib/stores/modal-store';
+import { ModalTypes } from '@/lib/types/modal';
 import styles from './logged-in-menu.module.scss';
 
-const LoggedInMenu = () => {
-  const { push } = useRouter();
+type LoggedInMenuProps = {
+  handleSignOut: () => void;
+};
+
+const LoggedInMenu: FC<LoggedInMenuProps> = ({ handleSignOut }) => {
   const t = useTranslations('shared');
-  const { mutateAsync: signOut } = useSignOut();
-  const { data: profile } = useProfile();
+  const { push } = useRouter();
+
+  const { data: profile } = useQuery(profileQueryOptions);
+  const imageUrl = profile?.imageUrl ?? undefined;
 
   const { openModal } = useModalStore();
-  const imageUrl = profile?.imageUrl || undefined;
-
-  const handleSignOut = async () => {
-    await signOut();
-  };
 
   const handleOpenProfileSettings = () => {
-    openModal({
-      id: 'profile-settings',
-      type: 'PROFILE_SETTINGS',
-    });
+    openModal({ type: ModalTypes.PROFILE_SETTINGS });
   };
 
   return (

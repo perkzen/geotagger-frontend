@@ -6,14 +6,15 @@ import { Drawer } from '@mui/material';
 import Logo from 'public/images/logo.svg';
 import MobileLoggedInMenu from '@/components/blocks/mobile-menu-drawer/mobile-logged-in-menu/mobile-logged-in-menu';
 import MobileLoggedOutMenu from '@/components/blocks/mobile-menu-drawer/mobile-logged-out-menu/mobile-logged-out-menu';
-import { useSession } from '@/lib/api/auth/hooks';
 import styles from './mobile-menu-drawer.module.scss';
 
-const MobileMenuDrawer = () => {
-  const [open, setOpen] = useState(false);
+type MobileMenuDrawerProps = {
+  isAuth: boolean;
+  handleSignOut: () => void;
+};
 
-  const session = useSession();
-  const isAuth = !!session?.session;
+const MobileMenuDrawer = ({ isAuth,handleSignOut }: MobileMenuDrawerProps) => {
+  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -35,7 +36,7 @@ const MobileMenuDrawer = () => {
             <Close color="primary" onClick={() => setOpen(false)} />
           </div>
           {isAuth ? (
-            <MobileLoggedInMenu />
+            <MobileLoggedInMenu handleSignOut={handleSignOut} />
           ) : (
             <MobileLoggedOutMenu closeDrawer={() => setOpen(false)} />
           )}

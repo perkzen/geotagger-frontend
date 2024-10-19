@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Typography } from '@mui/material';
 import FacebookIcon from '@/components/ui/icons/facebook-icon';
@@ -13,14 +14,27 @@ import { signInWithFacebook, signInWithGoogle } from '@/lib/api/auth';
 import { useSignIn } from '@/lib/api/auth/hooks';
 import { Routes } from '@/lib/constants/routes';
 import { useError } from '@/lib/hooks/use-error';
+import { useSessionStore } from '@/lib/stores/session-store';
 import { SignInFormData, SignInValidator } from '@/lib/validators/sign-in';
 import styles from './sign-in-form.module.scss';
 
 const SignInForm: FC = () => {
   const t = useTranslations('shared');
+  const { push } = useRouter();
   const { getError } = useError();
 
-  const { mutateAsync: signIn, error: signInError, isPending } = useSignIn();
+  const { setSession } = useSessionStore();
+
+  const {
+    mutateAsync: signIn,
+    error: signInError,
+    isPending,
+  } = useSignIn({
+    onSuccess: async (data) => {
+      setSession(data);
+      push(Routes.HOME);
+    },
+  });
 
   const { register, handleSubmit, formState } = useForm<SignInFormData>({
     resolver: zodResolver(SignInValidator),

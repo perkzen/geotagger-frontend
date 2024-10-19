@@ -63,3 +63,8 @@ export const updateLocation = async (id: string, data: AddLocationFormData) => {
 
   return res.data;
 };
+
+export const getLocations = async (query: PaginationQuery) => {
+  const res = await api.get<LocationsList>(ApiRoutes.locations.list(query));
+  return res.data;
+};

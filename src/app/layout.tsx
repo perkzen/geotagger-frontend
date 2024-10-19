@@ -8,6 +8,7 @@ import '@fontsource/roboto/700.css';
 import '@/styles/globals.scss';
 import Providers from '@/components/providers/providers';
 import TranslationsProvider from '@/components/providers/translations-provider';
+import { getSession } from '@/lib/server/session';
 
 export const metadata: Metadata = {
   title: 'Geotagger',
@@ -33,13 +34,15 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale();
 
+  const session = await getSession();
+
   return (
     <html lang={locale}>
       <body>
         {/* TranslationProvider cannot be a child of a client component 
         (therefore we cant have it in providers.tsx) */}
         <TranslationsProvider>
-          <Providers>{children}</Providers>
+          <Providers session={session}>{children}</Providers>
         </TranslationsProvider>
       </body>
     </html>

@@ -1,23 +1,34 @@
+import { NextRequest } from 'next/server';
 import { AxiosError } from 'axios';
 import { api } from '@/lib/api';
 import { AccessTokens } from '@/lib/api/auth/models';
 import { ApiRoutes } from '@/lib/constants/api-routes';
-import { getAccessTokens, setAuthCookies } from '@/lib/server/auth';
+import { NextAuthErrorCodes } from '@/lib/constants/next-auth-error-codes';
+import { getServerSession, updateTokens } from '@/lib/server/session';
 import { NextAuthError } from '@/lib/types/next-auth-error';
 
-export async function POST() {
+export async function POST(req: NextRequest) {
   try {
-    const tokens = getAccessTokens();
+    const session = await getServerSession(req);
 
-    const { data } = await api.post<AccessTokens>(ApiRoutes.auth.refreshToken, {
-      refreshToken: tokens.refreshToken,
-    });
+    if (!session) {
+      throw new NextAuthError(
+        'Session not found',
+        NextAuthErrorCodes.UNAUTHORIZED,
+        401
+      );
+    }
 
-    const { accessToken, refreshToken } = data;
+    const { data: tokens } = await api.post<AccessTokens>(
+      ApiRoutes.auth.refreshToken,
+      {
+        refreshToken: session.refreshToken,
+      }
+    );
 
-    setAuthCookies({ accessToken, refreshToken });
+    await updateTokens(tokens);
 
-    return new Response(undefined, {
+    return Response.json(tokens, {
       status: 200,
     });
   } catch (e: unknown) {

@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 import GuessesList from '@/components/blocks/guess-list/guesses-list';
-import LocationsListSkeleton from '@/components/blocks/locations-list/locations-list-skeleton';
+import LocationsListSkeleton from '@/components/blocks/lists/locations-list/locations-list-skeleton';
+import UploadsList from '@/components/blocks/lists/uploads-list/uploads-list';
 import ProfileInfo from '@/components/blocks/profile-info/profile-info';
 import ProfileInfoSkeleton from '@/components/blocks/profile-info/profile-info-skeleton';
-import UploadsList from '@/components/blocks/uploads-list/uploads-list';
 import styles from './profile-page.module.scss';
 
 const ProfilePage = () => {

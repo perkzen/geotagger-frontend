@@ -1,86 +1,58 @@
-import { useRouter } from 'next/navigation';
-import {
-  useMutation,
-  UseMutationOptions,
-  useQuery,
-} from '@tanstack/react-query';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import {
-  changePassword,
-  getSession,
-  signIn,
-  signOut,
-  signUp,
-} from '@/lib/api/auth';
-import { GET_PROFILE_KEY } from '@/lib/api/profile/hooks';
-import { Routes } from '@/lib/constants/routes';
+import { changePassword, signIn, signOut, signUp } from '@/lib/api/auth';
 import { ApiError } from '@/lib/types/api-error';
-import { getQueryClient } from '@/lib/utils/get-query-client';
 import { ChangePasswordFormData } from '@/lib/validators/change-password';
 import { SignInFormData } from '@/lib/validators/sign-in';
 import { SignUpFormData } from '@/lib/validators/sign-up';
 
-export const SESSION_KEY = 'SESSION';
-
-export const useSession = () => {
-  const { data } = useQuery({
-    queryKey: [SESSION_KEY],
-    queryFn: getSession,
-    refetchOnMount: true,
-  });
-
-  return data;
-};
-
 export const SIGN_IN_KEY = 'LOGIN';
 
-export const useSignIn = () => {
-  const { push } = useRouter();
-  const queryClient = getQueryClient();
+type UseSignInOptions = Omit<
+  UseMutationOptions<
+    Awaited<ReturnType<typeof signIn>>,
+    AxiosError<ApiError>,
+    SignInFormData,
+    unknown
+  >,
+  'mutationFn' | 'mutationKey'
+>;
 
-  return useMutation<void, AxiosError<ApiError>, SignInFormData>({
+export const useSignIn = (options?: UseSignInOptions) => {
+  return useMutation({
+    ...options,
     mutationKey: [SIGN_IN_KEY],
     mutationFn: signIn,
-    onSuccess: () => {
-      push(Routes.HOME);
-      void queryClient.invalidateQueries({
-        queryKey: [SESSION_KEY],
-      });
-    },
   });
 };
 
 export const SIGN_UP_KEY = 'REGISTER';
 
-export const useSignUp = () => {
-  const { push } = useRouter();
+type UseSignUpOptions = Omit<
+  UseMutationOptions<void, AxiosError<ApiError>, SignUpFormData, unknown>,
+  'mutationFn' | 'mutationKey'
+>;
 
-  return useMutation<void, AxiosError<ApiError>, SignUpFormData>({
+export const useSignUp = (options?: UseSignUpOptions) => {
+  return useMutation({
+    ...options,
     mutationKey: [SIGN_UP_KEY],
     mutationFn: signUp,
-    onSuccess: () => push(Routes.SIGN_IN),
   });
 };
 
 export const SIGN_OUT_KEY = 'LOGOUT';
 
-export const useSignOut = () => {
-  const { push } = useRouter();
-  const queryClient = getQueryClient();
+type UseSignOutOptions = Omit<
+  UseMutationOptions<void, Error, void, unknown>,
+  'mutationFn' | 'mutationKey'
+>;
 
+export const useSignOut = (options?: UseSignOutOptions) => {
   return useMutation({
+    ...options,
     mutationKey: [SIGN_OUT_KEY],
     mutationFn: signOut,
-    onSuccess: () => {
-      void Promise.all([
-        queryClient.invalidateQueries({
-          queryKey: [SESSION_KEY],
-        }),
-        queryClient.invalidateQueries({ queryKey: [GET_PROFILE_KEY] }),
-      ]);
-
-      push(Routes.SIGN_IN);
-    },
   });
 };
 
