@@ -1,6 +1,6 @@
 import { env } from '@/env';
 import { api, nextAuthApi } from '@/lib/api';
-import { AccessTokens, User } from '@/lib/api/auth/models';
+import { AccessTokens } from '@/lib/api/auth/models';
 import { ApiRoutes, NextAuthRoutes } from '@/lib/constants/api-routes';
 import { Session } from '@/lib/types/session';
 import { ChangePasswordFormData } from '@/lib/validators/change-password';
@@ -19,11 +19,6 @@ export const signInWithFacebook = () => {
 
 export const signUp = async (data: SignUpFormData) => {
   await api.post(ApiRoutes.auth.register, data);
-};
-
-export const getSession = async () => {
-  const res = await api.get<User>(ApiRoutes.auth.session);
-  return res.data;
 };
 
 export const changePassword = async (data: ChangePasswordFormData) => {
