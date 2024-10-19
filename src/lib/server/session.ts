@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import type { NextRequest } from 'next/server';
 import { jwtVerify, SignJWT } from 'jose';
 import { env } from '@/env';
 import { AccessTokens } from '@/lib/api/auth/models';
@@ -27,25 +28,45 @@ export async function createSession(payload: Session) {
   cookies().set(SESSION_COOKIE_NAME, session, cookieOptions);
 }
 
+/**
+ * Get the session in react sever component
+ */
 export async function getSession() {
   'use server';
 
   const cookie = cookies().get(SESSION_COOKIE_NAME)?.value;
   if (!cookie) return null;
 
-  try {
-    const { payload } = await jwtVerify(cookie, secret);
-
-    return payload as Session;
-  } catch (_err) {
-    return null;
-  }
+  return await validateSession(cookie);
 }
 
+/**
+ * Get the session from the request
+ * @param req
+ */
+export async function getServerSession(req: NextRequest) {
+  let sessionToken: string | undefined =
+    req.cookies.get(SESSION_COOKIE_NAME)?.value;
+
+  if (!sessionToken) {
+    sessionToken = req.headers.get('authorization')?.split('Bearer ')[1];
+  }
+
+  return await validateSession(sessionToken);
+}
+
+/**
+ * Delete the session on server
+ */
 export async function deleteSession() {
   cookies().delete(SESSION_COOKIE_NAME);
 }
 
+/**
+ * Update the session tokens
+ * @param accessToken
+ * @param refreshToken
+ */
 export async function updateTokens({
   accessToken,
   refreshToken,
@@ -73,7 +94,11 @@ export async function updateTokens({
   await createSession(newPayload);
 }
 
-export async function validateSession(token: string | undefined) {
+/**
+ * Validate the session token
+ * @param token
+ */
+async function validateSession(token: string | undefined) {
   if (!token) return null;
 
   try {

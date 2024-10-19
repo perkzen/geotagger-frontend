@@ -1,6 +1,6 @@
 import { env } from '@/env';
 import { api, nextAuthApi } from '@/lib/api';
-import { User } from '@/lib/api/auth/models';
+import { AccessTokens, User } from '@/lib/api/auth/models';
 import { ApiRoutes, NextAuthRoutes } from '@/lib/constants/api-routes';
 import { Session } from '@/lib/types/session';
 import { ChangePasswordFormData } from '@/lib/validators/change-password';
@@ -46,5 +46,15 @@ export const signOut = async () => {
 };
 
 export const refreshAccessToken = async () => {
-  await nextAuthApi.post(NextAuthRoutes.refreshToken);
+  const res = await nextAuthApi.post<AccessTokens>(NextAuthRoutes.refreshToken);
+  return res.data;
+};
+
+export const getAccessTokenFromSession = async (token: string) => {
+  const { data } = await nextAuthApi.get<Session>(NextAuthRoutes.session, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data.accessToken;
 };

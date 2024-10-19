@@ -7,10 +7,19 @@ import axios, {
 } from 'axios';
 import { env } from '@/env';
 import { refreshAccessToken, signOut } from '@/lib/api/auth';
-import { NextAuthRoutes } from '@/lib/constants/api-routes';
-import { SESSION_COOKIE_NAME } from '@/lib/constants/cookies';
 import { useSessionStore } from '@/lib/stores/session-store';
-import { Session } from '@/lib/types/session';
+import {
+  getClientAccessToken,
+  getServerAccessToken,
+} from '@/lib/utils/access-token';
+
+const handleSignOut = async () => {
+  await signOut();
+
+  if (!isServer) {
+    useSessionStore.getState().clearSession();
+  }
+};
 
 const refreshTokenInterceptor = async (
   instance: AxiosInstance,
@@ -20,22 +29,20 @@ const refreshTokenInterceptor = async (
     isRefreshing?: boolean;
   };
 
-  if (
-    error.response?.status === 401 &&
-    !originalConfig?.url?.includes('auth/refresh-token') &&
-    !originalConfig?.url?.includes('auth/login')
-  ) {
-    if (!originalConfig.isRefreshing) {
-      originalConfig.isRefreshing = true;
+  if (error.response?.status === 401 && !originalConfig.isRefreshing) {
+    originalConfig.isRefreshing = true;
 
-      try {
-        await refreshAccessToken();
-        return instance(originalConfig);
-      } catch (_e) {
-        await signOut();
+    try {
+      const tokens = await refreshAccessToken();
+
+      if (!isServer) {
+        const { updateTokens } = useSessionStore.getState();
+        updateTokens(tokens);
       }
-    } else {
-      await signOut();
+
+      return instance(originalConfig);
+    } catch (_e) {
+      await handleSignOut();
     }
   }
 
@@ -43,26 +50,9 @@ const refreshTokenInterceptor = async (
 };
 
 const accessTokenInterceptor = async (config: InternalAxiosRequestConfig) => {
-  let accessToken: string | undefined;
-
-  if (isServer) {
-    const { cookies } = await import('next/headers');
-
-    const sessionCookie = cookies().get(SESSION_COOKIE_NAME)?.value;
-
-    try {
-      const { data } = await nextAuthApi.get<Session>(NextAuthRoutes.session, {
-        headers: {
-          Authorization: `Bearer ${sessionCookie}`,
-        },
-      });
-      accessToken = data.accessToken;
-    } catch (_e) {
-      accessToken = undefined;
-    }
-  } else {
-    accessToken = useSessionStore.getState().session?.accessToken;
-  }
+  const accessToken = await (isServer
+    ? getServerAccessToken()
+    : getClientAccessToken());
 
   if (accessToken) {
     config.headers!.Authorization = `Bearer ${accessToken}`;
@@ -70,9 +60,9 @@ const accessTokenInterceptor = async (config: InternalAxiosRequestConfig) => {
 
   return config;
 };
+
 const defaultApiConfig: CreateAxiosDefaults = {
   baseURL: env.NEXT_PUBLIC_API_URL,
-  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -82,13 +72,14 @@ export const api = axios.create(defaultApiConfig);
 
 api.interceptors.request.use(accessTokenInterceptor);
 
-// api.interceptors.response.use(
-//   (response) => response,
-//   (error) => refreshTokenInterceptor(api, error)
-// );
+api.interceptors.response.use(
+  (response) => response,
+  (error) => refreshTokenInterceptor(api, error)
+);
 
 const defaultNextAuthApiConfig: CreateAxiosDefaults = {
   baseURL: env.NEXT_PUBLIC_AUTH_URL,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },

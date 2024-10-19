@@ -1,4 +1,5 @@
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
+import { env } from '@/env';
 import { api } from '@/lib/api';
 import { AccessTokens, User } from '@/lib/api/auth/models';
 import { ApiRoutes } from '@/lib/constants/api-routes';
@@ -31,7 +32,9 @@ export async function POST(req: Request) {
     const { refreshToken, accessToken } = tokens;
 
     // we need to set headers manually because session is still not created
-    const { data: user } = await api.get<User>('/auth/session', {
+    // we need to use axios client here to bypass request interceptors throwing 401 error
+    const { data: user } = await axios.get<User>(ApiRoutes.auth.session, {
+      baseURL: env.NEXT_PUBLIC_API_URL,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

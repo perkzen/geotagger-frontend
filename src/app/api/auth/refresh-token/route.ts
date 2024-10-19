@@ -1,14 +1,15 @@
+import { NextRequest } from 'next/server';
 import { AxiosError } from 'axios';
 import { api } from '@/lib/api';
 import { AccessTokens } from '@/lib/api/auth/models';
 import { ApiRoutes } from '@/lib/constants/api-routes';
 import { NextAuthErrorCodes } from '@/lib/constants/next-auth-error-codes';
-import { getSession, updateTokens } from '@/lib/server/session';
+import { getServerSession, updateTokens } from '@/lib/server/session';
 import { NextAuthError } from '@/lib/types/next-auth-error';
 
-export async function POST() {
+export async function POST(req: NextRequest) {
   try {
-    const session = await getSession();
+    const session = await getServerSession(req);
 
     if (!session) {
       throw new NextAuthError(
@@ -27,7 +28,7 @@ export async function POST() {
 
     await updateTokens(tokens);
 
-    return new Response(undefined, {
+    return Response.json(tokens, {
       status: 200,
     });
   } catch (e: unknown) {

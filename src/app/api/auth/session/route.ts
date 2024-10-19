@@ -1,12 +1,10 @@
 import { NextRequest } from 'next/server';
 import { NextAuthErrorCodes } from '@/lib/constants/next-auth-error-codes';
-import { validateSession } from '@/lib/server/session';
+import { getServerSession } from '@/lib/server/session';
 import { NextAuthError } from '@/lib/types/next-auth-error';
 
 export async function GET(req: NextRequest) {
-  const token = req.headers.get('authorization')?.split('Bearer ')[1];
-
-  const session = await validateSession(token);
+  const session = await getServerSession(req);
 
   if (!session) {
     return Response.json(

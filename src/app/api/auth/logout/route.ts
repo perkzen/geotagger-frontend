@@ -1,4 +1,4 @@
-import {deleteSession} from "@/lib/server/session";
+import { deleteSession } from '@/lib/server/session';
 
 export async function GET() {
   await deleteSession();
