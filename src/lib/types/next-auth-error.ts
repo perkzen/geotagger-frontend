@@ -1,9 +1,4 @@
-export const NextAuthErrorCodes = {
-  ACCESS_TOKEN_NOT_FOUND: 'ACCESS_TOKEN_NOT_FOUND',
-} as const;
-
-export type NextAuthErrorCode =
-  (typeof NextAuthErrorCodes)[keyof typeof NextAuthErrorCodes];
+import { NextAuthErrorCode } from '@/lib/constants/next-auth-error-codes';
 
 export class NextAuthError extends Error {
   public code: NextAuthErrorCode;

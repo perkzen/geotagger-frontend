@@ -1,14 +1,13 @@
 import axios, {
   AxiosError,
   AxiosInstance,
-  AxiosRequestConfig,
+  CreateAxiosDefaults,
   InternalAxiosRequestConfig,
 } from 'axios';
-import { getCookie } from 'cookies-next';
 import { env } from '@/env';
 import { refreshAccessToken, signOut } from '@/lib/api/auth';
-import { NextAuthRoutes } from '@/lib/constants/api-routes';
-import { ACCESS_TOKEN_COOKIE_NAME } from '@/lib/constants/cookies';
+import { getSession } from '@/lib/server/auth/actions';
+import { useSessionStore } from '@/lib/stores/session-store';
 
 const isServer = typeof window === 'undefined';
 
@@ -22,8 +21,8 @@ const refreshTokenInterceptor = async (
 
   if (
     error.response?.status === 401 &&
-    !originalConfig?.url?.includes(NextAuthRoutes.login) &&
-    !originalConfig?.url?.includes(NextAuthRoutes.refreshToken)
+    !originalConfig?.url?.includes('auth/refresh-token') &&
+    !originalConfig?.url?.includes('auth/login')
   ) {
     if (!originalConfig.isRefreshing) {
       originalConfig.isRefreshing = true;
@@ -43,11 +42,13 @@ const refreshTokenInterceptor = async (
 };
 
 const accessTokenInterceptor = async (config: InternalAxiosRequestConfig) => {
-  let accessToken = getCookie(ACCESS_TOKEN_COOKIE_NAME);
+  let accessToken: string | undefined;
 
   if (isServer) {
-    const { cookies } = await import('next/headers');
-    accessToken = cookies().get(ACCESS_TOKEN_COOKIE_NAME)?.value;
+    const session = await getSession();
+    accessToken = session?.accessToken;
+  } else {
+    accessToken = useSessionStore.getState().session?.accessToken;
   }
 
   if (accessToken) {
@@ -56,9 +57,9 @@ const accessTokenInterceptor = async (config: InternalAxiosRequestConfig) => {
 
   return config;
 };
-
-const defaultApiConfig = {
+const defaultApiConfig: CreateAxiosDefaults = {
   baseURL: env.NEXT_PUBLIC_API_URL,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -73,7 +74,7 @@ api.interceptors.response.use(
   (error) => refreshTokenInterceptor(api, error)
 );
 
-const defaultNextAuthApiConfig: AxiosRequestConfig = {
+const defaultNextAuthApiConfig: CreateAxiosDefaults = {
   baseURL: env.NEXT_PUBLIC_AUTH_URL,
   withCredentials: true,
   headers: {
@@ -83,7 +84,9 @@ const defaultNextAuthApiConfig: AxiosRequestConfig = {
 
 export const nextAuthApi = axios.create(defaultNextAuthApiConfig);
 
-nextAuthApi.interceptors.response.use(
-  (response) => response,
-  (error) => refreshTokenInterceptor(nextAuthApi, error)
-);
+nextAuthApi.interceptors.request.use(accessTokenInterceptor);
+//
+// nextAuthApi.interceptors.response.use(
+//   (response) => response,
+//   (error) => refreshTokenInterceptor(nextAuthApi, error)
+// );

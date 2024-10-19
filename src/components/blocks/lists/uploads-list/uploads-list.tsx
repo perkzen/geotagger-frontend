@@ -20,7 +20,11 @@ const UploadsList = () => {
   return (
     <div className={styles.container}>
       <Typography variant="h5">{t('myUploads')}</Typography>
-      <LocationsList data={locations} emptyComponent={<EmptyUploadsList />} />
+      <LocationsList
+        data={locations}
+        emptyComponent={<EmptyUploadsList />}
+        itemProps={{ allowEdit: true }}
+      />
     </div>
   );
 };

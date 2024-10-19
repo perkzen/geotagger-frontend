@@ -1,7 +1,8 @@
 import { env } from '@/env';
 import { api, nextAuthApi } from '@/lib/api';
-import { Session } from '@/lib/api/auth/models';
+import { User } from '@/lib/api/auth/models';
 import { ApiRoutes, NextAuthRoutes } from '@/lib/constants/api-routes';
+import { Session } from '@/lib/types/session';
 import { ChangePasswordFormData } from '@/lib/validators/change-password';
 import { SignInFormData } from '@/lib/validators/sign-in';
 import { SignUpFormData } from '@/lib/validators/sign-up';
@@ -20,23 +21,30 @@ export const signUp = async (data: SignUpFormData) => {
   await api.post(ApiRoutes.auth.register, data);
 };
 
-export const signIn = async (data: SignInFormData) => {
-  await nextAuthApi.post(NextAuthRoutes.login, data);
-};
-
-export const signOut = async () => {
-  await nextAuthApi.post(NextAuthRoutes.logout);
-};
-
-export const refreshAccessToken = async () => {
-  await nextAuthApi.post(NextAuthRoutes.refreshToken);
-};
-
 export const getSession = async () => {
-  const res = await nextAuthApi.get<Session>(NextAuthRoutes.session);
+  const res = await api.get<User>(ApiRoutes.auth.session);
   return res.data;
 };
 
 export const changePassword = async (data: ChangePasswordFormData) => {
   await api.patch(ApiRoutes.auth.changePassword, data);
+};
+
+/**
+ *
+ * NextAuth API
+ *
+ */
+
+export const signIn = async (data: SignInFormData) => {
+  const res = await nextAuthApi.post<Session>(NextAuthRoutes.login, data);
+  return res.data;
+};
+
+export const signOut = async () => {
+  await nextAuthApi.get(NextAuthRoutes.logout);
+};
+
+export const refreshAccessToken = async () => {
+  await nextAuthApi.post(NextAuthRoutes.refreshToken);
 };

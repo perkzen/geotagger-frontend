@@ -10,9 +10,10 @@ import styles from './mobile-menu-drawer.module.scss';
 
 type MobileMenuDrawerProps = {
   isAuth: boolean;
+  handleSignOut: () => void;
 };
 
-const MobileMenuDrawer = ({ isAuth }: MobileMenuDrawerProps) => {
+const MobileMenuDrawer = ({ isAuth,handleSignOut }: MobileMenuDrawerProps) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,7 +36,7 @@ const MobileMenuDrawer = ({ isAuth }: MobileMenuDrawerProps) => {
             <Close color="primary" onClick={() => setOpen(false)} />
           </div>
           {isAuth ? (
-            <MobileLoggedInMenu />
+            <MobileLoggedInMenu handleSignOut={handleSignOut} />
           ) : (
             <MobileLoggedOutMenu closeDrawer={() => setOpen(false)} />
           )}

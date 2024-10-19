@@ -1,8 +1,9 @@
 import { AxiosError } from 'axios';
 import { api } from '@/lib/api';
-import { AccessTokens } from '@/lib/api/auth/models';
+import { AccessTokens, User } from '@/lib/api/auth/models';
 import { ApiRoutes } from '@/lib/constants/api-routes';
-import { setAuthCookies } from '@/lib/server/auth';
+import { createSession } from '@/lib/server/auth/actions';
+import { Session } from '@/lib/types/session';
 import { SignInValidator } from '@/lib/validators/sign-in';
 
 export async function POST(req: Request) {
@@ -26,11 +27,25 @@ export async function POST(req: Request) {
       ApiRoutes.auth.login,
       data
     );
-    const { accessToken, refreshToken } = tokens;
 
-    setAuthCookies({ accessToken, refreshToken });
+    const { refreshToken, accessToken } = tokens;
 
-    return new Response(undefined, {
+    // we need to set headers manually because session is still not created
+    const { data: user } = await api.get<User>('/auth/session', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const session: Session = {
+      user,
+      accessToken,
+      refreshToken,
+    };
+
+    await createSession(session);
+
+    return Response.json(session, {
       status: 200,
     });
   } catch (e: unknown) {

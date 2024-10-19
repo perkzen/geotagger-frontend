@@ -1,10 +1,16 @@
 @import "src/styles";
 
 .container {
-
+  @include flex-col;
+  gap: 32px;
 
   .title {
     @include flex-col;
     gap: 16px;
+  }
+
+  .loadMore {
+    width: fit-content;
+    margin: auto;
   }
 }

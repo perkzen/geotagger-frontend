@@ -11,29 +11,28 @@ import GoogleIcon from '@/components/ui/icons/google-icon';
 import Input from '@/components/ui/input/input';
 import PasswordInput from '@/components/ui/password-input/password-input';
 import { signInWithFacebook, signInWithGoogle } from '@/lib/api/auth';
-import { SESSION_KEY, useSignIn } from '@/lib/api/auth/hooks';
+import { useSignIn } from '@/lib/api/auth/hooks';
 import { Routes } from '@/lib/constants/routes';
 import { useError } from '@/lib/hooks/use-error';
-import { getQueryClient } from '@/lib/utils/get-query-client';
+import { useSessionStore } from '@/lib/stores/session-store';
 import { SignInFormData, SignInValidator } from '@/lib/validators/sign-in';
 import styles from './sign-in-form.module.scss';
 
 const SignInForm: FC = () => {
   const t = useTranslations('shared');
   const { push } = useRouter();
-  const queryClient = getQueryClient();
   const { getError } = useError();
+
+  const { setSession } = useSessionStore();
 
   const {
     mutateAsync: signIn,
     error: signInError,
     isPending,
   } = useSignIn({
-    onSuccess: () => {
+    onSuccess: async (data) => {
+      setSession(data);
       push(Routes.HOME);
-      void queryClient.invalidateQueries({
-        queryKey: [SESSION_KEY],
-      });
     },
   });
 

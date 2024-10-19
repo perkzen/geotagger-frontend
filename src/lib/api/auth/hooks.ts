@@ -1,37 +1,25 @@
-import {
-  queryOptions,
-  useMutation,
-  UseMutationOptions,
-} from '@tanstack/react-query';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import {
-  changePassword,
-  getSession,
-  signIn,
-  signOut,
-  signUp,
-} from '@/lib/api/auth';
+import { changePassword, signIn, signOut, signUp } from '@/lib/api/auth';
 import { ApiError } from '@/lib/types/api-error';
 import { ChangePasswordFormData } from '@/lib/validators/change-password';
 import { SignInFormData } from '@/lib/validators/sign-in';
 import { SignUpFormData } from '@/lib/validators/sign-up';
 
-export const SESSION_KEY = 'SESSION';
-
-export const sessionQueryOptions = queryOptions({
-  queryKey: [SESSION_KEY],
-  queryFn: getSession,
-});
-
 export const SIGN_IN_KEY = 'LOGIN';
 
 type UseSignInOptions = Omit<
-  UseMutationOptions<void, AxiosError<ApiError>, SignInFormData, unknown>,
+  UseMutationOptions<
+    Awaited<ReturnType<typeof signIn>>,
+    AxiosError<ApiError>,
+    SignInFormData,
+    unknown
+  >,
   'mutationFn' | 'mutationKey'
 >;
 
 export const useSignIn = (options?: UseSignInOptions) => {
-  return useMutation<void, AxiosError<ApiError>, SignInFormData>({
+  return useMutation({
     ...options,
     mutationKey: [SIGN_IN_KEY],
     mutationFn: signIn,
@@ -46,7 +34,7 @@ type UseSignUpOptions = Omit<
 >;
 
 export const useSignUp = (options?: UseSignUpOptions) => {
-  return useMutation<void, AxiosError<ApiError>, SignUpFormData>({
+  return useMutation({
     ...options,
     mutationKey: [SIGN_UP_KEY],
     mutationFn: signUp,

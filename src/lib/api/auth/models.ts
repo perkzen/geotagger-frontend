@@ -3,16 +3,10 @@ export type AccessTokens = {
   refreshToken: string;
 };
 
-export type SessionUser = {
+export type User = {
   id: string;
   role: 'user' | 'admin';
   email: string;
-};
-
-export type Session = {
-  session: boolean;
-  user: SessionUser | null;
-  error: string | null;
 };
 
 export const AuthErrorCodes = {

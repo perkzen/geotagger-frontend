@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { Routes } from '@/lib/constants/routes';
-import { getServerSession } from '@/lib/server/auth';
+import {getSession} from "@/lib/server/auth/actions";
 
 const protectedRoutes = [
   Routes.ADD_LOCATION,
@@ -15,9 +15,9 @@ export async function middleware(req: NextRequest) {
   );
 
   if (isProtectedRoute) {
-    const { session } = await getServerSession();
+    const session = await getSession();
 
-    if (!session) {
+    if (!session?.user) {
       const redirectUrl = new URL(Routes.SIGN_IN, req.url);
       return NextResponse.redirect(redirectUrl);
     }

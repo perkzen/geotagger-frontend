@@ -1,16 +1,12 @@
 import { Metadata } from 'next';
 import HomePage from '@/components/containers/home/home-page';
-import { sessionQueryOptions } from '@/lib/api/auth/hooks';
-import { getQueryClient } from '@/lib/utils/get-query-client';
+import { getSession } from '@/lib/server/auth/actions';
 
 export const metadata: Metadata = {
   title: 'Geotagger | Home',
 };
 
-export default function Page() {
-  const queryClient = getQueryClient();
-
-  void queryClient.prefetchQuery(sessionQueryOptions);
-
-  return <HomePage />;
+export default async function Page() {
+  const session = await getSession();
+  return <HomePage isAuth={!!session} />;
 }

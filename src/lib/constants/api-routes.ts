@@ -9,7 +9,7 @@ export const ApiRoutes = {
       `${env.NEXT_PUBLIC_API_URL}/auth/facebook?redirect=${encodeURIComponent(redirect)}`,
     login: '/auth/login',
     register: '/auth/register',
-    logout: '/auth/logout',
+    session: '/auth/session',
     refreshToken: '/auth/refresh-token',
     changePassword: '/auth/change-password',
   },
