@@ -3,11 +3,7 @@ import { cookies } from 'next/headers';
 import { jwtVerify, SignJWT } from 'jose';
 import { env } from '@/env';
 import { AccessTokens } from '@/lib/api/auth/models';
-import {
-  cookieOptions,
-  ONE_WEEK,
-  SESSION_COOKIE_NAME,
-} from '@/lib/constants/cookies';
+import { cookieOptions, SESSION_COOKIE_NAME } from '@/lib/constants/cookies';
 import { NextAuthErrorCodes } from '@/lib/constants/next-auth-error-codes';
 import { NextAuthError } from '@/lib/types/next-auth-error';
 import { Session } from '@/lib/types/session';
@@ -22,7 +18,7 @@ export async function createSession(payload: Session) {
   const session = await new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
-    .setExpirationTime(ONE_WEEK)
+    .setExpirationTime('7d')
     .sign(secret);
 
   cookies().set(SESSION_COOKIE_NAME, session, cookieOptions);
