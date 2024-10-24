@@ -1,9 +1,11 @@
 import { FC } from 'react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { Typography } from '@mui/material';
 import classNames from 'classnames';
 import { formatDistanceToNow } from 'date-fns';
 import { Guess } from '@/lib/api/locations/models';
+import { useSessionStore } from '@/lib/stores/session-store';
 import styles from './leaderboard-item.module.scss';
 
 type LeaderboardItemProps = {
@@ -12,8 +14,18 @@ type LeaderboardItemProps = {
 };
 
 const LeaderboardItem: FC<LeaderboardItemProps> = ({ item, place }) => {
+  const t = useTranslations();
+  const { session } = useSessionStore();
+
+  const isCurrentUser = session?.user.id === item.user.id;
+  const displayName = isCurrentUser
+    ? t('shared.you')
+    : `${item.user.firstname} ${item.user.lastname}`;
+
   return (
-    <li className={styles.container}>
+    <li className={classNames(styles.container, {
+        [styles.currentUser]: isCurrentUser,
+    })}>
       <Typography
         variant="caption"
         color="contrast"
@@ -33,9 +45,7 @@ const LeaderboardItem: FC<LeaderboardItemProps> = ({ item, place }) => {
         height={40}
       />
       <div className={styles.info}>
-        <Typography variant="body1">
-          {item.user.firstname} {item.user.lastname}
-        </Typography>
+        <Typography variant="body1">{displayName}</Typography>
         <Typography variant="caption">
           {formatDistanceToNow(new Date(item.createdAt), { addSuffix: true })}
         </Typography>

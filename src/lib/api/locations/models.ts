@@ -20,6 +20,7 @@ export type Guess = {
   distanceText: number;
   createdAt: string;
   user: {
+    id: string;
     firstname: string;
     lastname: string;
     imageUrl: string;

@@ -5,6 +5,14 @@
   gap: 16px;
   padding: 4px 8px;
 
+  &.currentUser {
+    background: $primary-color;
+
+    span, p {
+      color: $white-color;
+    }
+  }
+
   .image {
     border-radius: 64px;
 
