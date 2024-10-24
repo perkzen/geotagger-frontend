@@ -1,0 +1,42 @@
+@import "src/styles";
+
+.container {
+  @include flex-row-items-center;
+  gap: 16px;
+  padding: 4px 8px;
+
+  .image {
+    border-radius: 64px;
+
+    img {
+      overflow: hidden;
+    }
+  }
+
+  .info {
+    @include flex-col;
+    gap: 4px;
+  }
+
+  .distance {
+    margin-left: auto;
+  }
+
+  .badge {
+    border-radius: 30px;
+    padding: 6.5px 10px;
+    background: $dark-color;
+
+    &.first {
+      background: linear-gradient(41.75deg, #FE7F2D 22.78%, #FCCA46 87.18%);
+    }
+
+    &.second {
+      background: linear-gradient(41.75deg, #D8D8D8 22.78%, #999999 87.18%);
+    }
+
+    &.third {
+      background: linear-gradient(41.75deg, #956956 22.78%, #D79376 87.18%);
+    }
+  }
+}

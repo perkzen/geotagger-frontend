@@ -1,0 +1,11 @@
+@import "src/styles";
+
+.container {
+  @include flex-col;
+  gap: 16px;
+
+  .list {
+    @include flex-col;
+    gap: 8px;
+  }
+}

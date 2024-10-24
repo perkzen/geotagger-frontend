@@ -2,8 +2,9 @@ export const Routes = {
   HOME: '/',
   SIGN_IN: '/sign-in',
   SIGN_UP: '/sign-up',
-  ADD_LOCATION: '/location/add',
   PROFILE: '/profile',
+  LOCATION: '/location',
+  ADD_LOCATION: '/location/add',
   EDIT_LOCATION: '/location/edit',
 } as const;
 

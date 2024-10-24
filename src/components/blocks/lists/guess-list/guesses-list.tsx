@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Typography } from '@mui/material';
-import EmptyGuessesList from '@/components/blocks/guess-list/empty-guesses-list/empty-guesses-list';
+import EmptyGuessesList from '@/components/blocks/lists/guess-list/empty-guesses-list/empty-guesses-list';
 import styles from './guesses-list.module.scss';
 
 const GuessesList = () => {

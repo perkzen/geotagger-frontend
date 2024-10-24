@@ -21,6 +21,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: '"geotagger-bucket.s3.eu-central-1.amazonaws.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'platform-lookaside.fbsbx.com',
+      },
     ],
   },
   async headers() {

@@ -42,3 +42,7 @@ export const ImageValidator = (
       }
     );
 };
+
+export const LatValidator = z.number().min(-90).max(90);
+
+export const LngValidator = z.number().min(-180).max(180);

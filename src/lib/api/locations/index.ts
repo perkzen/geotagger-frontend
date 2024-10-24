@@ -1,7 +1,9 @@
 import { api } from '@/lib/api';
 import {
   GeocodeResponse,
+  GuessDetails,
   Location,
+  LocationDetails,
   LocationsList,
 } from '@/lib/api/locations/models';
 import { ApiRoutes } from '@/lib/constants/api-routes';
@@ -43,7 +45,7 @@ export const deleteLocation = async (id: string) => {
 };
 
 export const getLocation = async (id: string) => {
-  const res = await api.get<Location>(ApiRoutes.locations.byId(id));
+  const res = await api.get<LocationDetails>(ApiRoutes.locations.byId(id));
   return res.data;
 };
 
@@ -66,5 +68,10 @@ export const updateLocation = async (id: string, data: AddLocationFormData) => {
 
 export const getLocations = async (query: PaginationQuery) => {
   const res = await api.get<LocationsList>(ApiRoutes.locations.list(query));
+  return res.data;
+};
+
+export const guessLocation = async (id: string, data: Coordinates) => {
+  const res = await api.post<GuessDetails>(ApiRoutes.locations.guess(id), data);
   return res.data;
 };

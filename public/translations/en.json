@@ -61,6 +61,13 @@
     "settingsSaved": "Your settings are saved"
   },
   "location": {
+    "guess": {
+      "title": "Take a <span>guess</span>",
+      "guessedLocation": "Guessed location",
+      "errorDistance": "Error distance",
+      "leaderboard": "Leaderboard",
+      "guess": "Guess"
+    },
     "add": {
       "title": "Add a new <span>location</span>",
       "addNew": "Add new",

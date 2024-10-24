@@ -1,0 +1,26 @@
+@import "src/styles";
+
+
+.container {
+  display: grid;
+  grid-template-columns: min(860px, 66%) 1fr;
+  gap: 20px;
+  padding-bottom: 38px;
+
+  @include mq("lg") {
+    @include flex-col;
+    gap: 32px;
+    padding-bottom: 64px;
+  }
+
+  .guess {
+    @include flex-col;
+    gap: 16px;
+
+    .title {
+      span {
+        color: $primary-color;
+      }
+    }
+  }
+}
