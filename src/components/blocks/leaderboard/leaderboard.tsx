@@ -15,7 +15,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ items }) => {
   return (
     <div className={styles.container}>
       <Typography variant="h4">{t('location.guess.leaderboard')}</Typography>
-      <ul>
+      <ul className={styles.list}>
         {items.map((g, index) => (
           <LeaderboardItem key={g.id} item={g} place={index + 1} />
         ))}
