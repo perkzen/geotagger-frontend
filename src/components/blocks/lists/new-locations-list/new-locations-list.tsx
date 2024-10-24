@@ -25,7 +25,10 @@ const NewLocationsList = () => {
           {t('home.newLocationsDescription')}
         </Typography>
       </div>
-      <LocationsList data={locations.data} itemProps={{ size: 'lg' }} />
+      <LocationsList
+        data={locations.data}
+        itemProps={{ size: 'lg', as: 'link' }}
+      />
       <Button variant="outlined" className={styles.loadMore}>
         {t('shared.loadMore')}
       </Button>

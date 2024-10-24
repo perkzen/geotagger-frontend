@@ -1,6 +1,7 @@
 'use client';
 import { FC } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Close, Edit } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
@@ -15,6 +16,7 @@ export type LocationCardProps = {
   className?: string;
   allowEdit?: boolean;
   size?: 'md' | 'lg';
+  as?: 'link' | 'div';
 };
 
 const LocationCard: FC<LocationCardProps> = ({
@@ -22,17 +24,15 @@ const LocationCard: FC<LocationCardProps> = ({
   className,
   allowEdit,
   size = 'md',
+  as = 'div',
 }) => {
   const { push } = useRouter();
   const openDeleteLocationModal = useDeleteLocationModal({ id: location.id });
 
-  return (
-    <div
-      className={classNames(styles.container, className, {
-        [styles.md]: size === 'md',
-        [styles.lg]: size === 'lg',
-      })}
-    >
+  const url = `${Routes.LOCATION}/${location.id}`;
+
+  const content = (
+    <>
       <Image
         src={location.imageUrl}
         alt={location.address}
@@ -55,6 +55,17 @@ const LocationCard: FC<LocationCardProps> = ({
           </IconButton>
         </>
       )}
+    </>
+  );
+
+  return (
+    <div
+      className={classNames(styles.container, className, {
+        [styles.md]: size === 'md',
+        [styles.lg]: size === 'lg',
+      })}
+    >
+      {as === 'link' ? <Link href={url}>{content}</Link> : content}
     </div>
   );
 };

@@ -7,6 +7,7 @@ const protectedRoutes = [
   Routes.ADD_LOCATION,
   Routes.EDIT_LOCATION,
   Routes.PROFILE,
+  Routes.LOCATION,
 ];
 
 export async function middleware(req: NextRequest) {

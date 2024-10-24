@@ -1,5 +1,5 @@
 'use client';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -24,16 +24,21 @@ const AddLocationForm: FC = () => {
   const t = useTranslations();
   const { push } = useRouter();
 
-  const [coordinates, setCoordinates] = useState<Coordinates>();
-
-  const { mutateAsync: fetchAddress, data: address } = useGeocode();
-
   const { register, handleSubmit, setValue, formState, watch } =
     useForm<AddLocationFormData>({
       resolver: zodResolver(AddLocationValidator),
     });
 
   const { errors } = formState;
+
+  const [lat, lng] = watch(['lat', 'lng']);
+
+  const coordinates: Coordinates | undefined =
+    lat && lng ? { lat, lng } : undefined;
+
+  const { mutateAsync: fetchAddress } = useGeocode({
+    onSuccess: (data) => setValue('address', data.address),
+  });
 
   const { mutateAsync: addLocation, isPending: isUploading } = useAddLocation({
     onSuccess: () => push(Routes.PROFILE),
@@ -44,18 +49,6 @@ const AddLocationForm: FC = () => {
     ? URL.createObjectURL(selectedFile)
     : PlaceholderImage;
 
-  useEffect(() => {
-    if (address) {
-      setValue('address', address.formattedAddress);
-    }
-  }, [address, setValue]);
-
-  useEffect(() => {
-    if (coordinates) {
-      void fetchAddress(coordinates);
-    }
-  }, [coordinates, fetchAddress]);
-
   const onSubmit = (data: AddLocationFormData) => {
     void addLocation(data);
   };
@@ -64,11 +57,11 @@ const AddLocationForm: FC = () => {
     const lat = e.detail.latLng?.lat;
     const lng = e.detail.latLng?.lng;
 
-    if (lat && lng) {
-      setCoordinates({ lat, lng });
-      setValue('lat', lat);
-      setValue('lng', lng);
-    }
+    if (!lat || !lng) return;
+
+    setValue('lat', lat);
+    setValue('lng', lng);
+    void fetchAddress({ lat, lng });
   };
 
   return (

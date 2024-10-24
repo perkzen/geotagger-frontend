@@ -1,0 +1,40 @@
+@import "src/styles";
+
+.container {
+  @include flex-col;
+  gap: 32px;
+  max-width: 860px;
+  width: 100%;
+
+  .row {
+    display: grid;
+    grid-template-columns: 75% 1fr;
+    gap: 20px;
+
+    @include mq("sm") {
+      @include flex-col;
+        gap: 16px;
+    }
+  }
+
+  .image {
+    position: relative;
+    height: 324px;
+    width: 100%;
+    border-radius: $border-rounded;
+    overflow: hidden;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  button {
+    margin-left: auto;
+
+    @include mq("sm") {
+      width: fit-content;
+      margin-left: 0;
+    }
+  }
+}

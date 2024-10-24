@@ -11,10 +11,13 @@ import {
   getLocation,
   getLocations,
   getMyLocations,
+  guessLocation,
   updateLocation,
 } from '@/lib/api/locations';
 import {
   GeocodeResponse,
+  GuessDetails,
+  GuessLocationPayload,
   Location,
   UpdateLocationPayload,
 } from '@/lib/api/locations/models';
@@ -106,3 +109,19 @@ export const locationsListQueryOptions = (query: PaginationQuery) =>
     queryKey: [LOCATIONS_LIST_KEY, query],
     queryFn: () => getLocations(query),
   });
+
+export const GUSS_LOCATION_KEY = 'GUSS_LOCATION';
+
+type UseGuessLocationOptions = Omit<
+  UseMutationOptions<GuessDetails, AxiosError, GuessLocationPayload, unknown>,
+  'mutationFn' | 'mutationKey'
+>;
+
+export const useGuessLocation = (options?: UseGuessLocationOptions) => {
+  return useMutation({
+    ...options,
+    mutationKey: [GUSS_LOCATION_KEY],
+    mutationFn: ({ id, ...data }: GuessLocationPayload) =>
+      guessLocation(id, data),
+  });
+};
