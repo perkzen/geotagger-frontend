@@ -1,5 +1,5 @@
-import CardSkeleton from '@/components/blocks/lists/skeletons/card-skeleton';
-import styles from '../locations-list/locations-list.module.scss';
+import CardSkeleton from '@/components/blocks/skeletons/card-skeleton';
+import styles from '../lists/locations-list/locations-list.module.scss';
 
 const ListSkeleton = () => {
   return (

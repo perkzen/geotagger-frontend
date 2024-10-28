@@ -15,7 +15,7 @@ type GuessesListProps = {
   paginatedData: Pagination<BestScore>;
   emptyComponent?: ReactNode;
   className?: string;
-  itemProps?: Omit<GuessCardProps, 'score'>;
+  itemProps?: Pick<GuessCardProps, 'size' | 'className'>;
 };
 
 const GuessesList: FC<GuessesListProps> = ({

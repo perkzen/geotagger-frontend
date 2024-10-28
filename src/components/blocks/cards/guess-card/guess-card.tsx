@@ -12,11 +12,11 @@ import styles from './guess-card.module.scss';
 
 export type GuessCardProps = (
   | {
-      isLocked: true;
+      isLocked?: true;
       score?: never;
     }
   | {
-      isLocked: false;
+      isLocked?: false;
       score: BestScore;
     }
 ) & {
@@ -25,7 +25,7 @@ export type GuessCardProps = (
 };
 
 const GuessCard: FC<GuessCardProps> = ({
-  isLocked,
+  isLocked = false,
   score,
   className,
   size = 'md',
@@ -46,12 +46,12 @@ const GuessCard: FC<GuessCardProps> = ({
         quality={100}
         fill
       />
-      {isLocked ? (
+      {isLocked? (
         <LockOutlined className={styles.icon} />
       ) : (
         <>
           <GuessCardOverlay
-            locationId={score.location.id}
+            locationId={score!.location.id}
             isHovering={isHovering}
             size={size}
           />
