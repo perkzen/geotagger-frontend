@@ -4,16 +4,16 @@ import { Typography } from '@mui/material';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import GuessesList from '@/components/blocks/lists/guess-list/guesses-list';
 import { myBestGuessesQueryOptions } from '@/lib/api/locations/hooks';
+import { useQueryParams } from '@/lib/hooks/use-query-params';
 import styles from './personal-best-guesses-list.module.scss';
 
 const PersonalBestGuessesList = () => {
   const t = useTranslations();
 
-  const { data: list } = useSuspenseQuery(
-    myBestGuessesQueryOptions({
-      take: 5,
-      skip: 0,
-    })
+  const { urlQuery } = useQueryParams();
+
+  const { data } = useSuspenseQuery(
+    myBestGuessesQueryOptions(urlQuery.guess)
   );
 
   return (
@@ -26,7 +26,7 @@ const PersonalBestGuessesList = () => {
           {t('home.bestGuessesDescription')}
         </Typography>
       </div>
-      <GuessesList data={list.data} itemProps={{ size: 'lg' }} />
+      <GuessesList paginatedData={data} itemProps={{ size: 'lg' }} />
     </div>
   );
 };
