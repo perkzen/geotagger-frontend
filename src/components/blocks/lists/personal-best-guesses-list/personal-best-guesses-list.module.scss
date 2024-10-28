@@ -1,7 +1,8 @@
 @import "src/styles";
 
 .container {
-
+  @include flex-col;
+  gap: 32px;
 
   .title {
     @include flex-col;

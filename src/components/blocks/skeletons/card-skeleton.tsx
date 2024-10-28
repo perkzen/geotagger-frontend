@@ -1,7 +1,7 @@
 import { Skeleton } from '@mui/material';
 
-const LocationCardSkeleton = () => {
+const CardSkeleton = () => {
   return <Skeleton variant="rectangular" width={309} height={175} />;
 };
 
-export default LocationCardSkeleton;
+export default CardSkeleton;

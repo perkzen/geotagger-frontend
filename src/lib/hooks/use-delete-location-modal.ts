@@ -1,5 +1,9 @@
 import { useTranslations } from 'next-intl';
-import { MY_LOCATIONS_KEY, useDeleteLocation } from '@/lib/api/locations/hooks';
+import {
+  LOCATIONS_LIST_KEY,
+  MY_LOCATIONS_KEY,
+  useDeleteLocation,
+} from '@/lib/api/locations/hooks';
 import { useModalStore } from '@/lib/stores/modal-store';
 import { ModalTypes } from '@/lib/types/modal';
 import { getQueryClient } from '@/lib/utils/get-query-client';
@@ -18,9 +22,10 @@ export const useDeleteLocationModal = ({
 
   const { mutateAsync: deleteLocation } = useDeleteLocation({
     onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [MY_LOCATIONS_KEY],
-      });
+      void Promise.all([
+        queryClient.invalidateQueries({ queryKey: [LOCATIONS_LIST_KEY] }),
+        queryClient.invalidateQueries({ queryKey: [MY_LOCATIONS_KEY] }),
+      ]);
 
       openModal({
         type: ModalTypes.DELETE_CONFIRMATION,

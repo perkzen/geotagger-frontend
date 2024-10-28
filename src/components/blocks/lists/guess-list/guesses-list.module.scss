@@ -1,6 +1,13 @@
-@import "../../../../styles/index";
+@import "src/styles";
 
 .container {
-  @include flex-col;
+  @include flex-col-items-center;
   gap: 32px;
+
+  .list {
+    @include flex-row;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 }

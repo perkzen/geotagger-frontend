@@ -1,6 +1,6 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import LocationsList from '@/components/blocks/lists/locations-list/locations-list';
 import { locationsListQueryOptions } from '@/lib/api/locations/hooks';
@@ -11,8 +11,8 @@ const NewLocationsList = () => {
   const t = useTranslations();
   const { urlQuery } = useQueryParams();
 
-  const { data: locations } = useSuspenseQuery(
-    locationsListQueryOptions(urlQuery)
+  const { data } = useSuspenseQuery(
+    locationsListQueryOptions(urlQuery.location)
   );
 
   return (
@@ -26,12 +26,9 @@ const NewLocationsList = () => {
         </Typography>
       </div>
       <LocationsList
-        data={locations.data}
+        paginatedData={data}
         itemProps={{ size: 'lg', as: 'link' }}
       />
-      <Button variant="outlined" className={styles.loadMore}>
-        {t('shared.loadMore')}
-      </Button>
     </div>
   );
 };

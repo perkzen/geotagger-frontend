@@ -21,9 +21,9 @@ export default function LoggedOutHomePage() {
           </div>
         </div>
         <div className={styles.cards}>
-          <GuessCard isLocked />
-          <GuessCard isLocked />
-          <GuessCard isLocked />
+          <GuessCard isLocked={true} />
+          <GuessCard isLocked={true} />
+          <GuessCard isLocked={true} />
         </div>
         <Button variant="contained" href={Routes.SIGN_UP}>
           {t('shared.signUp')}

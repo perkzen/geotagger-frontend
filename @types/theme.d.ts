@@ -17,3 +17,9 @@ declare module '@mui/material/Typography' {
     contrast: true;
   }
 }
+
+declare module '@mui/material/Button' {
+  interface ButtonPropsVariantOverrides {
+    contrast: true;
+  }
+}

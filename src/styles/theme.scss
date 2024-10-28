@@ -10,7 +10,6 @@ $danger-color: #9B6161;
 
 // border
 $border-rounded: 8px;
-$mobile-border-rounded: 4px;
 
 // box-shadow
 $shadow-color: #00000026;
@@ -22,3 +21,21 @@ $modal-width: 593px;
 $modal-sm-width: 489px;
 $modal-fit-width: fit-content;
 $valid-modal-sizes: ("sm", "md", "fit");
+
+// card
+$card-lg-width: 420px;
+$card-lg-height: 235px;
+$card-md-width: 309px;
+$card-md-height: 175px;
+$card-mobile-width: 344px;
+$card-mobile-height: 194px;
+
+$card-widths: (
+        "lg": $card-lg-width,
+        "md": $card-md-width
+);
+
+$card-heights: (
+        "lg": $card-lg-height,
+        "md": $card-md-height
+)

@@ -10,6 +10,7 @@ import {
   geocode,
   getLocation,
   getLocations,
+  getMyBestScores,
   getMyLocations,
   guessLocation,
   updateLocation,
@@ -83,7 +84,7 @@ export const GET_LOCATION_KEY = 'GET_LOCATION';
 
 export const locationQueryOptions = (id: string) =>
   queryOptions({
-    queryKey: [GET_LOCATION_KEY],
+    queryKey: [GET_LOCATION_KEY, id],
     queryFn: () => getLocation(id),
   });
 
@@ -125,3 +126,11 @@ export const useGuessLocation = (options?: UseGuessLocationOptions) => {
       guessLocation(id, data),
   });
 };
+
+export const MY_BEST_GUESSES_KEY = 'MY_BEST_GUESSES';
+
+export const myBestGuessesQueryOptions = (query: PaginationQuery) =>
+  queryOptions({
+    queryKey: [MY_BEST_GUESSES_KEY, query],
+    queryFn: () => getMyBestScores(query),
+  });

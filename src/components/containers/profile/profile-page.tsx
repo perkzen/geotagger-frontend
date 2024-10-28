@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
-import GuessesList from '@/components/blocks/lists/guess-list/guesses-list';
-import LocationsListSkeleton from '@/components/blocks/lists/locations-list/locations-list-skeleton';
+import BestGuessesList from '@/components/blocks/lists/best-guesses-list/best-guesses-list';
 import UploadsList from '@/components/blocks/lists/uploads-list/uploads-list';
 import ProfileInfo from '@/components/blocks/profile-info/profile-info';
 import ProfileInfoSkeleton from '@/components/blocks/profile-info/profile-info-skeleton';
+import ListSkeleton from '@/components/blocks/skeletons/list-skeleton';
 import styles from './profile-page.module.scss';
 
 const ProfilePage = () => {
@@ -12,8 +12,10 @@ const ProfilePage = () => {
       <Suspense fallback={<ProfileInfoSkeleton />}>
         <ProfileInfo />
       </Suspense>
-      <GuessesList />
-      <Suspense fallback={<LocationsListSkeleton />}>
+      <Suspense fallback={<ListSkeleton />}>
+        <BestGuessesList />
+      </Suspense>
+      <Suspense fallback={<ListSkeleton />}>
         <UploadsList />
       </Suspense>
     </div>

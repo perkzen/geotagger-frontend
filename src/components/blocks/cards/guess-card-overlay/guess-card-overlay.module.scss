@@ -1,0 +1,24 @@
+@import "src/styles";
+
+.container {
+  @include flex-row-center;
+  width: 100%;
+  background: $primary-color;
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+
+  &.md {
+    @include card-size("md");
+  }
+
+  &.lg {
+    @include card-size("lg");
+  }
+
+  &.visible {
+    opacity: 1;
+  }
+}

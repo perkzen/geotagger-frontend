@@ -13,15 +13,15 @@ const UploadsList = () => {
 
   const { urlQuery } = useQueryParams();
 
-  const { data: list } = useSuspenseQuery(myLocationsQueryOptions(urlQuery));
+  const { data } = useSuspenseQuery(myLocationsQueryOptions(urlQuery.location));
 
-  const locations = list?.data;
+
 
   return (
     <div className={styles.container}>
       <Typography variant="h5">{t('myUploads')}</Typography>
       <LocationsList
-        data={locations}
+        paginatedData={data}
         emptyComponent={<EmptyUploadsList />}
         itemProps={{ allowEdit: true }}
       />

@@ -26,6 +26,35 @@
   align-items: center;
 }
 
+@mixin flex-row-center {
+  @include flex-row-items-center;
+  justify-content: center;
+}
+
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin card-size($size) {
+  $width: map-get($card-widths, $size);
+  $height: map-get($card-heights, $size);
+
+  @if $width and $height {
+    max-width: $width;
+    height: $height;
+
+    @include mq("sm") {
+      max-width: $card-mobile-width;
+      height: $card-mobile-height;
+    }
+  } @else {
+    @error "Invalid size '#{$size}' provided. Allowed sizes: #{join(map-keys($card-widths), ', ')}";
+  }
+}
+
 @mixin mq($breakpoint) {
   $value: map-get($breakpoints, $breakpoint);
 

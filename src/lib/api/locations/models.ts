@@ -41,6 +41,19 @@ export type LocationDetails = Location & {
   guesses: Guess[];
 };
 
+export type BestScore = {
+  distance: string;
+  location: {
+    id: string;
+    media: {
+      key: string;
+      keyUrl: string;
+    };
+  };
+};
+
+export type BestScoresList = Pagination<BestScore>;
+
 export type LocationsList = Pagination<Location>;
 
 export type UpdateLocationPayload = AddLocationFormData & { id: string };
