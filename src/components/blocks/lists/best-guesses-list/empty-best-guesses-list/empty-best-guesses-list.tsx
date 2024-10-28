@@ -3,9 +3,9 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { Button, Typography } from '@mui/material';
 import { Routes } from '@/lib/constants/routes';
-import styles from './empty-guesses-list.module.scss';
+import styles from './empty-best-guesses-list.module.scss';
 
-const EmptyGuessesList = () => {
+const EmptyBestGuessesList = () => {
   const t = useTranslations('profile');
   const { push } = useRouter();
 
@@ -22,4 +22,4 @@ const EmptyGuessesList = () => {
   );
 };
 
-export default EmptyGuessesList;
+export default EmptyBestGuessesList;

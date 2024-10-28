@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@mui/material';
+import { useWindowVirtualizer } from '@tanstack/react-virtual';
 import classNames from 'classnames';
 import LocationCard, {
   LocationCardProps,
@@ -29,7 +30,13 @@ const LocationsList: FC<LocationsListProps> = ({
 
   const { data, meta } = paginatedData;
 
-  const hasMore = meta.take > meta.total;
+  const hasMore = meta.total > meta.take;
+
+  const virtualizer = useWindowVirtualizer({
+    count: data.length,
+    estimateSize: () => 235,
+    overscan: 5,
+  });
 
   if (data.length === 0) {
     return emptyComponent;
@@ -47,11 +54,11 @@ const LocationsList: FC<LocationsListProps> = ({
   return (
     <div className={classNames(styles.container, className)}>
       <div className={styles.list}>
-        {data.map((location) => (
-          <LocationCard {...itemProps} key={location.id} location={location} />
+        {virtualizer.getVirtualItems().map(({ key, index }) => (
+          <LocationCard {...itemProps} key={key} location={data[index]} />
         ))}
       </div>
-      <Button variant="outlined" onClick={loadMore} disabled={hasMore}>
+      <Button variant="outlined" onClick={loadMore} disabled={!hasMore}>
         {t('shared.loadMore')}
       </Button>
     </div>
