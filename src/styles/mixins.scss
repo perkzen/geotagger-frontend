@@ -45,6 +45,11 @@
   @if $width and $height {
     max-width: $width;
     height: $height;
+
+    @include mq("sm") {
+      max-width: $card-mobile-width;
+      height: $card-mobile-height;
+    }
   } @else {
     @error "Invalid size '#{$size}' provided. Allowed sizes: #{join(map-keys($card-widths), ', ')}";
   }
