@@ -3,7 +3,6 @@
 .container {
   @include flex-col;
 
-
   button {
     width: 172px;
     @include mq("sm") {
@@ -34,7 +33,7 @@
     }
 
     .cards {
-      @include flex-row-items-center;
+      @include flex-row-center;
       width: 100%;
       gap: 20px;
 

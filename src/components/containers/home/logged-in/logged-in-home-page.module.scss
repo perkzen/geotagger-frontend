@@ -3,7 +3,11 @@
 .container {
   @include flex-col;
   gap: 32px;
+  padding-bottom: 48px;
 
+  @include mq("sm") {
+    padding-bottom: 72px;
+  }
 
   .title {
     @include flex-col;
