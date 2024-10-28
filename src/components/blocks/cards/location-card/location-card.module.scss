@@ -2,18 +2,16 @@
 
 .container {
   position: relative;
-  width: 100%;
   overflow: hidden;
+  width: 100%;
   border-radius: $border-rounded;
 
   &.md {
-    max-width: 309px;
-    height: 175px;
+    @include card-size("md");
   }
 
   &.lg {
-    max-width: 420px;
-    height: 236px;
+    @include card-size("lg");
   }
 
   .delete {

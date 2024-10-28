@@ -1,4 +1,5 @@
 import { env } from '@/env';
+import { Coordinates } from '@/lib/types/coordinates';
 import { PaginationQuery } from '@/lib/types/pagination';
 
 export const ApiRoutes = {
@@ -20,13 +21,15 @@ export const ApiRoutes = {
   locations: {
     list: ({ take, skip }: PaginationQuery) =>
       `/locations?take=${take}&skip=${skip}`,
-    geocode: ({ lat, lng }: { lat: number; lng: number }) =>
+    geocode: ({ lat, lng }: Coordinates) =>
       `/locations/geocode?lat=${lat}&lng=${lng}`,
     add: '/locations',
     myLocations: ({ take, skip }: PaginationQuery) =>
       `/locations/me?take=${take}&skip=${skip}`,
     byId: (id: string) => `/locations/${id}`,
     guess: (id: string) => `/locations/guess/${id}`,
+    bestScores: ({ take, skip }: PaginationQuery) =>
+      `/locations/me/best-scores?take=${take}&skip=${skip}`,
   },
 } as const;
 

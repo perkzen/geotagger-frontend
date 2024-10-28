@@ -93,6 +93,15 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
     },
     components: {
       MuiButton: {
+        variants: [
+          {
+            props: { variant: 'contrast' },
+            style: {
+              backgroundColor: vars.white,
+              color: vars.primary,
+            },
+          },
+        ],
         styleOverrides: {
           root: {
             padding: '8px 30px',

@@ -1,5 +1,6 @@
 import { api } from '@/lib/api';
 import {
+  BestScoresList,
   GeocodeResponse,
   GuessDetails,
   Location,
@@ -73,5 +74,12 @@ export const getLocations = async (query: PaginationQuery) => {
 
 export const guessLocation = async (id: string, data: Coordinates) => {
   const res = await api.post<GuessDetails>(ApiRoutes.locations.guess(id), data);
+  return res.data;
+};
+
+export const getMyBestScores = async (query: PaginationQuery) => {
+  const res = await api.get<BestScoresList>(
+    ApiRoutes.locations.bestScores(query)
+  );
   return res.data;
 };

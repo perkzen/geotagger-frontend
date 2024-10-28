@@ -11,9 +11,15 @@ import PlaceholderImage from 'public/images/placeholder-image.svg';
 import FileUploadInput from '@/components/ui/file-upload-input/file-upload-input';
 import Input from '@/components/ui/input/input';
 import Map from '@/components/ui/map/map';
-import { useAddLocation, useGeocode } from '@/lib/api/locations/hooks';
+import {
+  LOCATIONS_LIST_KEY,
+  MY_LOCATIONS_KEY,
+  useAddLocation,
+  useGeocode,
+} from '@/lib/api/locations/hooks';
 import { Routes } from '@/lib/constants/routes';
 import { Coordinates } from '@/lib/types/coordinates';
+import { getQueryClient } from '@/lib/utils/get-query-client';
 import {
   AddLocationFormData,
   AddLocationValidator,
@@ -22,6 +28,7 @@ import styles from './add-location-form.module.scss';
 
 const AddLocationForm: FC = () => {
   const t = useTranslations();
+  const queryClient = getQueryClient();
   const { push } = useRouter();
 
   const { register, handleSubmit, setValue, formState, watch } =
@@ -41,7 +48,13 @@ const AddLocationForm: FC = () => {
   });
 
   const { mutateAsync: addLocation, isPending: isUploading } = useAddLocation({
-    onSuccess: () => push(Routes.PROFILE),
+    onSuccess: () => {
+      void Promise.all([
+        queryClient.invalidateQueries({ queryKey: [MY_LOCATIONS_KEY] }),
+        queryClient.invalidateQueries({ queryKey: [LOCATIONS_LIST_KEY] }),
+      ]);
+      push(Routes.PROFILE);
+    },
   });
 
   const selectedFile = watch('fileList')?.item(0);

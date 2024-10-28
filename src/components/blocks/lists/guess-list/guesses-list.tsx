@@ -1,15 +1,33 @@
-import { useTranslations } from 'next-intl';
-import { Typography } from '@mui/material';
-import EmptyGuessesList from '@/components/blocks/lists/guess-list/empty-guesses-list/empty-guesses-list';
+import { FC, ReactNode } from 'react';
+import classNames from 'classnames';
+import GuessCard, {
+  GuessCardProps,
+} from '@/components/blocks/cards/guess-card/guess-card';
+import { BestScore } from '@/lib/api/locations/models';
 import styles from './guesses-list.module.scss';
 
-const GuessesList = () => {
-  const t = useTranslations('profile');
+type GuessesListProps = {
+  data: BestScore[];
+  emptyComponent?: ReactNode;
+  className?: string;
+  itemProps?: Omit<GuessCardProps, 'score'>;
+};
+
+const GuessesList: FC<GuessesListProps> = ({
+  data,
+  emptyComponent,
+  itemProps,
+  className,
+}) => {
+  if (data.length === 0) {
+    return emptyComponent;
+  }
 
   return (
-    <div className={styles.container}>
-      <Typography variant="h5">{t('myBestGuesses')}</Typography>
-      <EmptyGuessesList />
+    <div className={classNames(styles.container, className)}>
+      {data.map((score, index) => (
+        <GuessCard {...itemProps} key={index} score={score} />
+      ))}
     </div>
   );
 };
