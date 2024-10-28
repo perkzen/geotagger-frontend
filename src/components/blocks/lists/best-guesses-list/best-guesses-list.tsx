@@ -2,7 +2,7 @@
 import { useTranslations } from 'next-intl';
 import { Typography } from '@mui/material';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import EmptyGuessesList from '@/components/blocks/lists/guess-list/empty-guesses-list/empty-guesses-list';
+import EmptyBestGuessesList from '@/components/blocks/lists/best-guesses-list/empty-best-guesses-list/empty-best-guesses-list';
 import GuessesList from '@/components/blocks/lists/guess-list/guesses-list';
 import { myBestGuessesQueryOptions } from '@/lib/api/locations/hooks';
 import { useQueryParams } from '@/lib/hooks/use-query-params';
@@ -20,7 +20,7 @@ const BestGuessesList = () => {
   return (
     <div className={styles.container}>
       <Typography variant="h5">{t('myBestGuesses')}</Typography>
-      <GuessesList paginatedData={data} emptyComponent={<EmptyGuessesList />} />
+      <GuessesList paginatedData={data} emptyComponent={<EmptyBestGuessesList />} />
     </div>
   );
 };
