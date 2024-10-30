@@ -26,7 +26,7 @@ const NewLocationsList = () => {
         </Typography>
       </div>
       <LocationsList
-        paginatedData={data}
+        data={data}
         itemProps={{ size: 'lg', as: 'link' }}
       />
     </div>

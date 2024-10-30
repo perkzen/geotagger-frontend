@@ -21,7 +21,7 @@ const UploadsList = () => {
     <div className={styles.container}>
       <Typography variant="h5">{t('myUploads')}</Typography>
       <LocationsList
-        paginatedData={data}
+        data={data}
         emptyComponent={<EmptyUploadsList />}
         itemProps={{ allowEdit: true }}
       />

@@ -20,5 +20,5 @@ export default function SessionProvider({
     }
   }, [session, setSession]);
 
-  return <>{children}</>;
+  return children;
 }

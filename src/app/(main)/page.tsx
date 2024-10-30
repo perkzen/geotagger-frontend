@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const session = await getSession();
-  return <HomePage isAuth={!!session} />;
+  return <HomePage session={session} />;
 }

@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import '@mui/material/styles';
 
 declare module '@mui/material/styles' {
@@ -12,7 +13,24 @@ declare module '@mui/material/styles' {
   }
 }
 
+declare module '@mui/material/styles' {
+  interface TypographyVariants {
+    xs: CSSProperties;
+    sm: CSSProperties;
+  }
+
+  interface TypographyVariantsOptions {
+    xs?: CSSProperties;
+    sm?: CSSProperties;
+  }
+}
+
 declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    xs: true;
+    sm: true
+  }
+
   interface TypographyPropsColorOverrides {
     contrast: true;
   }

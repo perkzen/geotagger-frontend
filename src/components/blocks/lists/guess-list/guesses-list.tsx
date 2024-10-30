@@ -13,14 +13,14 @@ import { Pagination } from '@/lib/types/pagination';
 import styles from './guesses-list.module.scss';
 
 type GuessesListProps = {
-  paginatedData: Pagination<BestScore>;
+  data: Pagination<BestScore>;
   emptyComponent?: ReactNode;
   className?: string;
   itemProps?: Pick<GuessCardProps, 'size' | 'className'>;
 };
 
 const GuessesList: FC<GuessesListProps> = ({
-  paginatedData,
+  data,
   emptyComponent,
   itemProps,
   className,
@@ -28,12 +28,12 @@ const GuessesList: FC<GuessesListProps> = ({
   const t = useTranslations();
   const { updateQueryParams, urlQuery } = useQueryParams();
 
-  const { data, meta } = paginatedData;
+  const { data: guesses, meta } = data;
 
   const hasMore = meta.total >meta.take ;
 
   const virtualizer = useWindowVirtualizer({
-    count: data.length,
+    count: guesses.length,
     estimateSize: () => 235,
     overscan: 5,
   });
@@ -47,7 +47,7 @@ const GuessesList: FC<GuessesListProps> = ({
     });
   };
 
-  if (data.length === 0) {
+  if (guesses.length === 0) {
     return emptyComponent;
   }
 
@@ -55,7 +55,7 @@ const GuessesList: FC<GuessesListProps> = ({
     <div className={classNames(styles.container, className)}>
       <div className={styles.list}>
         {virtualizer.getVirtualItems().map(({ key, index }) => (
-          <GuessCard key={key} {...itemProps} score={data[index]} />
+          <GuessCard key={key} {...itemProps} score={guesses[index]} />
         ))}
       </div>
       <Button variant="outlined" onClick={loadMore} disabled={!hasMore}>

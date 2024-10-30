@@ -92,6 +92,29 @@
     "uploadInfo": "Upload new location with the click on button bellow or in navigation bar press the “+” button.",
     "addLocation": "Add location"
   },
+  "activityLog": {
+    "title": "Activity log",
+    "table": {
+      "user": "User",
+      "date": "Date/Time",
+      "action": "Action",
+      "componentType": "Component type",
+      "newValue": "New value",
+      "location": "Location of action"
+    },
+    "action": {
+      "click": "Click",
+      "addedValue": "Added value",
+      "removedValue": "Removed value",
+      "changedValue": "Changed value",
+      "scroll": "Scroll"
+    },
+    "componentType": {
+      "button": "Button",
+      "input": "Input field",
+      "link": "Link"
+    }
+  },
   "errors": {
     "errorCode": "Ooppss! Error code #{code}",
     "invalidCredentials": "Invalid email or password",

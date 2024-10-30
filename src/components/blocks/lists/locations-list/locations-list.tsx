@@ -13,14 +13,14 @@ import { Pagination } from '@/lib/types/pagination';
 import styles from './locations-list.module.scss';
 
 type LocationsListProps = {
-  paginatedData: Pagination<Location>;
+  data: Pagination<Location>;
   emptyComponent?: ReactNode;
   className?: string;
   itemProps?: Omit<LocationCardProps, 'location'>;
 };
 
 const LocationsList: FC<LocationsListProps> = ({
-  paginatedData,
+  data,
   emptyComponent,
   itemProps,
   className,
@@ -28,17 +28,17 @@ const LocationsList: FC<LocationsListProps> = ({
   const t = useTranslations();
   const { updateQueryParams, urlQuery } = useQueryParams();
 
-  const { data, meta } = paginatedData;
+  const { data: locations, meta } = data;
 
   const hasMore = meta.total > meta.take;
 
   const virtualizer = useWindowVirtualizer({
-    count: data.length,
-    estimateSize: () => 235,
+    count: locations.length,
+    estimateSize: () => 20 + 236, // gap + card height
     overscan: 5,
   });
 
-  if (data.length === 0) {
+  if (locations.length === 0) {
     return emptyComponent;
   }
 
@@ -55,7 +55,7 @@ const LocationsList: FC<LocationsListProps> = ({
     <div className={classNames(styles.container, className)}>
       <div className={styles.list}>
         {virtualizer.getVirtualItems().map(({ key, index }) => (
-          <LocationCard {...itemProps} key={key} location={data[index]} />
+          <LocationCard {...itemProps} key={key} location={locations[index]} />
         ))}
       </div>
       <Button variant="outlined" onClick={loadMore} disabled={!hasMore}>

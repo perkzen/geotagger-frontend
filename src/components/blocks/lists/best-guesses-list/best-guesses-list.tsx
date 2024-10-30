@@ -20,7 +20,7 @@ const BestGuessesList = () => {
   return (
     <div className={styles.container}>
       <Typography variant="h5">{t('myBestGuesses')}</Typography>
-      <GuessesList paginatedData={data} emptyComponent={<EmptyBestGuessesList />} />
+      <GuessesList data={data} emptyComponent={<EmptyBestGuessesList />} />
     </div>
   );
 };

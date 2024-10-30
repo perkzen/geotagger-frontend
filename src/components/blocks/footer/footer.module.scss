@@ -6,7 +6,7 @@
   align-items: center;
   padding: 15px 70px;
   background: $primary-color;
-  color: $white-color;
+  color: $contrast-color;
 
   @include mq("sm") {
     padding: 15px 42px;

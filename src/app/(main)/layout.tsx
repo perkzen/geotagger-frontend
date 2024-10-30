@@ -10,7 +10,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className={styles.container}>
-      <Navbar items={<NavbarItems isAuth={!!session} />} />
+      <Navbar items={<NavbarItems session={session} />} />
       <main>{children}</main>
       <Footer />
     </div>

@@ -1,0 +1,13 @@
+@import "src/styles";
+
+.container {
+  @include flex-col;
+  gap: 32px;
+  max-height: calc(100dvh - $header-height - $footer-height - 32px);
+  padding-bottom: 50px;
+
+  @include mq("md") {
+    max-height: unset;
+    padding-bottom: 72px;
+  }
+}
