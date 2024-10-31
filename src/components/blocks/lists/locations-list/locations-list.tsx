@@ -44,6 +44,7 @@ const LocationsList: FC<LocationsListProps> = ({
     });
   };
 
+  // TODO: this list should be virtualized
   return (
     <div className={classNames(styles.container, className)}>
       <div className={styles.list}>
