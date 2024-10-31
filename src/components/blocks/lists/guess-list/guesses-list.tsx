@@ -29,7 +29,7 @@ const GuessesList: FC<GuessesListProps> = ({
 
   const { data: guesses, meta } = data;
 
-  const hasMore = meta.total >meta.take ;
+  const hasMore = meta.total > meta.take;
 
   const loadMore = () => {
     updateQueryParams({
@@ -44,6 +44,7 @@ const GuessesList: FC<GuessesListProps> = ({
     return emptyComponent;
   }
 
+  // TODO: this list should be virtualized
   return (
     <div className={classNames(styles.container, className)}>
       <div className={styles.list}>
