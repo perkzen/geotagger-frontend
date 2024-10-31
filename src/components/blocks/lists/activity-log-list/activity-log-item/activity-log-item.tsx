@@ -21,7 +21,7 @@ const ActivityLogItem: FC<ActivityLogItemProps> = ({ item }) => {
   const formattedDate = formatDate(item.createdAt).split(' ');
 
   return (
-    <li className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.row}>
         <Typography variant="xs" color="textSecondary">
           {t('user')}
@@ -64,7 +64,7 @@ const ActivityLogItem: FC<ActivityLogItemProps> = ({ item }) => {
           {item.location}
         </Typography>
       </div>
-    </li>
+    </div>
   );
 };
 

@@ -1,7 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@mui/material';
-import { useWindowVirtualizer } from '@tanstack/react-virtual';
 import classNames from 'classnames';
 import GuessCard, {
   GuessCardProps,
@@ -32,12 +31,6 @@ const GuessesList: FC<GuessesListProps> = ({
 
   const hasMore = meta.total >meta.take ;
 
-  const virtualizer = useWindowVirtualizer({
-    count: guesses.length,
-    estimateSize: () => 235,
-    overscan: 5,
-  });
-
   const loadMore = () => {
     updateQueryParams({
       guess: {
@@ -54,8 +47,8 @@ const GuessesList: FC<GuessesListProps> = ({
   return (
     <div className={classNames(styles.container, className)}>
       <div className={styles.list}>
-        {virtualizer.getVirtualItems().map(({ key, index }) => (
-          <GuessCard key={key} {...itemProps} score={guesses[index]} />
+        {guesses.map((guess, i) => (
+          <GuessCard key={i} guess={guess} {...itemProps} />
         ))}
       </div>
       <Button variant="outlined" onClick={loadMore} disabled={!hasMore}>

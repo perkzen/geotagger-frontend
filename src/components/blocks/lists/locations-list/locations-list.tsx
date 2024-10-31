@@ -1,7 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@mui/material';
-import { useWindowVirtualizer } from '@tanstack/react-virtual';
 import classNames from 'classnames';
 import LocationCard, {
   LocationCardProps,
@@ -32,12 +31,6 @@ const LocationsList: FC<LocationsListProps> = ({
 
   const hasMore = meta.total > meta.take;
 
-  const virtualizer = useWindowVirtualizer({
-    count: locations.length,
-    estimateSize: () => 20 + 236, // gap + card height
-    overscan: 5,
-  });
-
   if (locations.length === 0) {
     return emptyComponent;
   }
@@ -54,8 +47,8 @@ const LocationsList: FC<LocationsListProps> = ({
   return (
     <div className={classNames(styles.container, className)}>
       <div className={styles.list}>
-        {virtualizer.getVirtualItems().map(({ key, index }) => (
-          <LocationCard {...itemProps} key={key} location={locations[index]} />
+        {locations.map((location) => (
+          <LocationCard key={location.id} location={location} {...itemProps} />
         ))}
       </div>
       <Button variant="outlined" onClick={loadMore} disabled={!hasMore}>

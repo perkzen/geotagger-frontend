@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@mui/material';
+import { useWindowVirtualizer } from '@tanstack/react-virtual';
 import ActivityLogItem from '@/components/blocks/lists/activity-log-list/activity-log-item/activity-log-item';
 import { ActivityLog } from '@/lib/api/activity-log/models';
 import { DEFAULT_TAKE } from '@/lib/constants/pagination';
@@ -20,6 +21,12 @@ const ActivityLogList: FC<ActivityLogListProps> = ({ data }) => {
 
   const hasMore = meta.total > meta.take;
 
+  const virtualizer = useWindowVirtualizer({
+    count: activityLogs.length,
+    estimateSize: () => 236, // item height
+    overscan: 5,
+  });
+
   const loadMore = () => {
     updateQueryParams({
       logs: {
@@ -31,9 +38,27 @@ const ActivityLogList: FC<ActivityLogListProps> = ({ data }) => {
 
   return (
     <div className={styles.container}>
-      <ul>
-        {activityLogs.map((activityLog) => (
-          <ActivityLogItem key={activityLog.id} item={activityLog} />
+      <ul
+        style={{
+          height: `${virtualizer.getTotalSize()}px`,
+          width: '100%',
+          position: 'relative',
+        }}
+      >
+        {virtualizer.getVirtualItems().map((virtualItem) => (
+          <li
+            key={virtualItem.key}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: `${virtualItem.size}px`,
+              transform: `translateY(${virtualItem.start}px)`,
+            }}
+          >
+            <ActivityLogItem item={activityLogs[virtualItem.index]} />
+          </li>
         ))}
       </ul>
       <Button variant="outlined" onClick={loadMore} disabled={!hasMore}>
