@@ -10,6 +10,7 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
       },
       text: {
         primary: vars.textPrimary,
+        secondary: vars.textSecondary,
       },
       error: {
         main: vars.error,
@@ -22,6 +23,18 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
       },
     },
     typography: {
+      xs: {
+        fontWeight: 500,
+        fontSize: '12px',
+        lineHeight: '18px',
+        color: vars.dark,
+      },
+      sm: {
+        fontWeight: 400,
+        fontSize: '14px',
+        lineHeight: '20px',
+        color: vars.dark,
+      },
       caption: {
         fontWeight: 400,
         fontSize: '12px',

@@ -1,7 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@mui/material';
-import { useWindowVirtualizer } from '@tanstack/react-virtual';
 import classNames from 'classnames';
 import LocationCard, {
   LocationCardProps,
@@ -13,14 +12,14 @@ import { Pagination } from '@/lib/types/pagination';
 import styles from './locations-list.module.scss';
 
 type LocationsListProps = {
-  paginatedData: Pagination<Location>;
+  data: Pagination<Location>;
   emptyComponent?: ReactNode;
   className?: string;
   itemProps?: Omit<LocationCardProps, 'location'>;
 };
 
 const LocationsList: FC<LocationsListProps> = ({
-  paginatedData,
+  data,
   emptyComponent,
   itemProps,
   className,
@@ -28,17 +27,11 @@ const LocationsList: FC<LocationsListProps> = ({
   const t = useTranslations();
   const { updateQueryParams, urlQuery } = useQueryParams();
 
-  const { data, meta } = paginatedData;
+  const { data: locations, meta } = data;
 
   const hasMore = meta.total > meta.take;
 
-  const virtualizer = useWindowVirtualizer({
-    count: data.length,
-    estimateSize: () => 235,
-    overscan: 5,
-  });
-
-  if (data.length === 0) {
+  if (locations.length === 0) {
     return emptyComponent;
   }
 
@@ -54,8 +47,8 @@ const LocationsList: FC<LocationsListProps> = ({
   return (
     <div className={classNames(styles.container, className)}>
       <div className={styles.list}>
-        {virtualizer.getVirtualItems().map(({ key, index }) => (
-          <LocationCard {...itemProps} key={key} location={data[index]} />
+        {locations.map((location) => (
+          <LocationCard key={location.id} location={location} {...itemProps} />
         ))}
       </div>
       <Button variant="outlined" onClick={loadMore} disabled={!hasMore}>

@@ -12,8 +12,8 @@ const Footer = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <footer className={styles.container}>
-      <Image src={isMobile ? MobileLogo : Logo} alt={'logo'} />
-      <Typography variant="caption" color="contrast">
+      <Image src={isMobile ? MobileLogo : Logo} height={30} alt={'logo'} />
+      <Typography variant={isMobile ? 'caption' : 'body1'} color="contrast">
         {t('allRightsReserved')}
       </Typography>
     </footer>

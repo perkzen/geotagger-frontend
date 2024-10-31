@@ -13,11 +13,11 @@ import styles from './guess-card.module.scss';
 export type GuessCardProps = (
   | {
       isLocked?: true;
-      score?: never;
+      guess?: never;
     }
   | {
       isLocked?: false;
-      score: BestScore;
+      guess: BestScore;
     }
 ) & {
   className?: string;
@@ -26,7 +26,7 @@ export type GuessCardProps = (
 
 const GuessCard: FC<GuessCardProps> = ({
   isLocked = false,
-  score,
+  guess,
   className,
   size = 'md',
 }) => {
@@ -41,7 +41,7 @@ const GuessCard: FC<GuessCardProps> = ({
       })}
     >
       <Image
-        src={score?.location.media.keyUrl ?? PlaceholderLocation}
+        src={guess?.location.media.keyUrl ?? PlaceholderLocation}
         alt={'guess-location'}
         quality={100}
         fill
@@ -51,13 +51,13 @@ const GuessCard: FC<GuessCardProps> = ({
       ) : (
         <>
           <GuessCardOverlay
-            locationId={score!.location.id}
+            locationId={guess!.location.id}
             isHovering={isHovering}
             size={size}
           />
 
           <Typography variant="h5" className={styles.text} color="contrast">
-            {score?.distance}
+            {guess?.distance}
           </Typography>
         </>
       )}

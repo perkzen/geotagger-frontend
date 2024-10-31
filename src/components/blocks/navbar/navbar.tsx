@@ -11,11 +11,17 @@ type NavbarProps = {
   items?: ReactNode;
 };
 
-const Navbar: FC<NavbarProps> = ({ className,  items }) => {
+const Navbar: FC<NavbarProps> = ({ className, items }) => {
   return (
     <nav className={classNames(styles.container, className)}>
       <Link href={Routes.HOME}>
-        <Image src={Logo} alt={'logo'} quality={100} className={styles.logo} />
+        <Image
+          src={Logo}
+          alt={'logo'}
+          height={40}
+          quality={100}
+          className={styles.logo}
+        />
       </Link>
       {items}
     </nav>

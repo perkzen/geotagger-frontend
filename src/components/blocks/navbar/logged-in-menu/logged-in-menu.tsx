@@ -8,8 +8,7 @@ import { Avatar, Button, IconButton, Typography } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { profileQueryOptions } from '@/lib/api/profile/hooks';
 import { Routes } from '@/lib/constants/routes';
-import { useModalStore } from '@/lib/stores/modal-store';
-import { ModalTypes } from '@/lib/types/modal';
+import { useProfileSettingsModal } from '@/lib/hooks/use-profile-settings-modal';
 import styles from './logged-in-menu.module.scss';
 
 type LoggedInMenuProps = {
@@ -20,14 +19,10 @@ const LoggedInMenu: FC<LoggedInMenuProps> = ({ handleSignOut }) => {
   const t = useTranslations('shared');
   const { push } = useRouter();
 
+  const handleOpenProfileSettings = useProfileSettingsModal();
+
   const { data: profile } = useQuery(profileQueryOptions);
   const imageUrl = profile?.imageUrl ?? undefined;
-
-  const { openModal } = useModalStore();
-
-  const handleOpenProfileSettings = () => {
-    openModal({ type: ModalTypes.PROFILE_SETTINGS });
-  };
 
   return (
     <div className={styles.container}>

@@ -31,6 +31,11 @@ export const ApiRoutes = {
     bestScores: ({ take, skip }: PaginationQuery) =>
       `/locations/me/best-scores?take=${take}&skip=${skip}`,
   },
+  activityLogs: {
+    base: '/activity-logs',
+    list: ({ take, skip }: PaginationQuery) =>
+      `/activity-logs?take=${take}&skip=${skip}`,
+  },
 } as const;
 
 export const NextAuthRoutes = {

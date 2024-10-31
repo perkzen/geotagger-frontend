@@ -3,10 +3,13 @@ $primary-color: #619B8A;
 $primary-hover-color: #468579;
 $primary-disabled-color: #D0F5DF;
 $error-color: #F04438;
-$white-color: #fff;
+$contrast-color: #fff;
+$muted-color: #EAECF0;
 $dark-color: #233D4D;
-$text-primary-color: #000000;
 $danger-color: #9B6161;
+$text-primary-color: #000000;
+$text-secondary-color: #667085;
+
 
 // border
 $border-rounded: 8px;
@@ -14,7 +17,6 @@ $border-rounded: 8px;
 // box-shadow
 $shadow-color: #00000026;
 $primary-shadow: 0px 0px 8px 0px $shadow-color;
-
 
 // modal
 $modal-width: 593px;
@@ -38,4 +40,12 @@ $card-widths: (
 $card-heights: (
         "lg": $card-lg-height,
         "md": $card-md-height
-)
+);
+
+// table
+$table-odd-cell-color: #F9FAFB;
+
+// variables
+$footer-height: 60px;
+$header-height: 132px;
+$mobile-header-height: 96px;

@@ -11,6 +11,11 @@
   flex-direction: column;
 }
 
+@mixin flex-col-content-center {
+  @include flex-col;
+  justify-content: center;
+}
+
 @mixin flex-row-content-between {
   @include flex-row;
   justify-content: space-between;
@@ -83,5 +88,29 @@
     }
   } @else {
     @error "Invalid size '#{$size}' provided. Allowed sizes: #{join($valid-modal-sizes, ', ')}";
+  }
+}
+
+@mixin scrollbar {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $muted-color;
+    border-radius: $border-rounded;
+
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: darken($muted-color, 10%);
   }
 }

@@ -1,10 +1,12 @@
 export type Pagination<T> = {
   data: T[];
-  meta: {
-    total: number;
-    take: number;
-    skip: number;
-  };
+  meta: Metadata;
+};
+
+export type Metadata = {
+  total: number;
+  take: number;
+  skip: number;
 };
 
 export type PaginationQuery = {

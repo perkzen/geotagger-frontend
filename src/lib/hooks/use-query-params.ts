@@ -6,6 +6,7 @@ import { PaginationQuery } from '@/lib/types/pagination';
 type QueryParams = {
   guess: PaginationQuery;
   location: PaginationQuery;
+  logs: PaginationQuery;
 };
 
 const defaultQueryParams: QueryParams = {
@@ -14,6 +15,10 @@ const defaultQueryParams: QueryParams = {
     skip: DEFAULT_SKIP,
   },
   location: {
+    take: DEFAULT_TAKE,
+    skip: DEFAULT_SKIP,
+  },
+  logs: {
     take: DEFAULT_TAKE,
     skip: DEFAULT_SKIP,
   },
@@ -49,6 +54,17 @@ export const useQueryParams = () => {
       });
     }
 
+    if (params.logs) {
+      Object.entries(params.logs).forEach(([key, value]) => {
+        if (value !== undefined) {
+          newSearchParams.set(
+            `logs.${key}`,
+            encodeURIComponent(value.toString())
+          );
+        }
+      });
+    }
+
     push(`${pathname}?${newSearchParams.toString()}`, {
       scroll: false,
     });
@@ -77,9 +93,20 @@ export const useQueryParams = () => {
       10
     );
 
+    const logsTake = parseInt(
+      searchParams.get('logs.take') ?? defaultQueryParams.logs.take.toString(),
+      10
+    );
+
+    const logsSkip = parseInt(
+      searchParams.get('logs.skip') ?? defaultQueryParams.logs.skip.toString(),
+      10
+    );
+
     return {
       guess: { take: guessTake, skip: guessSkip },
       location: { take: locationTake, skip: locationSkip },
+      logs: { take: logsTake, skip: logsSkip },
     };
   };
 

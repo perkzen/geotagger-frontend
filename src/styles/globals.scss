@@ -5,6 +5,7 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   min-height: 100vh;
+  @include scrollbar;
 }
 
 body {
@@ -26,8 +27,13 @@ body {
 }
 
 a {
+  display: flex;
+  height: fit-content;
+  width: fit-content;
   color: inherit;
   text-decoration: none;
+  padding: 0;
+  margin: 0;
 }
 
 ul {

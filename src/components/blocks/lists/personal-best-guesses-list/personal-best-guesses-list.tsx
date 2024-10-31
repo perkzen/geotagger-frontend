@@ -26,7 +26,7 @@ const PersonalBestGuessesList = () => {
           {t('home.bestGuessesDescription')}
         </Typography>
       </div>
-      <GuessesList paginatedData={data} itemProps={{ size: 'lg' }} />
+      <GuessesList data={data} itemProps={{ size: 'lg' }} />
     </div>
   );
 };

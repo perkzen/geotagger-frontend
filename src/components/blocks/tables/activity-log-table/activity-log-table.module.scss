@@ -1,0 +1,42 @@
+@import "src/styles";
+
+.container {
+  overflow-y: auto;
+  position: relative;
+  padding-right: 4px;
+
+  .table {
+    width: 100%;
+
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+
+      th {
+        padding: 13px 16px !important;
+        border-color: #EAECF0;
+        background-color: $contrast-color;
+      }
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: $table-odd-cell-color;
+    }
+  }
+}
+
+.user {
+  @include flex-row-items-center;
+  gap: 12px;
+
+  span {
+    font-weight: 500;
+  }
+
+  img {
+    border-radius: 100%;
+    overflow: hidden;
+  }
+}
