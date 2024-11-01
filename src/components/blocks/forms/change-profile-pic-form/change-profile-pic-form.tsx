@@ -2,8 +2,9 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Avatar, Button, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { AxiosError } from 'axios';
+import Avatar from '@/components/ui/avatar/avatar';
 import FileUploadInput from '@/components/ui/file-upload-input/file-upload-input';
 import {
   GET_PROFILE_KEY,
@@ -69,7 +70,7 @@ const ChangeProfilePicForm: FC<ProfileSettingsFormProps> = ({
         {t('profileSettings.changeYourProfilePic')}
       </Typography>
       <div className={styles.items}>
-        <Avatar className={styles.avatar} src={imgSrc} />
+        <Avatar src={imgSrc} size="lg" />
         <FileUploadInput
           {...register('fileList')}
           variant="outlined"

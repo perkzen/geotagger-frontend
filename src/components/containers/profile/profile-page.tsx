@@ -9,9 +9,11 @@ import styles from './profile-page.module.scss';
 const ProfilePage = () => {
   return (
     <div className={styles.container}>
-      <Suspense fallback={<ProfileInfoSkeleton />}>
-        <ProfileInfo avatar={{ size: 'lg' }} />
-      </Suspense>
+      <div className={styles.user}>
+        <Suspense fallback={<ProfileInfoSkeleton />}>
+          <ProfileInfo avatar={{ size: 'lg' }} />
+        </Suspense>
+      </div>
       <Suspense fallback={<ListSkeleton />}>
         <BestGuessesList />
       </Suspense>

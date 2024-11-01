@@ -10,16 +10,12 @@
   @include flex-row-items-center;
   justify-content: space-between;
   color: $dark-color;
-
-  h5 {
-    color: $dark-color;
-  }
+  padding: 0;
 }
 
 
 .logout {
   color: $primary-color;
-  padding: 0;
 
   h5 {
     color: $primary-color;

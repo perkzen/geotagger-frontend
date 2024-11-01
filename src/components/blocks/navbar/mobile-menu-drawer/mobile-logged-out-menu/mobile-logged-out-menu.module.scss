@@ -5,11 +5,9 @@
   @include flex-row-items-center;
   justify-content: space-between;
   color: $dark-color;
+  padding: 0;
   margin-bottom: 64px;
-
-  h5 {
-    color: $dark-color;
-  }
+  width: 100%;
 }
 
 .actions {

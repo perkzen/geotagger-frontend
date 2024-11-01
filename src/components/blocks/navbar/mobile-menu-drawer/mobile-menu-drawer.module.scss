@@ -17,3 +17,12 @@
     }
   }
 }
+
+.menu {
+  @include flex-row-items-center;
+
+  .points {
+    margin-right: 32px;
+    margin-left: 0;
+  }
+}

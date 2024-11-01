@@ -89,6 +89,10 @@
   } @else {
     @error "Invalid size '#{$size}' provided. Allowed sizes: #{join($valid-modal-sizes, ', ')}";
   }
+
+  @include mq("sm") {
+    max-width: $mobile-modal-width;
+  }
 }
 
 @mixin scrollbar {

@@ -28,7 +28,7 @@ const LoggedInMenu: FC<LoggedInMenuProps> = ({ handleSignOut }) => {
       </Button>
       <Button onClick={handleSignOut}>{t('logout')}</Button>
       <Suspense fallback={<UserPointsSkeleton />}>
-        <UserPoints />
+        <UserPoints showAvatar />
       </Suspense>
       <IconButton
         className={styles.add}
