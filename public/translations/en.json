@@ -33,8 +33,12 @@
     "info": "Try to guess the location of image by selecting position on the map. When you guess it, it gives you the error distance.",
     "personalBestGuesses": "Personal best guesses",
     "bestGuessesDescription": "Your personal best guesses appear here. Go on and try to beat your personal records or set a new one!",
+    "noBestGuesses": "No best guesses found",
+    "noBestGuessesDescription": "No best guesses found. Try to refresh the page or come back later.",
     "newLocations": "New locations",
-    "newLocationsDescription": "New uploads from users. Try to guess all the locations by pressing on a picture."
+    "newLocationsDescription": "New uploads from users. Try to guess all the locations by pressing on a picture.",
+    "noLocations": "No locations found",
+    "noLocationsDescription": "No locations found. Try to refresh the page or come back later."
   },
   "footer": {
     "allRightsReserved": "All rights reserved | skillupmentor.com"
@@ -100,7 +104,9 @@
       "action": "Action",
       "componentType": "Component type",
       "newValue": "New value",
-      "location": "Location of action"
+      "location": "Location of action",
+      "notFound": "No activity log found",
+      "notFoundDescription": "No activity log found. Refresh the page."
     },
     "action": {
       "click": "Click",

@@ -16,7 +16,7 @@
 
       th {
         padding: 13px 16px !important;
-        border-color: #EAECF0;
+        border-color: $table-border-color;
         background-color: $contrast-color;
       }
     }
@@ -38,5 +38,14 @@
   img {
     border-radius: 100%;
     overflow: hidden;
+  }
+}
+
+
+.emptyTable {
+  td {
+    background-color: $contrast-color;
+    border: none;
+    padding: 128px;
   }
 }

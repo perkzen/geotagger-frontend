@@ -22,6 +22,7 @@ const MobileLoggedInMenu: FC<MobileLoggedInMenuProps> = ({
   const t = useTranslations('shared');
   const openProfileSettings = useProfileSettingsModal();
 
+
   const navigateTo = (route: Route) => {
     push(route);
     closeDrawer();
@@ -39,7 +40,7 @@ const MobileLoggedInMenu: FC<MobileLoggedInMenuProps> = ({
 
   return (
     <>
-      <ProfileInfo textVariant={'h5'} href={Routes.PROFILE} />
+    <ProfileInfo textVariant={'h5'} href={Routes.PROFILE} />
       <nav className={styles.nav}>
         <Button
           variant="text"

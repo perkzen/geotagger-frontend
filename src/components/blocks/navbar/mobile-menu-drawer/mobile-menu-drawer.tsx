@@ -7,6 +7,7 @@ import Logo from 'public/images/logo.svg';
 import MobileLoggedInMenu from '@/components/blocks/navbar/mobile-menu-drawer/mobile-logged-in-menu/mobile-logged-in-menu';
 import MobileLoggedOutMenu from '@/components/blocks/navbar/mobile-menu-drawer/mobile-logged-out-menu/mobile-logged-out-menu';
 import UserPoints from '@/components/blocks/navbar/user-points/user-points';
+import { useRole } from '@/lib/hooks/use-role';
 import styles from './mobile-menu-drawer.module.scss';
 
 type MobileMenuDrawerProps = {
@@ -16,10 +17,10 @@ type MobileMenuDrawerProps = {
 
 const MobileMenuDrawer = ({ isAuth, handleSignOut }: MobileMenuDrawerProps) => {
   const [open, setOpen] = useState(false);
-
+  const { isUser } = useRole();
   return (
     <div className={styles.menu}>
-      {isAuth && <UserPoints showButton className={styles.points} />}
+      {isUser() && <UserPoints showButton className={styles.points} />}
       <Menu color="primary" onClick={() => setOpen(true)} />
       <Drawer
         className={styles.drawer}
@@ -38,7 +39,10 @@ const MobileMenuDrawer = ({ isAuth, handleSignOut }: MobileMenuDrawerProps) => {
             <Close color="primary" onClick={() => setOpen(false)} />
           </div>
           {isAuth ? (
-            <MobileLoggedInMenu signOut={handleSignOut} closeDrawer={() => setOpen(false)}/>
+            <MobileLoggedInMenu
+              signOut={handleSignOut}
+              closeDrawer={() => setOpen(false)}
+            />
           ) : (
             <MobileLoggedOutMenu closeDrawer={() => setOpen(false)} />
           )}
