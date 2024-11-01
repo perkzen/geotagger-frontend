@@ -8,13 +8,6 @@
   .items {
     @include flex-col-items-center;
     gap: 16px;
-
-    //.avatar {
-    //  max-width: 64px;
-    //  max-height: 64px;
-    //  width: 100%;
-    //  height: 64px;
-    //}
   }
 
   .actions {
