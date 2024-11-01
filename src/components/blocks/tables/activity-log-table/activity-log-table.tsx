@@ -11,6 +11,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import EmptyList from '@/components/blocks/empty-list/empty-list';
 import {
   useActionLabel,
   useComponentTypeLabel,
@@ -119,7 +120,22 @@ export const ActivityLogTable: FC<ActivityLogTableProps> = ({ data }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {activityLogs.map((activityLog) => renderActivityLog(activityLog))}
+          {activityLogs.length === 0 ? (
+            <TableRow className={styles.emptyTable}>
+              <TableCell colSpan={6}>
+                <EmptyList
+                  title={t('notFound')}
+                  description={t('notFoundDescription')}
+                />
+              </TableCell>
+            </TableRow>
+          ) : (
+            <>
+              {activityLogs.map((activityLog) =>
+                renderActivityLog(activityLog)
+              )}
+            </>
+          )}
         </TableBody>
       </Table>
     </TableContainer>

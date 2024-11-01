@@ -1,13 +1,12 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import dynamic from "next/dynamic";
 import { Typography } from '@mui/material';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import EmptyList from '@/components/blocks/empty-list/empty-list';
+import LocationsList from '@/components/blocks/lists/locations-list/locations-list';
 import { locationsListQueryOptions } from '@/lib/api/locations/hooks';
 import { useQueryParams } from '@/lib/hooks/use-query-params';
 import styles from './new-locations-list.module.scss';
-
-const LocationsList = dynamic(() => import('@/components/blocks/lists/locations-list/locations-list'));
 
 const NewLocationsList = () => {
   const t = useTranslations();
@@ -30,6 +29,12 @@ const NewLocationsList = () => {
       <LocationsList
         data={data}
         itemProps={{ size: 'lg', as: 'link' }}
+        emptyComponent={
+          <EmptyList
+            title={t('home.noLocations')}
+            description={t('home.noLocationsDescription')}
+          />
+        }
       />
     </div>
   );

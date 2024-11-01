@@ -1,0 +1,12 @@
+@import "src/styles";
+
+.container {
+  @include flex-col-center;
+  gap: 24px;
+
+  .text {
+    @include flex-col;
+    gap: 4px;
+    text-align: center;
+  }
+}

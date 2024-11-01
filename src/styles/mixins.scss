@@ -11,6 +11,12 @@
   flex-direction: column;
 }
 
+@mixin  flex-col-center {
+  @include flex-col;
+  justify-content: center;
+  align-items: center;
+}
+
 @mixin flex-col-content-center {
   @include flex-col;
   justify-content: center;
