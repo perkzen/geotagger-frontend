@@ -24,7 +24,9 @@
     "areYouSure": "Are you sure?",
     "repeatPassword": "Repeat password",
     "signInWithGoogle": "Sign in with Google",
-    "signInWithFacebook": "Sign in with Facebook"
+    "signInWithFacebook": "Sign in with Facebook",
+    "tryAgain": "Try again",
+    "back": "Back"
   },
   "home": {
     "title": "Explore the world with Geotagger!",
@@ -71,7 +73,9 @@
       "guessedLocation": "Guessed location",
       "errorDistance": "Error distance",
       "leaderboard": "Leaderboard",
-      "guess": "Guess"
+      "guess": "Guess",
+      "locationNotFound": "Location not found",
+      "locationNotFountDescription": "Location not found. Try to refresh the page or come back later."
     },
     "add": {
       "title": "Add a new <span>location</span>",

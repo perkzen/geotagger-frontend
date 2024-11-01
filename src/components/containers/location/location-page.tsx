@@ -1,7 +1,7 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import { Typography } from '@mui/material';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import {  useSuspenseQuery } from '@tanstack/react-query';
 import AddGuessForm from '@/components/blocks/forms/add-guess-form/add-guess-form';
 import Leaderboard from '@/components/blocks/leaderboard/leaderboard';
 import { locationQueryOptions } from '@/lib/api/locations/hooks';

@@ -5,8 +5,8 @@
   min-height: 100vh;
 
   main {
+    @include flex-col;
     flex-grow: 1;
-
     padding: 20px 70px 0 70px;
 
     @include mq("sm") {
