@@ -1,0 +1,16 @@
+@import "src/styles";
+
+.container {
+  border-radius: 100%;
+  overflow: hidden;
+
+  &.lg {
+    width: 64px;
+    height: 64px;
+  }
+
+  &.md {
+    width: 40px;
+    height: 40px;
+  }
+}

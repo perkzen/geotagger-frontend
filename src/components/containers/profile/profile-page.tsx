@@ -10,7 +10,7 @@ const ProfilePage = () => {
   return (
     <div className={styles.container}>
       <Suspense fallback={<ProfileInfoSkeleton />}>
-        <ProfileInfo />
+        <ProfileInfo avatar={{ size: 'lg' }} />
       </Suspense>
       <Suspense fallback={<ListSkeleton />}>
         <BestGuessesList />

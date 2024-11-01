@@ -2,10 +2,10 @@
 import { FC, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMediaQuery, useTheme } from '@mui/material';
-import MobileMenuDrawer from '@/components/blocks/mobile-menu-drawer/mobile-menu-drawer';
 import AdminMenu from '@/components/blocks/navbar/admin-menu/admin-menu';
 import LoggedInMenu from '@/components/blocks/navbar/logged-in-menu/logged-in-menu';
 import LoggedOutMenu from '@/components/blocks/navbar/logged-out-menu/logged-out-menu';
+import MobileMenuDrawer from '@/components/blocks/navbar/mobile-menu-drawer/mobile-menu-drawer';
 import { useSignOut } from '@/lib/api/auth/hooks';
 import { useRole } from '@/lib/hooks/use-role';
 import { useSessionStore } from '@/lib/stores/session-store';

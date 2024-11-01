@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { Close, Menu } from '@mui/icons-material';
 import { Drawer } from '@mui/material';
 import Logo from 'public/images/logo.svg';
-import MobileLoggedInMenu from '@/components/blocks/mobile-menu-drawer/mobile-logged-in-menu/mobile-logged-in-menu';
-import MobileLoggedOutMenu from '@/components/blocks/mobile-menu-drawer/mobile-logged-out-menu/mobile-logged-out-menu';
+import MobileLoggedInMenu from '@/components/blocks/navbar/mobile-menu-drawer/mobile-logged-in-menu/mobile-logged-in-menu';
+import MobileLoggedOutMenu from '@/components/blocks/navbar/mobile-menu-drawer/mobile-logged-out-menu/mobile-logged-out-menu';
 import styles from './mobile-menu-drawer.module.scss';
 
 type MobileMenuDrawerProps = {
