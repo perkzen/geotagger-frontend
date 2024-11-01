@@ -1,14 +1,18 @@
 @import "src/styles";
 
 .container {
-  @include flex-col-items-center;
+  @include flex-col;
   gap: 32px;
+
+  button {
+    margin: auto;
+  }
+
 
   .list {
     @include flex-row;
     width: 100%;
     flex-wrap: wrap;
     gap: 20px;
-
   }
 }

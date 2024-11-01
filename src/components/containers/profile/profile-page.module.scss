@@ -12,4 +12,9 @@
   .user {
     margin-bottom: 32px;
   }
+
+  .section {
+    @include flex-col;
+    gap: 32px;
+  }
 }

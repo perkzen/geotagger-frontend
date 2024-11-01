@@ -13,4 +13,9 @@
     @include flex-col;
     gap: 16px;
   }
+
+  .section {
+    @include flex-col;
+    gap: 32px;
+  }
 }

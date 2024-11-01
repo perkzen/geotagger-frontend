@@ -1,0 +1,16 @@
+@import "src/styles";
+
+.container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border-radius: $border-rounded;
+
+  &.md {
+    @include card-size("md");
+  }
+
+  &.lg {
+    @include card-size("lg");
+  }
+}
