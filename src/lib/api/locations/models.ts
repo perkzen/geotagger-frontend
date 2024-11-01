@@ -59,3 +59,10 @@ export type LocationsList = Pagination<Location>;
 export type UpdateLocationPayload = AddLocationFormData & { id: string };
 
 export type GuessLocationPayload = { id: string } & Coordinates;
+
+export const LocationErrorCodes = {
+  NOT_FOUND: 'LOCATION_NOT_FOUND',
+};
+
+export type LocationErrorCode =
+  (typeof LocationErrorCodes)[keyof typeof LocationErrorCodes];

@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
 import { Typography } from '@mui/material';
 import classNames from 'classnames';
 import { formatDistanceToNow } from 'date-fns';
+import Avatar from "@/components/ui/avatar/avatar";
 import { Guess } from '@/lib/api/locations/models';
 import { useSessionStore } from '@/lib/stores/session-store';
 import styles from './leaderboard-item.module.scss';
@@ -37,12 +37,9 @@ const LeaderboardItem: FC<LeaderboardItemProps> = ({ item, place }) => {
       >
         {place}
       </Typography>
-      <Image
-        className={styles.image}
+      <Avatar
         src={item.user.imageUrl}
-        alt={'user'}
-        width={40}
-        height={40}
+        size="md"
       />
       <div className={styles.info}>
         <Typography variant="body1">{displayName}</Typography>

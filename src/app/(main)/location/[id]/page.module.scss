@@ -1,0 +1,20 @@
+@import "src/styles";
+
+.container {
+  @include flex-col-items-center;
+  gap: 24px;
+  margin-top: 128px;
+
+
+  .text {
+    @include flex-col;
+    text-align: center;
+    gap: 4px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}

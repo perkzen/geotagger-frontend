@@ -25,12 +25,14 @@ export const useError = (options?: UseErrorOptions) => {
     }
   };
 
+
   const getError = (error: AxiosError<ApiError>) => {
     const authError = getAuthError(error);
 
     if (authError) {
       return authError;
     }
+
 
     const response =
       error.response?.data.error ??
