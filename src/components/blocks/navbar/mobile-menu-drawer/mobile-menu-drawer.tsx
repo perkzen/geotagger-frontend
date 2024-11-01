@@ -4,8 +4,9 @@ import Image from 'next/image';
 import { Close, Menu } from '@mui/icons-material';
 import { Drawer } from '@mui/material';
 import Logo from 'public/images/logo.svg';
-import MobileLoggedInMenu from '@/components/blocks/mobile-menu-drawer/mobile-logged-in-menu/mobile-logged-in-menu';
-import MobileLoggedOutMenu from '@/components/blocks/mobile-menu-drawer/mobile-logged-out-menu/mobile-logged-out-menu';
+import MobileLoggedInMenu from '@/components/blocks/navbar/mobile-menu-drawer/mobile-logged-in-menu/mobile-logged-in-menu';
+import MobileLoggedOutMenu from '@/components/blocks/navbar/mobile-menu-drawer/mobile-logged-out-menu/mobile-logged-out-menu';
+import UserPoints from '@/components/blocks/navbar/user-points/user-points';
 import styles from './mobile-menu-drawer.module.scss';
 
 type MobileMenuDrawerProps = {
@@ -13,11 +14,12 @@ type MobileMenuDrawerProps = {
   handleSignOut: () => void;
 };
 
-const MobileMenuDrawer = ({ isAuth,handleSignOut }: MobileMenuDrawerProps) => {
+const MobileMenuDrawer = ({ isAuth, handleSignOut }: MobileMenuDrawerProps) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
+    <div className={styles.menu}>
+      {isAuth && <UserPoints showButton className={styles.points} />}
       <Menu color="primary" onClick={() => setOpen(true)} />
       <Drawer
         className={styles.drawer}
@@ -36,13 +38,13 @@ const MobileMenuDrawer = ({ isAuth,handleSignOut }: MobileMenuDrawerProps) => {
             <Close color="primary" onClick={() => setOpen(false)} />
           </div>
           {isAuth ? (
-            <MobileLoggedInMenu handleSignOut={handleSignOut} />
+            <MobileLoggedInMenu signOut={handleSignOut} closeDrawer={() => setOpen(false)}/>
           ) : (
             <MobileLoggedOutMenu closeDrawer={() => setOpen(false)} />
           )}
         </div>
       </Drawer>
-    </>
+    </div>
   );
 };
 

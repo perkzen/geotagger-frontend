@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ChevronRight } from '@mui/icons-material';
 import { Button, Typography } from '@mui/material';
@@ -15,34 +14,30 @@ const MobileLoggedOutMenu: FC<MobileLoggedOutMenuProps> = ({ closeDrawer }) => {
   const t = useTranslations('shared');
   const { push } = useRouter();
 
-  const handleRouteChange = (route: Route) => {
+  const navigateTo = (route: Route) => {
     push(route);
     closeDrawer();
   };
 
   return (
-    <>
-      <nav>
-        <Link href={Routes.HOME} className={styles.link}>
-          <Typography variant="h5">{t('home')}</Typography>
-          <ChevronRight />
-        </Link>
-      </nav>
+    <nav>
+      <Button
+        variant="text"
+        onClick={() => navigateTo(Routes.HOME)}
+        className={styles.link}
+      >
+        <Typography variant="h5">{t('home')}</Typography>
+        <ChevronRight />
+      </Button>
       <div className={styles.actions}>
-        <Button
-          variant="contained"
-          onClick={() => handleRouteChange(Routes.SIGN_UP)}
-        >
+        <Button variant="contained" onClick={() => navigateTo(Routes.SIGN_UP)}>
           {t('signUp')}
         </Button>
-        <Button
-          variant="outlined"
-          onClick={() => handleRouteChange(Routes.SIGN_IN)}
-        >
+        <Button variant="outlined" onClick={() => navigateTo(Routes.SIGN_IN)}>
           {t('signIn')}
         </Button>
       </div>
-    </>
+    </nav>
   );
 };
 

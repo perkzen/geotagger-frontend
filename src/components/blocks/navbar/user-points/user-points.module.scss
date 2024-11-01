@@ -1,0 +1,33 @@
+@import "src/styles";
+
+.container {
+  @include flex-row-items-center;
+  gap: 17px;
+  border-radius: 64px;
+  margin-left: 24px;
+  margin-right: 16px;
+  border: 2px solid $primary-color;
+  height: 40px;
+
+  @include mq("sm") {
+    gap: 8px;
+  }
+
+  .points {
+    padding: 0 9px;
+  }
+
+  .add {
+    background: $primary-color;
+    color: $contrast-color;
+  }
+
+  &.withAvatar {
+    padding-right: 16px;
+  }
+
+  &.withButton {
+    padding-left: 16px;
+    border-right: none;
+  }
+}

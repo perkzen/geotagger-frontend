@@ -3,10 +3,4 @@
 .container {
   @include flex-row-items-center;
   gap: 24px;
-  margin-bottom: 32px;
-
-  .avatar {
-    height: 64px;
-    width: 64px;
-  }
 }
