@@ -12,5 +12,9 @@
     overflow: auto;
     padding-right: 4px; // padding for scrollbar
     padding-bottom: 4px; // padding for scrollbar
+
+    @include mq("sm") {
+      max-height: 600px;
+    }
   }
 }

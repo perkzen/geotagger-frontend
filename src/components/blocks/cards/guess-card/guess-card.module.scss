@@ -7,15 +7,12 @@
   border-radius: $border-rounded;
 
   &.md {
-    //@include card-size("md");
-    width: 100%;
-    height: 100%;
+    @include card-size("md");
+
   }
 
   &.lg {
-    //  @include card-size("lg");
-    width: 100%;
-    height: 100%;
+    @include card-size("lg");
   }
 
   .icon {

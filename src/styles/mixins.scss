@@ -54,11 +54,11 @@
   $height: map-get($card-heights, $size);
 
   @if $width and $height {
-    max-width: #{$width}px;
+    width: #{$width}px;
     height: #{$height}px;
 
     @include mq("sm") {
-      max-width: #{$card-mobile-width}px;
+      width: #{$card-mobile-width}px;
       height: #{$card-mobile-height}px;
     }
   } @else {
