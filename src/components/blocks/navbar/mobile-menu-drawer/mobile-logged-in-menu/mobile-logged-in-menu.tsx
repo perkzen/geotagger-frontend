@@ -40,7 +40,7 @@ const MobileLoggedInMenu: FC<MobileLoggedInMenuProps> = ({
 
   return (
     <>
-    <ProfileInfo textVariant={'h5'} href={Routes.PROFILE} />
+    <ProfileInfo textVariant={'h5'} href={Routes.PROFILE}  onClick={closeDrawer}/>
       <nav className={styles.nav}>
         <Button
           variant="text"

@@ -13,6 +13,7 @@ import styles from './profile-info.module.scss';
 type ProfileInfoProps = {
   className?: string;
   href?: string;
+  onClick?: () => void;
   avatar?: {
     size: 'md' | 'lg';
   };
@@ -26,6 +27,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
   className,
   avatar,
   href,
+  onClick,
   textVariant = 'h4',
 }) => {
   const { data: profile } = useSuspenseQuery(profileQueryOptions);
@@ -39,6 +41,12 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
     </div>
   );
 
-  return href ? <Link href={href}>{content}</Link> : content;
+  return href ? (
+    <Link href={href} onClick={onClick}>
+      {content}
+    </Link>
+  ) : (
+    content
+  );
 };
 export default ProfileInfo;
