@@ -8,9 +8,9 @@
 
 .link {
   @include flex-row-items-center;
-  justify-content: space-between;
+  justify-content: space-between !important;
   color: $dark-color;
-  padding: 0;
+  padding: 0 !important;
 }
 
 

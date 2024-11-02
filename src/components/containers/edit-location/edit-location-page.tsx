@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { useTranslations } from 'next-intl';
 import { Typography } from '@mui/material';
 import EditLocationForm from '@/components/blocks/forms/edit-location-form/edit-location-form';
+import EditLocationFormSkeleton from '@/components/blocks/forms/edit-location-form/edit-location-form-skeleton';
 import styles from './edit-location-page.module.scss';
 
 type EditLocationPageProps = {
@@ -20,7 +21,7 @@ export default function EditLocationPage({ id }: EditLocationPageProps) {
         .
       </Typography>
 
-      <Suspense fallback={'loading...'}>
+      <Suspense fallback={<EditLocationFormSkeleton />}>
         <EditLocationForm id={id} />
       </Suspense>
     </div>

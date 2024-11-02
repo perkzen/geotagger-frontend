@@ -1,8 +1,21 @@
 import { ReactNode } from 'react';
 import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material';
+import mediaQuery from 'css-mediaquery';
 import vars from '@/styles/variables.module.scss';
 
-export default function ThemeProvider({ children }: { children: ReactNode }) {
+const ssrMatchMedia = (deviceType: string) => (query: string) => ({
+  matches: mediaQuery.match(query, {
+    width: deviceType === 'mobile' ? '0px' : '1024px',
+  }),
+});
+
+export default function ThemeProvider({
+  children,
+  userAgent,
+}: {
+  children: ReactNode;
+  userAgent: string;
+}) {
   const theme = createTheme({
     palette: {
       primary: {
@@ -73,13 +86,6 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
         lineHeight: '40px',
         letterSpacing: '0.25px',
         color: vars.dark,
-
-        [`@media (max-width:${vars.sm}px)`]: {
-          fontWeight: 400,
-          fontSize: '24px',
-          lineHeight: '28px',
-          letterSpacing: '0.25px',
-        },
       },
       h5: {
         fontWeight: 400,
@@ -105,6 +111,21 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
       },
     },
     components: {
+      MuiUseMediaQuery: {
+        defaultProps: {
+          ssrMatchMedia: ssrMatchMedia(userAgent),
+        },
+      },
+      MuiIconButton: {
+        styleOverrides: {
+          root: {
+            '&:hover': {
+              backgroundColor: vars.primaryHover,
+              color: vars.white,
+            },
+          },
+        },
+      },
       MuiButton: {
         variants: [
           {

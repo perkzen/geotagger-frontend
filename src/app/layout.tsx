@@ -9,6 +9,7 @@ import '@/styles/globals.scss';
 import Providers from '@/components/providers/providers';
 import TranslationsProvider from '@/components/providers/translations-provider';
 import { getSession } from '@/lib/server/session';
+import { getUserAgent } from '@/lib/utils/get-user-agent';
 
 export const metadata: Metadata = {
   title: 'Geotagger',
@@ -36,13 +37,17 @@ export default async function RootLayout({
 
   const session = await getSession();
 
+  const userAgent = getUserAgent();
+
   return (
     <html lang={locale}>
       <body>
         {/* TranslationProvider cannot be a child of a client component 
         (therefore we cant have it in providers.tsx) */}
         <TranslationsProvider>
-          <Providers session={session}>{children}</Providers>
+          <Providers session={session} userAgent={userAgent}>
+            {children}
+          </Providers>
         </TranslationsProvider>
       </body>
     </html>

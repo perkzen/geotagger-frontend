@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
+import LocationNotFoundBoundary from '@/components/blocks/location-not-found-boundary/location-not-found-boundary';
 import EditLocationPage from '@/components/containers/edit-location/edit-location-page';
 import { locationQueryOptions } from '@/lib/api/locations/hooks';
 import { getQueryClient } from '@/lib/utils/get-query-client';
@@ -14,5 +16,11 @@ export default function Page({ params }: { params: { id: string } }) {
 
   void queryClient.prefetchQuery(locationQueryOptions(id));
 
-  return <EditLocationPage id={id} />;
+  return (
+    <LocationNotFoundBoundary>
+      <Suspense fallback={'loading...'}>
+        <EditLocationPage id={id} />
+      </Suspense>
+    </LocationNotFoundBoundary>
+  );
 }

@@ -73,6 +73,8 @@
       "guessedLocation": "Guessed location",
       "errorDistance": "Error distance",
       "leaderboard": "Leaderboard",
+      "noGuesses": "No guesses yet",
+      "noGuessesDescription": "No one has tried to guess this location. Be the first one!",
       "guess": "Guess",
       "locationNotFound": "Location not found",
       "locationNotFountDescription": "Location not found. Try to refresh the page or come back later."

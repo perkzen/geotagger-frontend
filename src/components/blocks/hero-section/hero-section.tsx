@@ -15,7 +15,7 @@ const HeroSection = () => {
           {t('home.title')}
         </Typography>
         <Typography variant="body1">{t('home.description')}</Typography>
-        <Button variant="contained" href={Routes.SIGN_UP}>
+        <Button className={styles.button} variant="contained" href={Routes.SIGN_UP}>
           {t('shared.signUp')}
         </Button>
       </div>

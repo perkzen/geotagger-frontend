@@ -3,8 +3,10 @@
 .container {
   @include flex-col;
 
-  button {
-    width: 172px;
+  .button {
+    max-width: 172px;
+    width: 100%;
+
     @include mq("sm") {
       margin: auto;
     }

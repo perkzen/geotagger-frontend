@@ -25,7 +25,7 @@ export default function LoggedOutHomePage() {
           <GuessCard isLocked={true} />
           <GuessCard isLocked={true} />
         </div>
-        <Button variant="contained" href={Routes.SIGN_UP}>
+        <Button className={styles.button} variant="contained" href={Routes.SIGN_UP}>
           {t('shared.signUp')}
         </Button>
       </div>

@@ -3,10 +3,10 @@
 
 .link {
   @include flex-row-items-center;
-  justify-content: space-between;
+  justify-content: space-between !important;
   color: $dark-color;
-  padding: 0;
-  margin-bottom: 64px;
+  padding: 0 !important;
+  margin-bottom: 64px !important;
   width: 100%;
 }
 
