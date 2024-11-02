@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@mui/material';
+import { Grid } from '@virtual-grid/react';
 import classNames from 'classnames';
 import LocationCard, {
   LocationCardProps,
@@ -8,6 +9,7 @@ import LocationCard, {
 import { Location } from '@/lib/api/locations/models';
 import { DEFAULT_TAKE } from '@/lib/constants/pagination';
 import { useQueryParams } from '@/lib/hooks/use-query-params';
+import { useVirtualGallery } from '@/lib/hooks/use-virtual-gallery';
 import { Pagination } from '@/lib/types/pagination';
 import styles from './locations-list.module.scss';
 
@@ -29,6 +31,11 @@ const LocationsList: FC<LocationsListProps> = ({
 
   const { data: locations, meta } = data;
 
+  const [grid, ref] = useVirtualGallery({
+    count: locations.length,
+    cardSize: itemProps?.size || 'md',
+  });
+
   const hasMore = meta.total > meta.take;
 
   if (locations.length === 0) {
@@ -44,13 +51,14 @@ const LocationsList: FC<LocationsListProps> = ({
     });
   };
 
-  // TODO: this list should be virtualized
   return (
     <div className={classNames(styles.container, className)}>
-      <div className={styles.list}>
-        {locations.map((location) => (
-          <LocationCard key={location.id} location={location} {...itemProps} />
-        ))}
+      <div ref={ref} className={styles.gird}>
+        <Grid grid={grid}>
+          {(index) => (
+            <LocationCard location={locations[index]} {...itemProps} />
+          )}
+        </Grid>
       </div>
       <Button variant="outlined" onClick={loadMore} disabled={!hasMore}>
         {t('shared.loadMore')}

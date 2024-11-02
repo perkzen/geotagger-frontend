@@ -2,13 +2,15 @@
 
 .container {
   @include flex-col-items-center;
+  width: 100%;
   gap: 32px;
   position: relative;
 
-  .list {
-    @include flex-row;
+  .gird {
     width: 100%;
-    flex-wrap: wrap;
-    gap: 20px;
+    max-height: 800px;
+    overflow: auto;
+    padding-right: 4px; // padding for scrollbar
+    padding-bottom: 4px; // padding for scrollbar
   }
 }

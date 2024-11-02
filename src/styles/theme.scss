@@ -19,19 +19,19 @@ $shadow-color: #00000026;
 $primary-shadow: 0px 0px 8px 0px $shadow-color;
 
 // modal
-$modal-width: 593px;
-$modal-sm-width: 489px;
+$modal-width: 593;
+$modal-sm-width: 489;
 $modal-fit-width: fit-content;
-$mobile-modal-width: 344px;
+$mobile-modal-width: 344;
 $valid-modal-sizes: ("sm", "md", "fit");
 
 // card
-$card-lg-width: 420px;
-$card-lg-height: 235px;
-$card-md-width: 309px;
-$card-md-height: 175px;
-$card-mobile-width: 344px;
-$card-mobile-height: 194px;
+$card-lg-width: 420;
+$card-lg-height: 235;
+$card-md-width: 309;
+$card-md-height: 175;
+$card-mobile-width: 344;
+$card-mobile-height: 194;
 
 $card-widths: (
         "lg": $card-lg-width,

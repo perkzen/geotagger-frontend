@@ -11,7 +11,7 @@
   flex-direction: column;
 }
 
-@mixin  flex-col-center {
+@mixin flex-col-center {
   @include flex-col;
   justify-content: center;
   align-items: center;
@@ -54,12 +54,12 @@
   $height: map-get($card-heights, $size);
 
   @if $width and $height {
-    max-width: $width;
-    height: $height;
+    max-width: #{$width}px;
+    height: #{$height}px;
 
     @include mq("sm") {
-      max-width: $card-mobile-width;
-      height: $card-mobile-height;
+      max-width: #{$card-mobile-width}px;
+      height: #{$card-mobile-height}px;
     }
   } @else {
     @error "Invalid size '#{$size}' provided. Allowed sizes: #{join(map-keys($card-widths), ', ')}";
@@ -86,11 +86,11 @@
 
   @if index($valid-modal-sizes, $size) {
     @if $size == "sm" {
-      max-width: $modal-sm-width;
+      max-width: #{$modal-sm-width}px;
     } @else if $size == "fit" {
-      width: $modal-fit-width;
+      width: #{$modal-fit-width}px;
     } @else {
-      max-width: $modal-width;
+      max-width: #{$modal-width}px;
     }
   } @else {
     @error "Invalid size '#{$size}' provided. Allowed sizes: #{join($valid-modal-sizes, ', ')}";
@@ -105,6 +105,7 @@
   /* width */
   ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
   }
 
   /* Track */

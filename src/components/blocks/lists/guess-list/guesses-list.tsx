@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@mui/material';
+import { Grid } from '@virtual-grid/react';
 import classNames from 'classnames';
 import GuessCard, {
   GuessCardProps,
@@ -8,6 +9,7 @@ import GuessCard, {
 import { BestScore } from '@/lib/api/locations/models';
 import { DEFAULT_TAKE } from '@/lib/constants/pagination';
 import { useQueryParams } from '@/lib/hooks/use-query-params';
+import { useVirtualGallery } from '@/lib/hooks/use-virtual-gallery';
 import { Pagination } from '@/lib/types/pagination';
 import styles from './guesses-list.module.scss';
 
@@ -29,6 +31,11 @@ const GuessesList: FC<GuessesListProps> = ({
 
   const { data: guesses, meta } = data;
 
+  const [grid, ref] = useVirtualGallery({
+    count: guesses.length,
+    cardSize: itemProps?.size || 'md',
+  });
+
   const hasMore = meta.total > meta.take;
 
   const loadMore = () => {
@@ -44,13 +51,14 @@ const GuessesList: FC<GuessesListProps> = ({
     return emptyComponent;
   }
 
-  // TODO: this list should be virtualized
   return (
     <div className={classNames(styles.container, className)}>
-      <div className={styles.list}>
-        {guesses.map((guess, i) => (
-          <GuessCard key={i} guess={guess} {...itemProps} />
-        ))}
+      <div ref={ref} className={styles.gird}>
+        <Grid grid={grid}>
+          {(index) => (
+            <GuessCard key={index} guess={guesses[index]} {...itemProps} />
+          )}
+        </Grid>
       </div>
       <Button variant="outlined" onClick={loadMore} disabled={!hasMore}>
         {t('shared.loadMore')}

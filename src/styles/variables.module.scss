@@ -19,7 +19,13 @@
   lg: $breakpoint-lg;
   xl: $breakpoint-lg;
 
+  shadow: $primary-shadow;
 
-  shadow: $primary-shadow
+  cardLgWidth: $card-lg-width;
+  cardLgHeight: $card-lg-height;
+  cardMdWidth: $card-md-width;
+  cardMdHeight: $card-md-height;
+  cardMobileWidth: $card-mobile-width;
+  cardMobileHeight: $card-mobile-height;
 }
 
