@@ -5,12 +5,6 @@
   align-items: center;
   padding: 46px 70px;
 
-  .logo {
-    @include mq("sm") {
-      max-width: 141px;
-      max-height: 33px;
-    }
-  }
 
   @include mq("md") {
     padding: 31.5px 35px;
