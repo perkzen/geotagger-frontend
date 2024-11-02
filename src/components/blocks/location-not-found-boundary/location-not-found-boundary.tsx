@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { Button, Typography } from '@mui/material';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
-import { Routes } from '@/lib/constants/routes';
 import styles from './location-not-found-boundary.module.scss';
 
 type LocationNotFoundProps = {
@@ -18,7 +17,7 @@ type LocationNotFoundProps = {
  */
 const LocationNotFoundBoundary: FC<LocationNotFoundProps> = ({ children }) => {
   const t = useTranslations();
-  const { push } = useRouter();
+  const { back } = useRouter();
 
   return (
     <QueryErrorResetBoundary>
@@ -37,7 +36,7 @@ const LocationNotFoundBoundary: FC<LocationNotFoundProps> = ({ children }) => {
                 </Typography>
               </div>
               <div className={styles.row}>
-                <Button variant="outlined" onClick={() => push(Routes.HOME)}>
+                <Button variant="outlined" onClick={() => back()}>
                   {t('shared.back')}
                 </Button>
                 <Button
