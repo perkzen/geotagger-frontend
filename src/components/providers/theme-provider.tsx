@@ -73,13 +73,6 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
         lineHeight: '40px',
         letterSpacing: '0.25px',
         color: vars.dark,
-
-        [`@media (max-width:${vars.sm}px)`]: {
-          fontWeight: 400,
-          fontSize: '24px',
-          lineHeight: '28px',
-          letterSpacing: '0.25px',
-        },
       },
       h5: {
         fontWeight: 400,
