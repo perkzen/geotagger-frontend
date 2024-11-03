@@ -9,104 +9,80 @@ type QueryParams = {
   logs: PaginationQuery;
 };
 
-const defaultQueryParams: QueryParams = {
-  guess: {
-    take: DEFAULT_TAKE,
-    skip: DEFAULT_SKIP,
-  },
-  location: {
-    take: DEFAULT_TAKE,
-    skip: DEFAULT_SKIP,
-  },
-  logs: {
-    take: DEFAULT_TAKE,
-    skip: DEFAULT_SKIP,
-  },
+type UseQueryParams = { take?: number };
+
+const parsePaginationParams = (
+  searchParams: URLSearchParams,
+  key: keyof QueryParams,
+  defaults: PaginationQuery
+) => {
+  return {
+    take: parseInt(
+      searchParams.get(`${key}.take`) ?? defaults.take.toString(),
+      10
+    ),
+    skip: parseInt(
+      searchParams.get(`${key}.skip`) ?? defaults.skip.toString(),
+      10
+    ),
+  };
 };
 
-export const useQueryParams = () => {
+const setPaginationParams = (
+  params: Partial<QueryParams>,
+  key: keyof QueryParams,
+  newSearchParams: URLSearchParams
+) => {
+  if (params[key]) {
+    Object.entries(params[key]).forEach(([k, value]) => {
+      if (value !== undefined) {
+        newSearchParams.set(
+          `${key}.${k}`,
+          encodeURIComponent(value.toString())
+        );
+      }
+    });
+  }
+};
+
+export const useQueryParams = (options?: UseQueryParams) => {
   const { push } = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
+  const defaultQueryParams: QueryParams = {
+    guess: { take: options?.take ?? DEFAULT_TAKE, skip: DEFAULT_SKIP },
+    location: { take: options?.take ?? DEFAULT_TAKE, skip: DEFAULT_SKIP },
+    logs: { take: options?.take ?? DEFAULT_TAKE, skip: DEFAULT_SKIP },
+  };
+
   const updateQueryParams = (params: Partial<QueryParams>) => {
     const newSearchParams = new URLSearchParams(searchParams);
 
-    if (params.guess) {
-      Object.entries(params.guess).forEach(([key, value]) => {
-        if (value !== undefined) {
-          newSearchParams.set(
-            `guess.${key}`,
-            encodeURIComponent(value.toString())
-          );
-        }
-      });
-    }
+    const keys = Object.keys(defaultQueryParams) as (keyof QueryParams)[];
 
-    if (params.location) {
-      Object.entries(params.location).forEach(([key, value]) => {
-        if (value !== undefined) {
-          newSearchParams.set(
-            `location.${key}`,
-            encodeURIComponent(value.toString())
-          );
-        }
-      });
-    }
+    keys.forEach((key) => setPaginationParams(params, key, newSearchParams));
 
-    if (params.logs) {
-      Object.entries(params.logs).forEach(([key, value]) => {
-        if (value !== undefined) {
-          newSearchParams.set(
-            `logs.${key}`,
-            encodeURIComponent(value.toString())
-          );
-        }
-      });
-    }
-
-    push(`${pathname}?${newSearchParams.toString()}`, {
-      scroll: false,
-    });
+    push(`${pathname}?${newSearchParams.toString()}`, { scroll: false });
   };
 
   const parseQueryParams = (): QueryParams => {
-    const guessTake = parseInt(
-      searchParams.get('guess.take') ??
-        defaultQueryParams.guess.take.toString(),
-      10
-    );
-    const guessSkip = parseInt(
-      searchParams.get('guess.skip') ??
-        defaultQueryParams.guess.skip.toString(),
-      10
-    );
-
-    const locationTake = parseInt(
-      searchParams.get('location.take') ??
-        defaultQueryParams.location.take.toString(),
-      10
-    );
-    const locationSkip = parseInt(
-      searchParams.get('location.skip') ??
-        defaultQueryParams.location.skip.toString(),
-      10
-    );
-
-    const logsTake = parseInt(
-      searchParams.get('logs.take') ?? defaultQueryParams.logs.take.toString(),
-      10
-    );
-
-    const logsSkip = parseInt(
-      searchParams.get('logs.skip') ?? defaultQueryParams.logs.skip.toString(),
-      10
-    );
-
     return {
-      guess: { take: guessTake, skip: guessSkip },
-      location: { take: locationTake, skip: locationSkip },
-      logs: { take: logsTake, skip: logsSkip },
+      guess: parsePaginationParams(
+        searchParams,
+        'guess',
+        defaultQueryParams.guess
+      ),
+      location: parsePaginationParams(
+        searchParams,
+        'location',
+        defaultQueryParams.location
+      ),
+      logs: parsePaginationParams(
+        searchParams,
+        'logs',
+        defaultQueryParams.logs
+      ),
     };
   };
 

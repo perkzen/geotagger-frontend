@@ -6,7 +6,7 @@ import { myLocationsQueryOptions } from '@/lib/api/locations/hooks';
 import { useQueryParams } from '@/lib/hooks/use-query-params';
 
 const UploadsList = () => {
-  const { urlQuery } = useQueryParams();
+  const { urlQuery } = useQueryParams({ take: 4 });
 
   const { data } = useSuspenseQuery(myLocationsQueryOptions(urlQuery.location));
 
@@ -15,6 +15,7 @@ const UploadsList = () => {
       data={data}
       emptyComponent={<EmptyUploadsList />}
       itemProps={{ allowEdit: true }}
+      columns={4}
     />
   );
 };

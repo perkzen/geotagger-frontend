@@ -18,6 +18,7 @@ type LocationsListProps = {
   emptyComponent?: ReactNode;
   className?: string;
   itemProps?: Omit<LocationCardProps, 'location'>;
+  columns?: number | 'auto';
 };
 
 const LocationsList: FC<LocationsListProps> = ({
@@ -25,6 +26,7 @@ const LocationsList: FC<LocationsListProps> = ({
   emptyComponent,
   itemProps,
   className,
+  columns,
 }) => {
   const t = useTranslations();
   const { updateQueryParams, urlQuery } = useQueryParams();
@@ -34,6 +36,7 @@ const LocationsList: FC<LocationsListProps> = ({
   const [grid, ref] = useVirtualGallery({
     count: locations.length,
     cardSize: itemProps?.size || 'md',
+    columns,
   });
 
   const hasMore = meta.total > meta.take;

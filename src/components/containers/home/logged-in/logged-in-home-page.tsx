@@ -20,7 +20,7 @@ export default function LoggedInHomePage() {
             {t('home.bestGuessesDescription')}
           </Typography>
         </div>
-        <Suspense fallback={<ListSkeleton size="lg" />}>
+        <Suspense fallback={<ListSkeleton size="lg" count={1} />}>
           <PersonalBestGuessesList />
         </Suspense>
       </div>

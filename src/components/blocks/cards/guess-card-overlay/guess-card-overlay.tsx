@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
 import { Button } from '@mui/material';
 import classNames from 'classnames';
 import { Routes } from '@/lib/constants/routes';

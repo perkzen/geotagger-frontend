@@ -1,19 +1,15 @@
 import { FC } from 'react';
 import { useTranslations } from 'next-intl';
-import { Button} from '@mui/material';
+import { Button } from '@mui/material';
 import CardSkeleton from '@/components/blocks/skeletons/card-skeleton';
-import styles from '../lists/locations-list/locations-list.module.scss';
+import styles from './list-skeleton.module.scss';
 
 type ListSkeletonProps = {
-
   count?: number;
   size?: 'md' | 'lg';
 };
 
-const ListSkeleton: FC<ListSkeletonProps> = ({
-  count = 4,
-  size,
-}) => {
+const ListSkeleton: FC<ListSkeletonProps> = ({ count = 4, size }) => {
   const t = useTranslations();
 
   return (

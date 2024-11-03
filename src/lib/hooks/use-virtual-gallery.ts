@@ -6,37 +6,50 @@ import vars from 'src/styles/variables.module.scss';
 type UseVirtualGalleryOptions = {
   count: number;
   cardSize: 'lg' | 'md';
-};
-
-const getCardSize = (
-  size: UseVirtualGalleryOptions['cardSize'],
-  isMobile: boolean
-) => {
-  if (isMobile) {
-    return { width: +vars.cardMobileWidth, height: +vars.cardMobileHeight };
-  }
-
-  if (size === 'lg') {
-    return { width: +vars.cardLgWidth, height: +vars.cardLgHeight };
-  }
-
-  return { width: +vars.cardMdWidth, height: +vars.cardMdHeight };
+  columns?: number | 'auto';
 };
 
 export const useVirtualGallery = ({
   count,
   cardSize,
+  columns = 3,
 }: UseVirtualGalleryOptions) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const isLg = useMediaQuery(theme.breakpoints.down('lg'));
+
   const ref = useRef<HTMLDivElement>(null);
+
+  const getColumns = () => {
+    if (isSm) {
+      return 1;
+    }
+
+    if (isLg) {
+      return 2;
+    }
+
+    return columns;
+  };
+
+  const getCardSize = () => {
+    if (isSm) {
+      return { width: +vars.cardMobileWidth, height: +vars.cardMobileHeight };
+    }
+
+    if (cardSize === 'lg') {
+      return { width: +vars.cardLgWidth, height: +vars.cardLgHeight };
+    }
+
+    return { width: +vars.cardMdWidth, height: +vars.cardMdHeight };
+  };
 
   const grid = useGrid({
     scrollRef: ref,
     count: count,
-    columns: isMobile ? 'auto' : 4,
+    columns: getColumns(),
     horizontal: false,
-    size: getCardSize(cardSize, isMobile),
+    size: getCardSize(),
     gap: 20,
     padding: 0,
     overscan: 4,

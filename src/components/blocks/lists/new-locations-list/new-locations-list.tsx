@@ -17,6 +17,7 @@ const NewLocationsList = () => {
     <LocationsList
       data={data}
       itemProps={{ size: 'lg', as: 'link' }}
+      columns={4}
       emptyComponent={
         <EmptyList
           title={t('home.noLocations')}

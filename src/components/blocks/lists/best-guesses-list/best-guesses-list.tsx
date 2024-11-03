@@ -6,11 +6,17 @@ import { myBestGuessesQueryOptions } from '@/lib/api/locations/hooks';
 import { useQueryParams } from '@/lib/hooks/use-query-params';
 
 const BestGuessesList = () => {
-  const { urlQuery } = useQueryParams();
+  const { urlQuery } = useQueryParams({ take: 4 });
 
   const { data } = useSuspenseQuery(myBestGuessesQueryOptions(urlQuery.guess));
 
-  return <GuessesList data={data} emptyComponent={<EmptyBestGuessesList />} />;
+  return (
+    <GuessesList
+      data={data}
+      emptyComponent={<EmptyBestGuessesList />}
+      columns={4}
+    />
+  );
 };
 
 export default BestGuessesList;

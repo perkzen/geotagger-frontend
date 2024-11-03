@@ -18,6 +18,7 @@ type GuessesListProps = {
   emptyComponent?: ReactNode;
   className?: string;
   itemProps?: Pick<GuessCardProps, 'size' | 'className'>;
+  columns?: number | 'auto';
 };
 
 const GuessesList: FC<GuessesListProps> = ({
@@ -25,6 +26,7 @@ const GuessesList: FC<GuessesListProps> = ({
   emptyComponent,
   itemProps,
   className,
+  columns,
 }) => {
   const t = useTranslations();
   const { updateQueryParams, urlQuery } = useQueryParams();
@@ -34,6 +36,7 @@ const GuessesList: FC<GuessesListProps> = ({
   const [grid, ref] = useVirtualGallery({
     count: guesses.length,
     cardSize: itemProps?.size || 'md',
+    columns,
   });
 
   const hasMore = meta.total > meta.take;

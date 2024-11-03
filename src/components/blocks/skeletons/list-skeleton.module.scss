@@ -1,0 +1,14 @@
+@import "src/styles";
+
+
+.container {
+  @include flex-col-items-center;
+  gap: 32px;
+  width: fit-content;
+
+  .list {
+    @include flex-row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
