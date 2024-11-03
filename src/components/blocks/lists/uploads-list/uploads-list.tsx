@@ -8,7 +8,7 @@ import { useQueryParams } from '@/lib/hooks/use-query-params';
 const UploadsList = () => {
   const { urlQuery } = useQueryParams({ take: 4 });
 
-  const { data } = useSuspenseQuery(myLocationsQueryOptions(urlQuery.location));
+  const { data } = useSuspenseQuery(myLocationsQueryOptions(urlQuery.locations));
 
   return (
     <LocationsList

@@ -17,7 +17,7 @@ const PersonalBestGuessesList = () => {
   const { urlQuery } = useQueryParams();
   const { data } = useSuspenseQuery(
     myBestGuessesQueryOptions(
-      isMobile ? { ...urlQuery.guess, take: 3 } : urlQuery.guess
+      isMobile ? { ...urlQuery.guesses, take: 3 } : urlQuery.guesses
     )
   );
 

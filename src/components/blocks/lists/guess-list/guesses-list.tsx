@@ -43,9 +43,9 @@ const GuessesList: FC<GuessesListProps> = ({
 
   const loadMore = () => {
     updateQueryParams({
-      guess: {
-        ...urlQuery.guess,
-        take: urlQuery.guess.take + DEFAULT_TAKE,
+      guesses: {
+        ...urlQuery.guesses,
+        take: urlQuery.guesses.take + DEFAULT_TAKE,
       },
     });
   };

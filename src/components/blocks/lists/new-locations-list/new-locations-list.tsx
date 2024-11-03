@@ -10,7 +10,7 @@ const NewLocationsList = () => {
   const t = useTranslations();
   const { urlQuery } = useQueryParams();
   const { data } = useSuspenseQuery(
-    locationsListQueryOptions(urlQuery.location)
+    locationsListQueryOptions(urlQuery.locations)
   );
 
   return (

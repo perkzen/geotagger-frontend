@@ -4,8 +4,8 @@ import { DEFAULT_SKIP, DEFAULT_TAKE } from '@/lib/constants/pagination';
 import { PaginationQuery } from '@/lib/types/pagination';
 
 type QueryParams = {
-  guess: PaginationQuery;
-  location: PaginationQuery;
+  guesses: PaginationQuery;
+  locations: PaginationQuery;
   logs: PaginationQuery;
 };
 
@@ -15,16 +15,12 @@ const parsePaginationParams = (
   searchParams: URLSearchParams,
   key: keyof QueryParams,
   defaults: PaginationQuery
-) => {
+): PaginationQuery => {
+  const take = parseInt(searchParams.get(key) ?? defaults.take.toString(), 10);
+
   return {
-    take: parseInt(
-      searchParams.get(`${key}.take`) ?? defaults.take.toString(),
-      10
-    ),
-    skip: parseInt(
-      searchParams.get(`${key}.skip`) ?? defaults.skip.toString(),
-      10
-    ),
+    take: isNaN(take) ? defaults.take : take,
+    skip: defaults.skip, // 'skip' remains internal and is not read from URL
   };
 };
 
@@ -32,16 +28,10 @@ const setPaginationParams = (
   params: Partial<QueryParams>,
   key: keyof QueryParams,
   newSearchParams: URLSearchParams
-) => {
-  if (params[key]) {
-    Object.entries(params[key]).forEach(([k, value]) => {
-      if (value !== undefined) {
-        newSearchParams.set(
-          `${key}.${k}`,
-          encodeURIComponent(value.toString())
-        );
-      }
-    });
+): void => {
+  const takeValue = params[key]?.take;
+  if (takeValue !== undefined) {
+    newSearchParams.set(key, encodeURIComponent(takeValue.toString()));
   }
 };
 
@@ -51,14 +41,13 @@ export const useQueryParams = (options?: UseQueryParams) => {
   const pathname = usePathname();
 
   const defaultQueryParams: QueryParams = {
-    guess: { take: options?.take ?? DEFAULT_TAKE, skip: DEFAULT_SKIP },
-    location: { take: options?.take ?? DEFAULT_TAKE, skip: DEFAULT_SKIP },
+    guesses: { take: options?.take ?? DEFAULT_TAKE, skip: DEFAULT_SKIP },
+    locations: { take: options?.take ?? DEFAULT_TAKE, skip: DEFAULT_SKIP },
     logs: { take: options?.take ?? DEFAULT_TAKE, skip: DEFAULT_SKIP },
   };
 
   const updateQueryParams = (params: Partial<QueryParams>) => {
     const newSearchParams = new URLSearchParams(searchParams);
-
     const keys = Object.keys(defaultQueryParams) as (keyof QueryParams)[];
 
     keys.forEach((key) => setPaginationParams(params, key, newSearchParams));
@@ -68,15 +57,15 @@ export const useQueryParams = (options?: UseQueryParams) => {
 
   const parseQueryParams = (): QueryParams => {
     return {
-      guess: parsePaginationParams(
+      guesses: parsePaginationParams(
         searchParams,
-        'guess',
-        defaultQueryParams.guess
+        'guesses',
+        defaultQueryParams.guesses
       ),
-      location: parsePaginationParams(
+      locations: parsePaginationParams(
         searchParams,
-        'location',
-        defaultQueryParams.location
+        'locations',
+        defaultQueryParams.locations
       ),
       logs: parsePaginationParams(
         searchParams,

@@ -47,9 +47,9 @@ const LocationsList: FC<LocationsListProps> = ({
 
   const loadMore = () => {
     updateQueryParams({
-      location: {
-        ...urlQuery.location,
-        take: urlQuery.location.take + DEFAULT_TAKE,
+      locations: {
+        ...urlQuery.locations,
+        take: urlQuery.locations.take + DEFAULT_TAKE,
       },
     });
   };

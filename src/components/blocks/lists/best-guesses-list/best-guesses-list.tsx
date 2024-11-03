@@ -8,7 +8,7 @@ import { useQueryParams } from '@/lib/hooks/use-query-params';
 const BestGuessesList = () => {
   const { urlQuery } = useQueryParams({ take: 4 });
 
-  const { data } = useSuspenseQuery(myBestGuessesQueryOptions(urlQuery.guess));
+  const { data } = useSuspenseQuery(myBestGuessesQueryOptions(urlQuery.guesses));
 
   return (
     <GuessesList
