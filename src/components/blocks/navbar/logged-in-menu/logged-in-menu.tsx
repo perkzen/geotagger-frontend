@@ -1,7 +1,7 @@
 'use client';
 import { FC, Suspense } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
 import { Add } from '@mui/icons-material';
 import { Button, IconButton } from '@mui/material';
 import UserPoints from '@/components/blocks/navbar/user-points/user-points';

@@ -1,5 +1,5 @@
 'use client';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -90,9 +90,12 @@ const SignInForm: FC = () => {
         {t('signInWithFacebook')}
       </Button>
 
-      <div className={styles.alreadyHaveAccount}>
-        <Typography variant="body1">{t('createAccount')}</Typography>
-        <Link href={Routes.SIGN_UP}>{t('signUp')}</Link>
+      <div className={styles.links}>
+        <div className={styles.alreadyHaveAccount}>
+          <Typography variant="body1">{t('createAccount')}</Typography>
+          <Link href={Routes.SIGN_UP}>{t('signUp')}</Link>
+        </div>
+        <Link href={Routes.FORGOT_PASSWORD}>{t('forgotPassword')}?</Link>
       </div>
     </form>
   );

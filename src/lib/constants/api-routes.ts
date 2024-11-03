@@ -13,6 +13,8 @@ export const ApiRoutes = {
     session: '/auth/session',
     refreshToken: '/auth/refresh-token',
     changePassword: '/auth/change-password',
+    forgotPassword: '/auth/reset-password',
+    resetPassword: (token: string) => `/auth/reset-password/${token}`,
   },
   profile: {
     base: '/profile',
