@@ -26,7 +26,14 @@
     "signInWithGoogle": "Sign in with Google",
     "signInWithFacebook": "Sign in with Facebook",
     "tryAgain": "Try again",
-    "back": "Back"
+    "back": "Back",
+    "forgotPassword": "Forgot password",
+    "forgotPasswordInfo": "Enter your email and we will send you a link to reset your password.",
+    "send": "Send",
+    "backToSignIn": "Back to sign in",
+    "resetPassword": "Reset password",
+    "newPassword": "New password",
+    "repeatNewPassword": "Repeat new password"
   },
   "home": {
     "title": "Explore the world with Geotagger!",

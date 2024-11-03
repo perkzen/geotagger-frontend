@@ -1,4 +1,4 @@
-@import "../../../../styles/index";
+@import "src/styles";
 
 .container {
   @include flex-col;
@@ -26,11 +26,17 @@
     line-height: 24px;
   }
 
-  .alreadyHaveAccount {
-    @include flex-row-content-between;
+
+  .links {
+    @include flex-col;
+    gap: 4px;
 
     a {
       color: $primary-color;
+    }
+
+    .alreadyHaveAccount {
+      @include flex-row-content-between;
     }
   }
 }

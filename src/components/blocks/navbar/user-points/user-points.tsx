@@ -1,6 +1,6 @@
 import { FC } from 'react';
+import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Add } from '@mui/icons-material';
 import { IconButton, Typography } from '@mui/material';
 import { useSuspenseQuery } from '@tanstack/react-query';

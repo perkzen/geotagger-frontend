@@ -17,3 +17,8 @@ export const AuthErrorCodes = {
 
 export type AuthErrorCodes =
   (typeof AuthErrorCodes)[keyof typeof AuthErrorCodes];
+
+export type ResetPasswordPayload = {
+  token: string;
+  password: string;
+};
