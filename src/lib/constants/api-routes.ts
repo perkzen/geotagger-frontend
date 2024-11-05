@@ -38,6 +38,9 @@ export const ApiRoutes = {
     list: ({ take, skip }: PaginationQuery) =>
       `/activity-logs?take=${take}&skip=${skip}`,
   },
+  media: {
+    upload: '/media/upload',
+  },
 } as const;
 
 export const NextAuthRoutes = {

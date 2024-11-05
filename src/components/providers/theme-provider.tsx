@@ -118,12 +118,20 @@ export default function ThemeProvider({
       },
       MuiIconButton: {
         styleOverrides: {
-          root: {
+          colorPrimary: {
+            backgroundColor: vars.primary,
+            color: vars.white,
             '&:hover': {
               backgroundColor: vars.primaryHover,
-              color: vars.white,
             },
           },
+          colorError: {
+            backgroundColor: vars.danger,
+            color: vars.white,
+            '&:hover': {
+              backgroundColor: vars.dangerHover,
+            },
+          }
         },
       },
       MuiButton: {

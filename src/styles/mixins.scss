@@ -84,16 +84,16 @@
   width: 100%;
   gap: 16px;
 
-  @if index($valid-modal-sizes, $size) {
-    @if $size == "sm" {
-      max-width: #{$modal-sm-width}px;
-    } @else if $size == "fit" {
-      width: #{$modal-fit-width}px;
-    } @else {
-      max-width: #{$modal-width}px;
-    }
+  $value: map-get($modal-widths, $size);
+
+  @if $value {
+    max-width: #{$value}px;
   } @else {
-    @error "Invalid size '#{$size}' provided. Allowed sizes: #{join($valid-modal-sizes, ', ')}";
+    @error "Invalid size '#{$size}' provided. Allowed sizes: #{join(map-keys($modal-widths), ', ')}";
+  }
+
+  @if $size == "fit" {
+    width: fit-content;
   }
 
   @include mq("sm") {
