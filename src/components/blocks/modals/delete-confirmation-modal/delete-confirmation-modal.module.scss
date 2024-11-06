@@ -3,7 +3,7 @@
 .container {
   @include modal("sm");
 
-    button {
-      margin-left: auto;
-    }
+  button {
+    margin-left: auto;
+  }
 }

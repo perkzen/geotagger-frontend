@@ -12,8 +12,8 @@ import FileUploadInput from '@/components/ui/file-upload-input/file-upload-input
 import {
   locationQueryOptions,
   MY_LOCATIONS_KEY,
-  useUpdateLocation,
 } from '@/lib/api/locations/hooks';
+import { useCreateUploadUrl, useUploadFile } from '@/lib/api/media/hooks';
 import { Routes } from '@/lib/constants/routes';
 import { getQueryClient } from '@/lib/utils/get-query-client';
 import {
@@ -32,13 +32,17 @@ const EditLocationForm: FC<EditLocationFormProps> = ({ id }) => {
   const { push } = useRouter();
 
   const { data: location } = useSuspenseQuery(locationQueryOptions(id));
-  const { mutateAsync: updateLocation, isPending: isUpdating } =
-    useUpdateLocation({
-      onSuccess: () => {
+
+  const { mutateAsync: uploadFile, isPending: isUpdating } = useUploadFile({
+    onSuccess: () => {
+      // wait for the image to be uploaded S3 and processed by the backend
+      setTimeout(() => {
         void queryClient.invalidateQueries({ queryKey: [MY_LOCATIONS_KEY] });
-        push(Routes.PROFILE);
-      },
-    });
+      }, 3000);
+      push(Routes.PROFILE);
+    },
+  });
+  const { mutateAsync: createUploadUrl } = useCreateUploadUrl();
 
   const { register, handleSubmit, formState, watch } =
     useForm<EditLocationFormData>({
@@ -52,11 +56,18 @@ const EditLocationForm: FC<EditLocationFormProps> = ({ id }) => {
     ? URL.createObjectURL(selectedFile)
     : location.imageUrl;
 
-  const onSubmit = (data: EditLocationFormData) => {
-    void updateLocation({
-      ...location,
-      fileList: data.fileList,
+  const onSubmit = async (data: EditLocationFormData) => {
+    const mimeType = data.fileList[0].type;
+    const originalFilename = data.fileList[0].name;
+
+    const url = await createUploadUrl({
+      bucketPath: 'locations/images',
+      mimeType,
+      originalFilename,
+      ownerId: location.id,
     });
+
+    void uploadFile({ url, file: data.fileList[0] });
   };
 
   return (

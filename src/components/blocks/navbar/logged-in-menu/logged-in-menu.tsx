@@ -31,6 +31,7 @@ const LoggedInMenu: FC<LoggedInMenuProps> = ({ handleSignOut }) => {
         <UserPoints showAvatar />
       </Suspense>
       <IconButton
+        color="primary"
         className={styles.add}
         onClick={() => push(Routes.ADD_LOCATION)}
       >

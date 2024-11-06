@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { Typography } from '@mui/material';
 import classNames from 'classnames';
 import { formatDistanceToNow } from 'date-fns';
-import Avatar from "@/components/ui/avatar/avatar";
+import Avatar from '@/components/ui/avatar/avatar';
 import { Guess } from '@/lib/api/locations/models';
 import { useSessionStore } from '@/lib/stores/session-store';
 import styles from './leaderboard-item.module.scss';
@@ -23,9 +23,11 @@ const LeaderboardItem: FC<LeaderboardItemProps> = ({ item, place }) => {
     : `${item.user.firstname} ${item.user.lastname}`;
 
   return (
-    <li className={classNames(styles.container, {
+    <li
+      className={classNames(styles.container, {
         [styles.currentUser]: isCurrentUser,
-    })}>
+      })}
+    >
       <Typography
         variant="caption"
         color="contrast"
@@ -37,10 +39,7 @@ const LeaderboardItem: FC<LeaderboardItemProps> = ({ item, place }) => {
       >
         {place}
       </Typography>
-      <Avatar
-        src={item.user.imageUrl}
-        size="md"
-      />
+      <Avatar src={item.user.imageUrl} size="md" />
       <div className={styles.info}>
         <Typography variant="body1">{displayName}</Typography>
         <Typography variant="caption">

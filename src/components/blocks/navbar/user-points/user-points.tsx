@@ -41,6 +41,7 @@ const UserPoints: FC<UserPointsProps> = ({
       </Typography>
       {showButton && (
         <IconButton
+          color="primary"
           className={styles.add}
           onClick={() => push(Routes.ADD_LOCATION)}
         >

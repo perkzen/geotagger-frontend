@@ -6,11 +6,8 @@ import { Button, Typography } from '@mui/material';
 import { AxiosError } from 'axios';
 import Avatar from '@/components/ui/avatar/avatar';
 import FileUploadInput from '@/components/ui/file-upload-input/file-upload-input';
-import {
-  GET_PROFILE_KEY,
-  useProfile,
-  useUpdateProfilePicture,
-} from '@/lib/api/profile/hooks';
+import { useCreateUploadUrl, useUploadFile } from '@/lib/api/media/hooks';
+import { GET_PROFILE_KEY, useProfile } from '@/lib/api/profile/hooks';
 import { ApiError } from '@/lib/types/api-error';
 import { getQueryClient } from '@/lib/utils/get-query-client';
 import {
@@ -35,14 +32,16 @@ const ChangeProfilePicForm: FC<ProfileSettingsFormProps> = ({
 
   const { data: profile } = useProfile();
 
-  const { mutateAsync: updatePicture, isPending: isUploading } =
-    useUpdateProfilePicture({
-      onSuccess: () => {
+  const { mutateAsync: uploadFile, isPending: isUploading } = useUploadFile({
+    onSuccess: () => {
+      // wait for the image to be uploaded S3 and processed by the backend
+      setTimeout(() => {
         void queryClient.invalidateQueries({ queryKey: [GET_PROFILE_KEY] });
-        onSuccess();
-      },
-      onError,
-    });
+      }, 3000);
+      onSuccess();
+    },
+  });
+  const { mutateAsync: createUploadUrl } = useCreateUploadUrl({ onError });
 
   const { handleSubmit, register, watch, formState } =
     useForm<ProfilePictureFormData>({
@@ -51,8 +50,18 @@ const ChangeProfilePicForm: FC<ProfileSettingsFormProps> = ({
 
   const { dirtyFields, errors } = formState;
 
-  const onFormSubmit = (data: ProfilePictureFormData) => {
-    void updatePicture(data.fileList[0]);
+  const onFormSubmit = async (data: ProfilePictureFormData) => {
+    const mimeType = data.fileList[0].type;
+    const originalFilename = data.fileList[0].name;
+
+    const url = await createUploadUrl({
+      bucketPath: 'profile/images',
+      mimeType,
+      originalFilename,
+      ownerId: profile?.id ?? '',
+    });
+
+    void uploadFile({ url, file: data.fileList[0] });
   };
 
   const selectedFile = watch('fileList')?.item(0);

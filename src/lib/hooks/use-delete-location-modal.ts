@@ -4,6 +4,7 @@ import {
   MY_LOCATIONS_KEY,
   useDeleteLocation,
 } from '@/lib/api/locations/hooks';
+import { GET_PROFILE_KEY } from '@/lib/api/profile/hooks';
 import { useModalStore } from '@/lib/stores/modal-store';
 import { ModalTypes } from '@/lib/types/modal';
 import { getQueryClient } from '@/lib/utils/get-query-client';
@@ -25,6 +26,7 @@ export const useDeleteLocationModal = ({
       void Promise.all([
         queryClient.invalidateQueries({ queryKey: [LOCATIONS_LIST_KEY] }),
         queryClient.invalidateQueries({ queryKey: [MY_LOCATIONS_KEY] }),
+        queryClient.invalidateQueries({ queryKey: [GET_PROFILE_KEY] }),
       ]);
 
       openModal({

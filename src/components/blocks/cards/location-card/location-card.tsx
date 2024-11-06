@@ -57,12 +57,14 @@ const LocationCard: FC<LocationCardProps> = ({
       {allowEdit && (
         <>
           <IconButton
+            color="primary"
             className={styles.edit}
             onClick={() => push(`${Routes.EDIT_LOCATION}/${location.id}`)}
           >
             <Edit />
           </IconButton>
           <IconButton
+            color="error"
             className={styles.delete}
             onClick={openDeleteLocationModal}
           >

@@ -38,7 +38,7 @@ export const useSignIn = (options?: UseSignInOptions) => {
 export const SIGN_UP_KEY = 'REGISTER';
 
 type UseSignUpOptions = Omit<
-  UseMutationOptions<void, AxiosError<ApiError>, SignUpFormData, unknown>,
+  UseMutationOptions< Awaited<ReturnType<typeof signUp>>, AxiosError<ApiError>, SignUpFormData, unknown>,
   'mutationFn' | 'mutationKey'
 >;
 

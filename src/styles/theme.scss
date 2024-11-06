@@ -7,6 +7,7 @@ $contrast-color: #fff;
 $muted-color: #EAECF0;
 $dark-color: #233D4D;
 $danger-color: #9B6161;
+$danger-hover-color: #7D4D4D;
 $text-primary-color: #000000;
 $text-secondary-color: #667085;
 
@@ -24,6 +25,12 @@ $modal-sm-width: 489;
 $modal-fit-width: fit-content;
 $mobile-modal-width: 344;
 $valid-modal-sizes: ("sm", "md", "fit");
+
+$modal-widths: (
+        "sm": $modal-sm-width,
+        "md": $modal-width,
+        "fit": $modal-fit-width
+);
 
 // card
 $card-lg-width: 420;
