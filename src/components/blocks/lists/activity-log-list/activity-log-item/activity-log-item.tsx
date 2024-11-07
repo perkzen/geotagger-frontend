@@ -20,6 +20,12 @@ const ActivityLogItem: FC<ActivityLogItemProps> = ({ item }) => {
 
   const formattedDate = formatDate(item.createdAt).split(' ');
 
+  const shortenUrl = (url: string) => {
+        if (url.length > 12) {
+            return url.substring(0, 20) + '...';
+        }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.row}>
@@ -61,7 +67,7 @@ const ActivityLogItem: FC<ActivityLogItemProps> = ({ item }) => {
       <div className={styles.row}>
         <Typography variant="xs" color="textSecondary">{t('location')}</Typography>
         <Typography variant="sm" color="textSecondary">
-          {item.location}
+          {shortenUrl(item.location)}
         </Typography>
       </div>
     </div>
