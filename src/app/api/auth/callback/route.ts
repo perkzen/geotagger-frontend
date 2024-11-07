@@ -11,8 +11,6 @@ export async function GET(req: NextRequest) {
   const accessToken = searchParams.get('accessToken');
   const refreshToken = searchParams.get('refreshToken');
 
-  console.log(req.url)
-
   if (accessToken && refreshToken) {
     try {
       // we need to set headers manually because session is still not created
