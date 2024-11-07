@@ -8,7 +8,8 @@ import Avatar from '@/components/ui/avatar/avatar';
 import FileUploadInput from '@/components/ui/file-upload-input/file-upload-input';
 import { useCreateUploadUrl, useUploadFile } from '@/lib/api/media/hooks';
 import { GET_PROFILE_KEY, useProfile } from '@/lib/api/profile/hooks';
-import { ApiError } from '@/lib/types/api-error';
+import { Profile } from '@/lib/api/profile/models';
+import { ApiError, createApiError } from '@/lib/types/api-error';
 import { getQueryClient } from '@/lib/utils/get-query-client';
 import {
   ProfilePictureFormData,
@@ -32,23 +33,55 @@ const ChangeProfilePicForm: FC<ProfileSettingsFormProps> = ({
 
   const { data: profile } = useProfile();
 
-  const { mutateAsync: uploadFile, isPending: isUploading } = useUploadFile({
-    onSuccess: () => {
-      // wait for the image to be uploaded S3 and processed by the backend
-      setTimeout(() => {
-        void queryClient.invalidateQueries({ queryKey: [GET_PROFILE_KEY] });
-      }, 3000);
-      onSuccess();
-    },
-  });
-  const { mutateAsync: createUploadUrl } = useCreateUploadUrl({ onError });
-
-  const { handleSubmit, register, watch, formState } =
+  const { handleSubmit, register, watch, formState, getValues } =
     useForm<ProfilePictureFormData>({
       resolver: zodResolver(ProfilePictureValidator),
     });
 
   const { dirtyFields, errors } = formState;
+
+  const { mutateAsync: uploadFile, isPending: isUploading } = useUploadFile({
+    onMutate: () => {
+      void queryClient.cancelQueries({ queryKey: [GET_PROFILE_KEY] });
+      const previousProfile = queryClient.getQueryData([
+        GET_PROFILE_KEY,
+      ]);
+
+      const imageUrl = URL.createObjectURL(getValues().fileList[0]);
+
+      queryClient.setQueryData([GET_PROFILE_KEY], (oldProfile: Profile) => ({
+        ...oldProfile,
+        imageUrl,
+      }));
+
+      return { previousProfile };
+    },
+    onSuccess: () => {
+      onSuccess();
+    },
+    onError: (error, _variables, context) => {
+      const apiError = createApiError(error, {
+        statusCode: 400,
+        error: 'Failed to upload image',
+        code: 'UPLOAD_FAILED',
+      });
+
+      onError(apiError);
+
+      queryClient.setQueryData(
+        [GET_PROFILE_KEY],
+        (context as { previousProfile: Profile }).previousProfile
+      );
+    },
+    onSettled: () => {
+      // wait for the image to be uploaded S3 and processed by the backend
+      setTimeout(() => {
+        void queryClient.invalidateQueries({ queryKey: [GET_PROFILE_KEY] });
+      }, 3000);
+    },
+  });
+
+  const { mutateAsync: createUploadUrl } = useCreateUploadUrl({ onError });
 
   const onFormSubmit = async (data: ProfilePictureFormData) => {
     const mimeType = data.fileList[0].type;

@@ -114,7 +114,12 @@ export const locationsListQueryOptions = (query: PaginationQuery) =>
 export const GUSS_LOCATION_KEY = 'GUSS_LOCATION';
 
 type UseGuessLocationOptions = Omit<
-  UseMutationOptions<GuessDetails, AxiosError, GuessLocationPayload, unknown>,
+  UseMutationOptions<
+    GuessDetails,
+    AxiosError<ApiError>,
+    GuessLocationPayload,
+    unknown
+  >,
   'mutationFn' | 'mutationKey'
 >;
 

@@ -13,8 +13,11 @@ import {
   locationQueryOptions,
   MY_LOCATIONS_KEY,
 } from '@/lib/api/locations/hooks';
+import { LocationsList } from '@/lib/api/locations/models';
 import { useCreateUploadUrl, useUploadFile } from '@/lib/api/media/hooks';
 import { Routes } from '@/lib/constants/routes';
+import { useErrorModal } from '@/lib/hooks/use-error-modal';
+import { createApiError } from '@/lib/types/api-error';
 import { getQueryClient } from '@/lib/utils/get-query-client';
 import {
   EditLocationFormData,
@@ -28,8 +31,16 @@ type EditLocationFormProps = {
 
 const EditLocationForm: FC<EditLocationFormProps> = ({ id }) => {
   const t = useTranslations();
+  const openErrorModal = useErrorModal();
   const queryClient = getQueryClient();
   const { push } = useRouter();
+
+  const { register, handleSubmit, formState, watch } =
+    useForm<EditLocationFormData>({
+      resolver: zodResolver(EditLocationValidator),
+    });
+
+  const { errors, dirtyFields } = formState;
 
   const { data: location } = useSuspenseQuery(locationQueryOptions(id));
 
@@ -38,18 +49,26 @@ const EditLocationForm: FC<EditLocationFormProps> = ({ id }) => {
       // wait for the image to be uploaded S3 and processed by the backend
       setTimeout(() => {
         void queryClient.invalidateQueries({ queryKey: [MY_LOCATIONS_KEY] });
-      }, 3000);
+      }, 2000);
       push(Routes.PROFILE);
     },
+    onError: (error, variables, context) => {
+      const apiError = createApiError(error, {
+        statusCode: 400,
+        error: 'Failed to update location',
+        code: 'UPDATE_FAILED',
+      });
+
+      openErrorModal(apiError);
+
+      queryClient.setQueryData(
+        [MY_LOCATIONS_KEY],
+        (context as { previousLocations: LocationsList }).previousLocations
+      );
+    },
   });
+
   const { mutateAsync: createUploadUrl } = useCreateUploadUrl();
-
-  const { register, handleSubmit, formState, watch } =
-    useForm<EditLocationFormData>({
-      resolver: zodResolver(EditLocationValidator),
-    });
-
-  const { errors, dirtyFields } = formState;
 
   const selectedFile = watch('fileList')?.item(0);
   const imgSrc = selectedFile
