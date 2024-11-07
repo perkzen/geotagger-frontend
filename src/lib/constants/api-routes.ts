@@ -45,8 +45,9 @@ export const ApiRoutes = {
 
 export const NextAuthRoutes = {
   login: '/login',
+  register: '/register',
   logout: '/logout',
   refreshToken: '/refresh-token',
-  authCallback: '/callback',
+  callback: '/callback',
   session: '/session',
 } as const;

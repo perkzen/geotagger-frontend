@@ -13,6 +13,7 @@ import {
 } from '@/lib/api/locations/hooks';
 import { GuessDetails, Location } from '@/lib/api/locations/models';
 import { profileQueryOptions } from '@/lib/api/profile/hooks';
+import { useErrorModal } from '@/lib/hooks/use-error-modal';
 import { Coordinates } from '@/lib/types/coordinates';
 import { getQueryClient } from '@/lib/utils/get-query-client';
 import {
@@ -28,6 +29,7 @@ type AddGuessFormProps = {
 const AddGuessForm: FC<AddGuessFormProps> = ({ location }) => {
   const t = useTranslations();
   const queryClient = getQueryClient();
+  const openErrorModal = useErrorModal();
 
   const [guess, setGuess] = useState<GuessDetails>();
 
@@ -51,6 +53,7 @@ const AddGuessForm: FC<AddGuessFormProps> = ({ location }) => {
           queryClient.invalidateQueries(locationQueryOptions(location.id)),
         ]);
       },
+      onError: (error) => openErrorModal(error),
     }
   );
 

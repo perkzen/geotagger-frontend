@@ -33,7 +33,7 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
                 onClick={togglePassword}
                 onMouseDown={(e) => e.preventDefault()} // Prevent losing focus on mouse down
               >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
+                {showPassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             </InputAdornment>
           }
