@@ -11,9 +11,9 @@ import PasswordInput from '@/components/ui/password-input/password-input';
 import { useSignUp } from '@/lib/api/auth/hooks';
 import { Routes } from '@/lib/constants/routes';
 import { useError } from '@/lib/hooks/use-error';
+import { useSessionStore } from '@/lib/stores/session-store';
 import { SignUpFormData, SignUpValidator } from '@/lib/validators/sign-up';
 import styles from './sign-up-form.module.scss';
-import { useSessionStore } from '@/lib/stores/session-store';
 
 const SignUpForm: FC = () => {
   const t = useTranslations('shared');
