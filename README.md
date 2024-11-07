@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Geotagger Frontend
 
-## Getting Started
+The Geotagger frontend is a React application that allows users to interact with the Image Guessing Game. Users can
+upload images, tag locations on a map, and guess the locations of other uploaded images. The application communicates
+with the backend API for user authentication, image management, and point tracking.
 
-First, run the development server:
+## Features
+
+- **User Authentication**:
+    - Login and registration via JWT authentication.
+    - OAuth login using Google or Facebook.
+    - Forgot password functionality with email-based token reset.
+
+- **Image Upload and Location Tagging**:
+    - Users can upload images and tag their geographical location on an interactive Google Map.
+    - The location is stored with latitude and longitude coordinates in the database.
+    - Images are displayed in a gallery.
+
+- **Guessing Game**:
+    - Registered users can try to guess the location of images by placing a pin on the map.
+    - Points are deducted with each guessing attempt and adjusted based on the accuracy of the guess.
+    - A distance error is shown, indicating how far the guess is from the real location.
+
+- **Points System**:
+    - Display the user's points balance and adjust it based on image uploads and guesses.
+    - Points are awarded for uploading images and deducted with each guessing attempt.
+
+- **Action Logging**:
+    - Logs user interactions, including clicks, scrolls, and form inputs, to track activity.
+
+
+## Technologies Used
+
+- **Frontend Framework**: Next.js with TypeScript
+- **UI Libraries**: Material UI (MUI)
+- **Authentication**: JWT for session management, OAuth for Google/Facebook login
+- **Map Integration**: Google Maps API for interactive map functionality
+- **State Management**: Zustand for global state management
+- **Virtualization**: Tanstack/react-virtual for efficient rendering of large lists
+- **Data fetching**: Tanstack/react-query for data fetching and caching
+
+## Prerequisites
+
+- **Node.js** 20+
+- **Google Maps API Key** (for map functionality)
+- **Backend API** (ensure the backend API is running as per the backend `README.md`)
+
+## Setup Instructions
+
+### 1. Install Dependencies
+
+In the frontend directory, run the following command to install all required dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configure Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env` file in the root directory with the following content:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+NEXT_PUBLIC_API_URL=
+NEXT_PUBLIC_ENVIRONMENT=development
+NEXT_PUBLIC_AUTH_URL=http://localhost:3000/api/auth
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
+JWT_SECRET=
+```
 
-## Learn More
+### 3. Run the Development Server
 
-To learn more about Next.js, take a look at the following resources:
+Start the frontend development server:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The Next app will be running on [http://localhost:3000](http://localhost:3000).
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
