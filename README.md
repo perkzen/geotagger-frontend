@@ -78,6 +78,11 @@ npm run start
 The Next app will be running on [http://localhost:3000](http://localhost:3000).
 
 
+### Admin Credentials
+
+- **Email**: admin@admin.com
+- **Password**: Admin123!
+
 
 
 
