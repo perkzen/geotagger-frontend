@@ -9,6 +9,7 @@ import Input from '@/components/ui/input/input';
 import Map from '@/components/ui/map/map';
 import {
   locationQueryOptions,
+  MY_BEST_GUESSES_KEY,
   useGuessLocation,
 } from '@/lib/api/locations/hooks';
 import { GuessDetails, Location } from '@/lib/api/locations/models';
@@ -51,6 +52,7 @@ const AddGuessForm: FC<AddGuessFormProps> = ({ location }) => {
         void Promise.all([
           queryClient.invalidateQueries(profileQueryOptions),
           queryClient.invalidateQueries(locationQueryOptions(location.id)),
+          queryClient.invalidateQueries({ queryKey: [MY_BEST_GUESSES_KEY] }),
         ]);
       },
       onError: (error) => openErrorModal(error),
