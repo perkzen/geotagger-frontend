@@ -72,7 +72,13 @@ export async function updateTokens({
   refreshToken,
 }: AccessTokens) {
   const cookie = cookies().get(SESSION_COOKIE_NAME)?.value;
-  if (!cookie) return null; // TODO  maybe throw error?
+  if (!cookie) {
+    throw new NextAuthError(
+      'Session not found',
+      NextAuthErrorCodes.SESSION_NOT_FOUND,
+      401
+    );
+  }
 
   const { payload } = await jwtVerify<Session>(cookie, secret);
 

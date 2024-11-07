@@ -8,7 +8,7 @@ import { ForgotPasswordData } from '@/lib/validators/forgot-password';
 import { SignInFormData } from '@/lib/validators/sign-in';
 import { SignUpFormData } from '@/lib/validators/sign-up';
 
-const redirectUrl = `${env.NEXT_PUBLIC_AUTH_URL}${NextAuthRoutes.authCallback}`;
+const redirectUrl = `${env.NEXT_PUBLIC_AUTH_URL}${NextAuthRoutes.callback}`;
 
 export const signInWithGoogle = () => {
   window.open(ApiRoutes.auth.google(redirectUrl), '_self');
@@ -16,10 +16,6 @@ export const signInWithGoogle = () => {
 
 export const signInWithFacebook = () => {
   window.open(ApiRoutes.auth.facebook(redirectUrl), '_self');
-};
-
-export const signUp = async (data: SignUpFormData) => {
-  await api.post(ApiRoutes.auth.register, data);
 };
 
 export const changePassword = async (data: ChangePasswordFormData) => {
@@ -34,6 +30,11 @@ export const changePassword = async (data: ChangePasswordFormData) => {
 
 export const signIn = async (data: SignInFormData) => {
   const res = await nextAuthApi.post<Session>(NextAuthRoutes.login, data);
+  return res.data;
+};
+
+export const signUp = async (data: SignUpFormData) => {
+  const res = await nextAuthApi.post<Session>(NextAuthRoutes.register, data);
   return res.data;
 };
 

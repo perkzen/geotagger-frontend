@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import {useRouter} from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Typography } from '@mui/material';
 import Input from '@/components/ui/input/input';
@@ -13,18 +13,24 @@ import { Routes } from '@/lib/constants/routes';
 import { useError } from '@/lib/hooks/use-error';
 import { SignUpFormData, SignUpValidator } from '@/lib/validators/sign-up';
 import styles from './sign-up-form.module.scss';
+import { useSessionStore } from '@/lib/stores/session-store';
 
 const SignUpForm: FC = () => {
   const t = useTranslations('shared');
   const { push } = useRouter();
   const { getError } = useError();
 
+  const { setSession } = useSessionStore();
+
   const {
     mutateAsync: signUp,
     error: signUpError,
     isPending,
   } = useSignUp({
-    onSuccess: () => push(Routes.SIGN_IN),
+    onSuccess: (data) => {
+      setSession(data);
+      push(Routes.HOME);
+    },
   });
 
   const { register, handleSubmit, formState } = useForm<SignUpFormData>({
