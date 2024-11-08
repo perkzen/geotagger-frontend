@@ -1,23 +1,19 @@
-import { FC } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@mui/material';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useWindowVirtualizer } from '@tanstack/react-virtual';
 import EmptyList from '@/components/blocks/empty-list/empty-list';
 import ActivityLogItem from '@/components/blocks/lists/activity-log-list/activity-log-item/activity-log-item';
-import { ActivityLog } from '@/lib/api/activity-log/models';
+import { activityLogsQueryOptions } from '@/lib/api/activity-log/hooks';
 import { DEFAULT_TAKE } from '@/lib/constants/pagination';
 import { useQueryParams } from '@/lib/hooks/use-query-params';
-import { Pagination } from '@/lib/types/pagination';
 import styles from './activity-log-list.module.scss';
 
-type ActivityLogListProps = {
-  data: Pagination<ActivityLog>;
-};
-
-const ActivityLogList: FC<ActivityLogListProps> = ({ data }) => {
+const ActivityLogList = () => {
   const t = useTranslations();
   const { updateQueryParams, urlQuery } = useQueryParams();
 
+  const { data } = useSuspenseQuery(activityLogsQueryOptions(urlQuery.logs));
   const { data: activityLogs, meta } = data;
 
   const hasMore = meta.total > meta.take;

@@ -1,7 +1,5 @@
 'use client';
-import { FC } from 'react';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
 import {
   Table,
   TableBody,
@@ -11,23 +9,23 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import {useSuspenseQuery} from "@tanstack/react-query";
 import EmptyList from '@/components/blocks/empty-list/empty-list';
+import Avatar from '@/components/ui/avatar/avatar';
 import {
+  activityLogsQueryOptions,
   useActionLabel,
   useComponentTypeLabel,
 } from '@/lib/api/activity-log/hooks';
 import { ActivityLog } from '@/lib/api/activity-log/models';
-import { Pagination } from '@/lib/types/pagination';
 import { formatDate } from '@/lib/utils/format-date';
 import styles from './activity-log-table.module.scss';
 
-type ActivityLogTableProps = {
-  data: Pagination<ActivityLog>;
-};
 
-export const ActivityLogTable: FC<ActivityLogTableProps> = ({ data }) => {
+
+export const ActivityLogTable = () => {
   const t = useTranslations('activityLog.table');
-
+  const { data } = useSuspenseQuery(activityLogsQueryOptions( { take: 100, skip: 0 }));
   const { data: activityLogs } = data;
 
   const getActionLabel = useActionLabel();
@@ -40,12 +38,7 @@ export const ActivityLogTable: FC<ActivityLogTableProps> = ({ data }) => {
       <TableRow key={activityLog.id}>
         <TableCell align="left">
           <span className={styles.user}>
-            <Image
-              src={activityLog.user.imageUrl as string}
-              alt={'user'}
-              width={40}
-              height={40}
-            />
+            <Avatar size={'md'} src={activityLog.user.imageUrl as string} />
             <Typography variant="sm">
               {activityLog.user.firstname} {activityLog.user.lastname}
             </Typography>

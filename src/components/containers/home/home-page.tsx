@@ -1,3 +1,4 @@
+'use client';
 import AdminHomePage from '@/components/containers/home/admin-home-page/admin-home-page';
 import LoggedInHomePage from '@/components/containers/home/logged-in/logged-in-home-page';
 import LoggedOutHomePage from '@/components/containers/home/logged-out/logged-out-home-page';

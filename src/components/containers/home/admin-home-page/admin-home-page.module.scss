@@ -6,6 +6,10 @@
   max-height: calc(100dvh - $header-height - $footer-height - 32px);
   padding-bottom: 50px;
 
+  .spinner {
+    @include center;
+  }
+
   @include mq("md") {
     max-height: unset;
     padding-bottom: 72px;
