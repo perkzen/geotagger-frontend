@@ -29,19 +29,23 @@ const refreshTokenInterceptor = async (
     isRefreshing?: boolean;
   };
 
-  if (error.response?.status === 401 && !originalConfig.isRefreshing) {
-    originalConfig.isRefreshing = true;
+  if (error.response?.status === 401) {
+    if (!originalConfig?.isRefreshing) {
+      originalConfig.isRefreshing = true;
 
-    try {
-      const tokens = await refreshAccessToken();
+      try {
+        const tokens = await refreshAccessToken();
 
-      if (!isServer) {
-        const { updateTokens } = useSessionStore.getState();
-        updateTokens(tokens);
+        if (!isServer) {
+          const { updateTokens } = useSessionStore.getState();
+          updateTokens(tokens);
+        }
+
+        return instance(originalConfig);
+      } catch (_e) {
+        await handleSignOut();
       }
-
-      return instance(originalConfig);
-    } catch (_e) {
+    } else {
       await handleSignOut();
     }
   }
