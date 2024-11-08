@@ -10,7 +10,7 @@ export const ONE_WEEK = ONE_DAY * 7;
 export const expiresAt = new Date(Date.now() + ONE_WEEK);
 
 export const cookieOptions: Partial<ResponseCookie> = {
-  httpOnly: false,
+  httpOnly: true,
   secure: true,
   expires: expiresAt,
   sameSite: 'lax',
